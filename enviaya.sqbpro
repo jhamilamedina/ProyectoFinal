@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/HP/Desktop/ENVIA YA DB/BASE DE DATOS ENVÍA YA/enviaya.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1790"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,11:maincomentarios"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="comentarios" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="2" value="44"/><column index="3" value="81"/><column index="4" value="56"/><column index="5" value="121"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="departamentos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="120"/><column index="2" value="57"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="empresas" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="83"/><column index="2" value="40"/><column index="3" value="57"/><column index="4" value="101"/><column index="5" value="81"/><column index="6" value="70"/><column index="7" value="107"/><column index="8" value="136"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="estrellas" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="76"/><column index="2" value="83"/><column index="3" value="73"/><column index="4" value="93"/><column index="5" value="73"/><column index="6" value="73"/><column index="7" value="73"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="provincias" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="86"/><column index="2" value="57"/><column index="3" value="120"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE empresas(empresa_id INTEGER PRIMARY KEY AUTOINCREMENT,
+						logo BLOB,
+						nombre TEXT,
+						sede_principal TEXT,
+						descripcion TEXT,
+						sitio_web TEXT,
+						fecha_creacion datetime,
+						fecha_actualizacion datetime);
+						
+						CREATE TABLE estrellas(estrella_id INTEGER PRIMARY KEY AUTOINCREMENT,
+												empresa_id INTEGER,
+												estrella_1 INTEGER,
+												estrella_2 INTEGER,
+												estrella_3 INTEGER,
+												estrella_4 INTEGER,
+												estrella_5 INTEGER,
+												FOREIGN KEY(empresa_id)REFERENCES empresas(empresa_id));
+												
+												CREATE TABLE valoracion(valoracion_id INTEGER PRIMARY KEY AUTOINCREMENT,
+												empresa_id INTEGER,
+												puntualidad INTEGER,
+												seguridad INTEGER,
+												economica INTEGER,
+												amabilidad INTEGER,
+												caro INTEGER,
+												inseguro INTEGER,
+												impuntual INTEGER,
+												FOREIGN KEY(empresa_id)REFERENCES empresas(empresa_id));
+												
+												CREATE TABLE comentarios(comentario_id INTEGER PRIMARY KEY AUTOINCREMENT,
+												fecha datetime,
+												comentario TEXT,
+												user_id INTEGER,
+												empresa_id INTEGER,
+												FOREIGN KEY(user_id)REFERENCES usuario(user_id),
+												FOREIGN KEY(empresa_id)REFERENCES empresas(empresa_id));
+												
+												CREATE TABLE agencias_lima(agenciaslima_id INTEGER PRIMARY KEY AUTOINCREMENT,
+												empresa_id INTEGER,
+												foto BLOB,
+												direccion TEXT,
+												horario_de_atencion TEXT,
+												telefono INTEGER,
+												cochera INTEGER,
+												salidas TEXT,
+												llegadas TEXT,
+												FOREIGN KEY(empresa_id)REFERENCES empresas(empresa_id));
+												
+												CREATE TABLE distritos(distrito_id INTEGER PRIMARY KEY AUTOINCREMENT,
+																		agenciaslima_id INTEGER,
+																		provincia_id INTEGER,
+																		nombre TEXT,
+																		FOREIGN KEY(agenciaslima_id)REFERENCES agencias_lima(agenciaslima_id),
+																		FOREIGN KEY(provincia_id)REFERENCES provincia(provincia_id));
+																		
+																		CREATE TABLE provincias(provincia_id INTEGER PRIMARY KEY AUTOINCREMENT,
+																								departamento_id INTEGER,
+																								nombre TEXT,
+																								FOREIGN KEY(departamento_id)REFERENCES departamentos(departamento_id));
+												
+													</sql><current_tab id="0"/></tab_sql></sqlb_project>
