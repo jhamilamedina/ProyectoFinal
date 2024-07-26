@@ -1,0 +1,30 @@
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 22px;
+}
+
+.filter-container label {
+font-weight: bold;
+}
+
+.filter-container select {
+    padding: 10px;
+    font-size: 1em;
+}
+
+.filter-container button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.filter-container button:hover {
+    background-color: #21a1f1;
+}
