@@ -1,0 +1,9 @@
+.home-container {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.home-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
