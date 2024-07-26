@@ -3,12 +3,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
-from .models import Empresa, Usuario
-from .serializers import EmpresaSerializer, UsuarioSerializers
+from .models import Empresa, Usuario, AgenciaLima
+from .serializers import EmpresaSerializer, UsuarioSerializers, AgenciasLimaSerializers
 
-message1 = 'Does not exist'
-message2 = 'Not registered in the database'
-message3 = 'It cannot be deleted because it does not exist'
+message1 = 'No existe'
+message2 = 'No registrado en la base de datos'
+message3 = 'No se puede eliminar porque no existe'
 
 
 class EmpresaAPIView(APIView):
@@ -35,7 +35,7 @@ class EmpresaAPIView(APIView):
         serializer = EmpresaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'Successfully created company', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+            return Response({'message': 'Empresa creada con exito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, id=None, format=None):
@@ -45,7 +45,7 @@ class EmpresaAPIView(APIView):
         serializer = EmpresaSerializer(empresa, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'Data updated correctly', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
+            return Response({'message': 'Datos actualizados con exito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
@@ -53,7 +53,53 @@ class EmpresaAPIView(APIView):
         if empresa is None:
             return Response({'message': message3}, status=status.HTTP_404_NOT_FOUND)
         empresa.delete()
-        return Response({'message': 'Company successfully eliminated'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Empresa eliminada con  exito'}, status=status.HTTP_204_NO_CONTENT)
+
+
+class AgenciasLimaAPIView(APIView):
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
+    def get_object(self, id):
+        try:
+            return AgenciaLima.objects.get(id=id)
+        except AgenciaLima.DoesNotExist:
+            return None
+
+    def get(self, request, id=None, format=None):
+        if id:
+            agencia_lima = self.get_object(id)
+            if agencia_lima is None:
+                return Response({'message': message1}, status=status.HTTP_404_NOT_FOUND)
+            serializer = AgenciasLimaSerializers(agencia_lima)
+        else:
+            agencias_Lima = AgenciaLima.objects.all()
+            serializer = AgenciasLimaSerializers(agencias_Lima, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = AgenciasLimaSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Agencia creada con exito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, id=None, format= None):
+        agencia_lima = self.get_object(id)
+        if agencia_lima is None:
+            return Response({'message': message2},status=status.HTTP_404_NOT_FOUND)
+        serializer = AgenciasLimaSerializers(agencia_lima, data=request.data, partial= True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Datos actualizados con exito', 'data':serializer.data})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        agencia_lima = self.get_object(id)
+        if agencia_lima is None:
+            return Response({'message': message3}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        agencia_lima.delete()
+        return Response({'message': 'Agencia eliminada con exito'}, status=status.HTTP_204_NO_CONTENT)
+
 
 class UsuarioAPIView(APIView):
     parser_classes = (MultiPartParser, FormParser, JSONParser)
@@ -79,7 +125,7 @@ class UsuarioAPIView(APIView):
         serializer = UsuarioSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'User created successfully', 'data':serializer.data}, status=status.HTTP_201_CREATED)
+            return Response({'message': 'Usuario creado con exito', 'data':serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id=None, format=None):
@@ -89,7 +135,7 @@ class UsuarioAPIView(APIView):
         serializer = UsuarioSerializers(usuario, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'Data updated successfully', 'data': serializer.data})
+            return Response({'message': 'Datos actualizados con exito', 'data': serializer.data})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
@@ -97,5 +143,5 @@ class UsuarioAPIView(APIView):
         if usuario is None:
             return Response({'message': message3}, status=status.HTTP_404_NOT_FOUND)
         usuario.delete()
-        return Response({'message': 'User successfully deleted'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Usuario eliminado con exito'}, status=status.HTTP_204_NO_CONTENT)
     
