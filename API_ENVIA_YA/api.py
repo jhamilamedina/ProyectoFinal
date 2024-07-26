@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
-from .models import Empresa, Usuario, AgenciaLima
-from .serializers import EmpresaSerializer, UsuarioSerializers, AgenciasLimaSerializers
+from .models import Empresa, Usuario, AgenciaLima,Comentario
+from .serializers import EmpresaSerializer, UsuarioSerializers, AgenciasLimaSerializers, ComentariosSerializers
 
 message1 = 'No existe'
 message2 = 'No registrado en la base de datos'
@@ -144,4 +144,48 @@ class UsuarioAPIView(APIView):
             return Response({'message': message3}, status=status.HTTP_404_NOT_FOUND)
         usuario.delete()
         return Response({'message': 'Usuario eliminado con exito'}, status=status.HTTP_204_NO_CONTENT)
-    
+
+
+class ComentariosAPIViews(APIView):
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
+    def get_object(self, id):
+        try:
+            return Comentario.objects.get(id=id)
+        except Comentario.DoesNotExist:
+            return None
+
+    def get(self, request, id=None, format=None):
+        if id:
+            comentario = self.get_object(id)
+            if comentario is None:
+                return Response({'message': message1}, status=status.HTTP_404_NOT_FOUND)
+            serializer = ComentariosSerializers(comentario)
+        else:
+            comentarios = Comentario.objects.all()
+            serializer = ComentariosSerializers(comentarios, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = ComentariosSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Comentario creado con exito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, id=None, format=None):
+        comentario = self.get_object(id)
+        if comentario is None:
+            return Response({'message': message2}, status=status.HTTP_404_NOT_FOUND)
+        serializer = ComentariosSerializers(comentario, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Datos actualizados con exito', 'data': serializer.data})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        comentario = self.get_object(id)
+        if comentario is None:
+            return Response({'message': message3}, status=status.HTTP_404_NOT_FOUND)
+        comentario.delete()
+        return Response({'message': 'Comentario eliminado con exito'}, status=status.HTTP_204_NO_CONTENT)
