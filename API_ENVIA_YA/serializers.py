@@ -23,25 +23,25 @@ class UsuarioSerializers(serializers.ModelSerializer):
 
 class ComentariosSerializers(serializers.ModelSerializer):
     class Meta:
-        models = Comentario
+        model = Comentario
         fields = '__all__'
 
 class AgenciasLimaSerializers(serializers.ModelSerializer):
     class Meta: 
-        models = AgenciaLima
+        model = AgenciaLima
         fields = '__all__'
 
 class DepartamentosSerializers(serializers.ModelSerializer):
     class Meta:
-        models = Departamento
+        model = Departamento
         fields = '__all__'
 
 class ProvinciasSerializers(serializers.ModelSerializer):
     class Meta:
-        models = Provincia
+        model = Provincia
         fields = '__all__'
 
 class DistritosSerializers(serializers.ModelSerializer):
     class Meta:
-        models = Distrito
+        model = Distrito
         fields = '__all__'
