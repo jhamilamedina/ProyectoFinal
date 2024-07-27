@@ -7,8 +7,8 @@ class Empresa(models.Model):
     Sede_principal = models.CharField(max_length=100)
     Descripcion = models.TextField()
     Sitio_web = models.CharField(max_length=100)
-    Created_ad = models.DateTimeField(auto_now_add=True)
-    Updated_ad = models.DateTimeField(auto_now_add=True)
+    Creado = models.DateTimeField(auto_now_add=True)
+    Actualizado = models.DateTimeField(auto_now=True)
 
 class Estrella(models.Model):
     Empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE)
@@ -27,30 +27,31 @@ class Valoracion(models.Model):
     Caro = models.IntegerField()
     Inseguro = models.IntegerField()
     Impuntual = models.IntegerField()
+    Poco_amables = models.IntegerField()
 
 class Usuario(models.Model):
     Foto_usuario = models.BinaryField(max_length=45)
     Nombre = models.CharField(max_length=100)
     Email = models.CharField(max_length=100, unique=True)
     Contrasena = models.CharField(max_length=20)
-    Created_ad = models.DateTimeField(auto_now_add=True)
-    Updated_ad = models.DateTimeField(auto_now_add=True)
+    Creado = models.DateTimeField(auto_now_add=True)
+    Actualizado = models.DateTimeField(auto_now=True)
 
 class Comentario(models.Model):
     Empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     Usuario_id = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    Fecha = models.DateTimeField()
+    Fecha = models.TimeField(auto_now_add=True)
     Comentario = models.TextField()
 
 class AgenciaLima(models.Model):
     Empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     Foto = models.BinaryField(max_length=200)
+    Nombre_Referencial = models.CharField(max_length=100)
     Direccion = models.CharField(max_length=100)
+    Link_mapa = models.CharField(max_length=200)
     Horario_de_atencion = models.CharField(max_length=45)
     Telefono = models.IntegerField()
     Cochera = models.BooleanField()
-    Salidas = models.TimeField()
-    Llegadas = models.TimeField()
 
 class Departamento(models.Model):
     Nombre = models.CharField(max_length=100)
