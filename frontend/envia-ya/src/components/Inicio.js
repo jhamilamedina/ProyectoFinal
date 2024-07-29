@@ -24,7 +24,7 @@ const App = () => {
       <h1>Crear Cuenta</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="nombres">Nombre:</label>
+          <label htmlFor="nombres">Nombres:</label>
           <input 
             type="text" 
             id="nombres" 
@@ -35,12 +35,12 @@ const App = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="apellidos">Apellidos:</label>
+          <label htmlFor="apellidos">Email:</label>
           <input 
             type="text" 
-            id="apellidos" 
-            name="apellidos" 
-            value={formData.apellidos} 
+            id="email" 
+            name="email" 
+            value={formData.email} 
             onChange={handleChange} 
             required 
           />
