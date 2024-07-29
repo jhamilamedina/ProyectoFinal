@@ -1,5 +1,5 @@
 from django.urls import path
-from .api import EmpresasAPIView , ValoracionesAPIView, EstrellasAPIView, UsuariosAPIView, AgenciasLimaAPIView, ComentariosAPIViews, DepartamentosAPIViews, ProvinciasAPIViews,DistritosAPIViews
+from .api import EmpresasAPIView , ValoracionesAPIView, EstrellasAPIView, UsuariosAPIView, AgenciasLimaAPIView, ComentariosAPIView, DepartamentosAPIView, ProvinciasAPIView,DistritosAPIView
 
 urlpatterns = [
     # Endpoint para listar y crear Empresas
@@ -28,23 +28,23 @@ urlpatterns = [
     path('api/agenciaslima/<int:id>/', AgenciasLimaAPIView.as_view(), name='agenciaslima-detail-update-delete'),
 
     # Endpoint para listar y crear comentarios
-    path('api/comentarios/', ComentariosAPIViews.as_view(), name='comentarios-list-create'),
+    path('api/comentarios/', ComentariosAPIView.as_view(), name='comentarios-list-create'),
     # Endpoint para obtener, actualizar y eliminar un comenario
-    path('api/comentarios/<int:id>/', ComentariosAPIViews.as_view(), name='comentarios-detail-update-delete'),
+    path('api/comentarios/<int:id>/', ComentariosAPIView.as_view(), name='comentarios-detail-update-delete'),
 
     # Endpoint para listar y crear departamentos
-    path('api/departamentos/', DepartamentosAPIViews.as_view(), name='departamentos-list-create'),
+    path('api/departamentos/', DepartamentosAPIView.as_view(), name='departamentos-list-create'),
     # Endpoint para obtener, actualizar y eliminar un departamento
-    path('api/departamentos/<int:id>/', DepartamentosAPIViews.as_view(), name='departamentos-detail-update-delete'),
+    path('api/departamentos/<int:id>/', DepartamentosAPIView.as_view(), name='departamentos-detail-update-delete'),
 
     # Endpoint para listar y crear Provincias
-    path('api/provincias/', ProvinciasAPIViews.as_view(), name='provincias-list-create'),
+    path('api/provincias/', ProvinciasAPIView.as_view(), name='provincias-list-create'),
     # Endpoint para obtener, actualizar y eliminar una Provincia
-    path('api/provincias/<int:id>/', ProvinciasAPIViews.as_view(), name='provincias-detail-update-delete'),
+    path('api/provincias/<int:id>/', ProvinciasAPIView.as_view(), name='provincias-detail-update-delete'),
 
 
     # Endpoint para listar y crear distritos
-    path('api/distritos/', DistritosAPIViews.as_view(), name='distritos-list-create'),
+    path('api/distritos/', DistritosAPIView.as_view(), name='distritos-list-create'),
     # Endpoint para obtener, actualizar y eliminar un distrito
-    path('api/distritos/<int:id>/', DistritosAPIViews.as_view(), name='distritos-detail-update-delete'),
+    path('api/distritos/<int:id>/', DistritosAPIView.as_view(), name='distritos-detail-update-delete'),
 ]
