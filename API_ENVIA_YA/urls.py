@@ -1,26 +1,26 @@
 from django.urls import path
-from .api import EmpresaAPIView , ValoracionAPIView, EstrellaAPIView, UsuarioAPIView, AgenciasLimaAPIView, ComentariosAPIViews, DepartamentosAPIViews, ProvinciasAPIViews,DistritosAPIViews
+from .api import EmpresasAPIView , ValoracionesAPIView, EstrellasAPIView, UsuariosAPIView, AgenciasLimaAPIView, ComentariosAPIViews, DepartamentosAPIViews, ProvinciasAPIViews,DistritosAPIViews
 
 urlpatterns = [
     # Endpoint para listar y crear Empresas
-    path('api/empresas/', EmpresaAPIView.as_view(), name='empresas-list-create'),
+    path('api/empresas/', EmpresasAPIView.as_view(), name='empresas-list-create'),
     # Endpoint para obtener, actualizar y eliminar una Empresa
-    path('api/empresas/<int:id>/', EmpresaAPIView.as_view(), name='empresas-detail-update-delete'),
+    path('api/empresas/<int:id>/', EmpresasAPIView.as_view(), name='empresas-detail-update-delete'),
 
     # Endpoint para listar y crear valoraciones
-    path('api/valoraciones/', ValoracionAPIView.as_view(), name='valoraciones-list-create'),
+    path('api/valoraciones/', ValoracionesAPIView.as_view(), name='valoraciones-list-create'),
     # Endpoint para obtener, actualizar y eliminar una valoracion
-    path('api/valoraciones/<int:id>/', ValoracionAPIView.as_view(), name='valoraciones-detail-update-delete'),
+    path('api/valoraciones/<int:id>/', ValoracionesAPIView.as_view(), name='valoraciones-detail-update-delete'),
 
     # Endpoint para listar y crear datos en la tabla Estrella
-    path('api/estrellas/', EstrellaAPIView.as_view(), name='estrella-list-create'),
+    path('api/estrellas/', EstrellasAPIView.as_view(), name='estrella-list-create'),
     # Endpoint para obtener, actualizar y eliminar datos de la  tabla Estrella
-    path('api/estrellas/<int:id>/', EstrellaAPIView.as_view(), name='estrella-detail-update-delete'),
+    path('api/estrellas/<int:id>/', EstrellasAPIView.as_view(), name='estrella-detail-update-delete'),
 
     # Endpoint para listar y crear usuarios
-    path('api/usuarios/', UsuarioAPIView.as_view(), name='usuarios-list-create'),
+    path('api/usuarios/', UsuariosAPIView.as_view(), name='usuarios-list-create'),
     # Endpoint para obtener, actualizar y eliminar un usuario
-    path('api/usuarios/<int:id>/', UsuarioAPIView.as_view(), name='usuarios-detail-update-delete'),
+    path('api/usuarios/<int:id>/', UsuariosAPIView.as_view(), name='usuarios-detail-update-delete'),
 
     # Endpoint para listar y crear agencias
     path('api/agenciaslima/', AgenciasLimaAPIView.as_view(), name='agenciaslima-list-create'),
