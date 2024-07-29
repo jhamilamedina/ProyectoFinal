@@ -1,0 +1,46 @@
+.reviews-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+.reviews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.review-card {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.review-author img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.show-more-link {
+  display: block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #007BFF;
+  cursor: pointer;
+}
+
+.show-more-link:hover {
+  text-decoration: underline;
+}

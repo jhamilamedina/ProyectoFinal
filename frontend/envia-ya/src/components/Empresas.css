@@ -1,0 +1,59 @@
+.host-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.host-card {
+  max-width: 300px; /* Ajusta el ancho según tus necesidades */
+  margin: 20px; /* Espacio entre las tarjetas */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+.host-info {
+  display: flex;
+  align-items: center;
+}
+
+.Olva {
+  max-width: 100px; /* Ajusta el tamaño del logo según tus necesidades */
+  margin-right: 16px;
+}
+
+.host-details h2 {
+  margin: 0;
+}
+
+.host-stats p {
+  margin: 5px 0;
+}
+
+.host-extra-info p {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.host-extra-info i {
+  margin-right: 10px;
+}
+
+.host-description {
+  margin: 20px 0;
+}
+
+.show-more-link {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #007BFF;
+  cursor: pointer;
+}
+
+.show-more-link:hover {
+  text-decoration: underline;
+}
