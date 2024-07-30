@@ -16,7 +16,7 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Formulario enviado:', formData);
-    // Aquí puedes manejar el envío del formulario, como enviarlo a un servidor
+    
   };
 
   return (

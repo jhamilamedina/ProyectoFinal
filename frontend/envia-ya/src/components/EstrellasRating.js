@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import './EstrellasRating.css';
 
-const EstrellasRating = ({ rating }) => {
+const EstrellasRating = ({ rating, onRatingChange }) => {
   const [currentRating, setCurrentRating] = useState(rating);
   const [hover, setHover] = useState(null);
+
+  const handleRatingChange = (ratingValue) => {
+    setCurrentRating(ratingValue);
+    onRatingChange(ratingValue);
+  };
 
   return (
     <div className="star-rating">
@@ -15,7 +20,7 @@ const EstrellasRating = ({ rating }) => {
               type="radio"
               name="rating"
               value={ratingValue}
-              onClick={() => setCurrentRating(ratingValue)}
+              onClick={() => handleRatingChange(ratingValue)}
             />
             <svg
               className="star"
