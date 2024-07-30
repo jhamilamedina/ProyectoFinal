@@ -19,7 +19,7 @@
   align-items: center;
 }
 
-.Olva {
+.logo {
   max-width: 100px; /* Ajusta el tamaño del logo según tus necesidades */
   margin-right: 16px;
 }
@@ -32,14 +32,22 @@
   margin: 5px 0;
 }
 
-.host-extra-info p {
-  display: flex;
-  align-items: center;
-  margin: 5px 0;
+.host-extra-info {
+  margin-top: 10px;
 }
 
-.host-extra-info i {
-  margin-right: 10px;
+.caracteristica {
+  display: flex;
+  align-items: center;
+  margin: 2px 0; /* Reduce el margen entre las características */
+}
+
+.caracteristica input {
+  margin-right: 0px; /* Reduce el espacio entre el checkbox y el texto */
+}
+
+.caracteristica p {
+  margin: 0; /* Elimina el margen del párrafo */
 }
 
 .host-description {
