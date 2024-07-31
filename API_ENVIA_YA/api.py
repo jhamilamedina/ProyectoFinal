@@ -5,15 +5,27 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from .models import Empresa, Valoracion, Estrella,Usuario, AgenciaLima, Comentario, Departamento, Provincia, Distrito
 from .serializers import EmpresaSerializer, ValoracionSerializers, EstrellasSerializers, UsuarioSerializers, AgenciasLimaSerializers, ComentariosSerializers, DepartamentosSerializers, ProvinciasSerializers, DistritosSerializers
+from .serializers import EmpresaDetailSerializer, AgenciaslimaDetailSerializer, DistritosDetailSerializer, ValoracionDetailSerializer, EstrellaDetailSerializer, ComentariosDetailSerializer, UsuarioDetailSerializer, ProvinciasDetailSerializer
 
 
-class EmpresaAPIView(APIView):
+class EmpresasAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
         if id:
             empresa = get_object_or_404(Empresa,id=id)
-            serializer = EmpresaSerializer(empresa)
+            serializer = EmpresaDetailSerializer(empresa)
+            valoraciones = Valoracion.objects.filter(empresa=empresa)
+            estrellas = Estrella.objects.filter(empresa=empresa)
+            comentarios = Comentario.objects.filter(empresa=empresa)
+            agenciaslima = AgenciaLima.objects.filter(empresa=empresa)
+            return Response({
+                'empresa': serializer.data,
+                'Sus agencias': AgenciaslimaDetailSerializer(agenciaslima, many=True).data,
+                'Sus valoraciones': ValoracionDetailSerializer(valoraciones, many=True).data,
+                'Sus estrellas': EstrellaDetailSerializer(estrellas, many=True).data,
+                'Sus comentarios': ComentariosDetailSerializer(comentarios, many=True).data
+            })
         else:
             empresas = Empresa.objects.all()
             serializer = EmpresaSerializer(empresas, many=True)
@@ -22,8 +34,9 @@ class EmpresaAPIView(APIView):
     def post(self, request, format=None):
         serializer = EmpresaSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Datos creados con exito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+            empresa = serializer.save()
+            mensaje = f'Datos creados con exito, con ID: {empresa.id}'
+            return Response({'message': mensaje,'data': serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, id=None, format=None):
@@ -31,15 +44,15 @@ class EmpresaAPIView(APIView):
         serializer = EmpresaSerializer(empresa, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'Datos actualizados con exito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
+            return Response({'message': 'Datos actualizados con exito', 'data': serializer.data, 'id': id}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
         empresa = get_object_or_404(Empresa, id=id)
         empresa.delete()
-        return Response({'message': 'Datos eliminados con  exito'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Datos eliminados con  exito', 'id': id}, status=status.HTTP_204_NO_CONTENT)
 
-class ValoracionAPIView(APIView):
+class ValoracionesAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
@@ -71,7 +84,7 @@ class ValoracionAPIView(APIView):
         valoracion.delete()
         return Response({'message': 'Datos eliminados con  exito'}, status=status.HTTP_204_NO_CONTENT)
 
-class EstrellaAPIView(APIView):
+class EstrellasAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
@@ -106,43 +119,58 @@ class EstrellaAPIView(APIView):
 class AgenciasLimaAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
+
     def get(self, request, id=None, format=None):
         if id:
             agencia_lima = get_object_or_404(AgenciaLima, id=id)
-            serializer = AgenciasLimaSerializers(agencia_lima)
+            serializer = AgenciaslimaDetailSerializer(agencia_lima)
+            empresa = agencia_lima.empresa
+            distritos = agencia_lima.distrito
+            
+            return Response({
+            'agencias_lima': serializer.data,
+            'empresa': EmpresaDetailSerializer(empresa).data,
+            'distritos': DistritosDetailSerializer(distritos).data
+        })
         else:
             agencias_Lima = AgenciaLima.objects.all()
             serializer = AgenciasLimaSerializers(agencias_Lima, many=True)
-        return Response(serializer.data)
+            return Response(serializer.data)
 
     def post(self, request, format=None):
         serializer = AgenciasLimaSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'Datos creados con exito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+            return Response({'message': 'Datos creados con éxito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, id=None, format= None):
+    def put(self, request, id=None, format=None):
         agencia_lima = get_object_or_404(AgenciaLima, id=id)
-        serializer = AgenciasLimaSerializers(agencia_lima, data=request.data, partial= True)
+        serializer = AgenciasLimaSerializers(agencia_lima, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'Datos actualizados con exito', 'data':serializer.data}, status=status.HTTP_202_ACCEPTED)
+            return Response({'message': 'Datos actualizados con éxito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
         agencia_lima = get_object_or_404(AgenciaLima, id=id)
         agencia_lima.delete()
-        return Response({'message': 'Datos eliminados con exito'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Datos eliminados con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
 
-class UsuarioAPIView(APIView):
+
+class UsuariosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
         
     def get(self, request, id=None, format=None):
         if id:
             usuario = get_object_or_404(Usuario, id=id)
-            serializer = UsuarioSerializers(usuario)
+            serializer = UsuarioDetailSerializer(usuario)
+            comentarios = Comentario.objects.filter(usuario=usuario)
+            return Response({
+                'usuario': serializer.data,
+                'Sus comentarios': ComentariosDetailSerializer(comentarios, many=True).data
+            })
         else:
             usuarios = Usuario.objects.all()
             serializer = UsuarioSerializers(usuarios, many=True)
@@ -169,7 +197,7 @@ class UsuarioAPIView(APIView):
         return Response({'message': 'Usuario eliminado con exito'}, status=status.HTTP_204_NO_CONTENT)
 
 
-class ComentariosAPIViews(APIView):
+class ComentariosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
@@ -199,26 +227,32 @@ class ComentariosAPIViews(APIView):
     def delete(self, request, id, format=None):
         comentario = get_object_or_404(Comentario, id=id)
         comentario.delete()
-        return Response({'message': 'Comentario eliminado con exito'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Comentario eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
-class DepartamentosAPIViews(APIView):
+class DepartamentosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
         if id:
             departamento = get_object_or_404(Departamento, id=id)
             serializer = DepartamentosSerializers(departamento)
+            provincias = Provincia.objects.filter(departamento=departamento)
+            return Response({
+                'departamento': serializer.data,
+                'provincias': ProvinciasDetailSerializer(provincias, many=True).data
+            })
         else:
             departamentos = Departamento.objects.all()
             serializer = DepartamentosSerializers(departamentos, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        departartamento = DepartamentosSerializers(data=request.data)
-        if departartamento.is_valid():
-            departartamento.save()
-            return Response({'message': 'Datos creados con exito', 'data': departartamento.data}, status=status.HTTP_201_CREATED)
-        return Response(departartamento.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = DepartamentosSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Datos creados con éxito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
     def put(self, request, id=None, format=None):
         departamento = get_object_or_404(Departamento, id=id)
@@ -228,29 +262,30 @@ class DepartamentosAPIViews(APIView):
             return Response({'message': 'Datos actualizados con exito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, id, format=None):
-        departamento = get_object_or_404(Departamento, id=id)
-        departamento.delete()
-        return Response({'message': 'Datos eliminados con exito'}, status=status.HTTP_204_NO_CONTENT)
 
-class ProvinciasAPIViews(APIView):
+class ProvinciasAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
         if id:
             provincia = get_object_or_404(Provincia, id=id)
             serializer = ProvinciasSerializers(provincia)
+            distritos = Distrito.objects.filter(provincia=provincia)
+            return Response({
+                'provincia': serializer.data,
+                'distrito': DistritosDetailSerializer(distritos, many=True).data
+            })
         else:
             provincias = Provincia.objects.all()
             serializer = ProvinciasSerializers(provincias, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        provincia = ProvinciasSerializers(data=request.data)
-        if provincia.is_valid():
-            provincia.save()
-            return Response({'message': 'Datos creados con exito', 'data': provincia.data}, status=status.HTTP_201_CREATED)
-        return Response(provincia.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = ProvinciasSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Datos creados con exito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id=None, format=None):
         provincia = get_object_or_404(Provincia, id=id)
@@ -260,18 +295,19 @@ class ProvinciasAPIViews(APIView):
             return Response({'message': 'Datos actualizados con exito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, id, format=None):
-        provincia = get_object_or_404(Provincia, id=id)
-        provincia.delete()
-        return Response({'message': 'Datos eliminados con exito'}, status=status.HTTP_204_NO_CONTENT)
 
-class DistritosAPIViews(APIView):
+class DistritosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
         if id:
             distrito = get_object_or_404(Distrito, id=id)
             serializer = DistritosSerializers(distrito)
+            provincia = Provincia.objects.filter(distrito=distrito)
+            return Response({
+                'distrito': serializer.data,
+                'provincia': ProvinciasSerializers(provincia, many=True).data
+            })
         else:
             distritos = Distrito.objects.all()
             serializer = DistritosSerializers(distritos, many=True)
@@ -291,8 +327,3 @@ class DistritosAPIViews(APIView):
             serializer.save()
             return Response({'message': 'Datos actualizados con exito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, id, format=None):
-        distrito = get_object_or_404(Distrito, id=id)
-        distrito.delete()
-        return Response({'message': 'Datos eliminados con exito'}, status=status.HTTP_204_NO_CONTENT)
