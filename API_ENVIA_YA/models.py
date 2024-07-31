@@ -1,67 +1,65 @@
-# models.py
 from django.db import models
 
 class Empresa(models.Model):
-    Logo = models.CharField(max_length=200)
-    Nombre = models.CharField(max_length=100)
-    Sede_principal = models.CharField(max_length=100)
-    Descripcion = models.TextField()
-    Sitio_web = models.CharField(max_length=100)
-    Creado = models.DateTimeField(auto_now_add=True)
-    Actualizado = models.DateTimeField(auto_now=True)
+    logo = models.ImageField(upload_to='logos/', null=True, blank=True)
+    nombre = models.CharField(max_length=100, db_index=True)
+    sede_principal = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    sitio_web = models.URLField(max_length=200)
+    creado = models.DateTimeField(auto_now_add=True)
+    actualizado = models.DateTimeField(auto_now=True)
 
 class Estrella(models.Model):
-    Empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE)
-    Estrella_1 = models.IntegerField()
-    Estrella_2 = models.IntegerField()
-    Estrella_3 = models.IntegerField()
-    Estrella_4 = models.IntegerField()
-    Estrella_5 = models.IntegerField()
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+    estrella_1 = models.IntegerField()
+    estrella_2 = models.IntegerField()
+    estrella_3 = models.IntegerField()
+    estrella_4 = models.IntegerField()
+    estrella_5 = models.IntegerField()
 
 class Valoracion(models.Model):
-    Empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE)
-    Puntualidad = models.IntegerField()
-    Seguridad = models.IntegerField()
-    Economica = models.IntegerField()
-    Amabilidad = models.IntegerField()
-    Caro = models.IntegerField()
-    Inseguro = models.IntegerField()
-    Impuntual = models.IntegerField()
-    Poco_amables = models.IntegerField()
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+    puntualidad = models.IntegerField()
+    seguridad = models.IntegerField()
+    economica = models.IntegerField()
+    amabilidad = models.IntegerField()
+    caro = models.IntegerField()
+    inseguro = models.IntegerField()
+    impuntual = models.IntegerField()
+    poco_amables = models.IntegerField()
 
 class Usuario(models.Model):
-    Foto_usuario = models.BinaryField(max_length=45)
-    Nombre = models.CharField(max_length=100)
-    Email = models.CharField(max_length=100, unique=True)
-    Contrasena = models.CharField(max_length=20)
-    Creado = models.DateTimeField(auto_now_add=True)
-    Actualizado = models.DateTimeField(auto_now=True)
+    foto_usuario = models.ImageField(upload_to='usuarios/', null=True, blank=True)
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100, unique=True)
+    contrasenia = models.CharField(max_length=20)
+    creado = models.DateTimeField(auto_now_add=True)
+    actualizado = models.DateTimeField(auto_now=True)
 
 class Comentario(models.Model):
-    Empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE)
-    Usuario_id = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    Fecha = models.TimeField(auto_now_add=True)
-    Comentario = models.TextField()
-
-class AgenciaLima(models.Model):
-    Empresa_id = models.ForeignKey(Empresa, on_delete=models.CASCADE)
-    Foto = models.BinaryField(max_length=200)
-    Nombre_Referencial = models.CharField(max_length=100)
-    Direccion = models.CharField(max_length=100)
-    Link_mapa = models.CharField(max_length=200)
-    Horario_de_atencion = models.CharField(max_length=45)
-    Telefono = models.IntegerField()
-    Cochera = models.BooleanField()
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    fecha = models.DateTimeField(auto_now_add=True)
+    comentario = models.TextField()
 
 class Departamento(models.Model):
-    Nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=100)
 
 class Provincia(models.Model):
-    Departamento_id = models.ForeignKey(Departamento, on_delete=models.CASCADE)
-    Nombre = models.CharField(max_length=100)
+    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
 
 class Distrito(models.Model):
-    Provincia_id = models.ForeignKey(Provincia, on_delete=models.CASCADE)
-    Agencia_lima_id = models.ForeignKey(AgenciaLima, on_delete=models.CASCADE)
-    Nombre = models.CharField(max_length=100)
+    provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
 
+class AgenciaLima(models.Model):
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
+    distrito = models.ForeignKey(Distrito, on_delete=models.CASCADE)
+    foto = models.ImageField(upload_to='agencias/', null=True, blank=True)
+    nombre_referencial = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=100)
+    link_mapa = models.CharField(max_length=200)
+    horario_de_atencion = models.CharField(max_length=45)
+    telefono = models.CharField(max_length=20)
+    cochera = models.BooleanField()
