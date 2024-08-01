@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import EstrellasRating from './EstrellasRating';
+import PropTypes from 'prop-types';
 
 import './Empresas.css';
 
-const EmpresaCard = ({ nombre, direccion, evaluaciones, valoracion, caracteristicas, descripcion, mapaUrl, logoUrl }) => {
+const EmpresaCard = ({ nombre, direccion, evaluaciones, valoracion, caracteristicas, descripcion, mapaUrl, webUrl, logoUrl, detallesUrl }) => {
   const [rating, setRating] = useState(valoracion);
 
   const handleRatingChange = (newRating) => {
@@ -12,14 +13,18 @@ const EmpresaCard = ({ nombre, direccion, evaluaciones, valoracion, caracteristi
   };
 
   return (
-    <div className="host-card">
-      <div className="host-info">
-        <img className="logo" src={logoUrl} alt={`${nombre}_logo`} />
-        <div className="host-details">
-          <h2>{nombre}</h2>
+    <div className="empresa-card">
+      <div className="empresa-info">
+        <img className="empresa-logo" src={logoUrl} alt={`${nombre}_logo`} />
+        <div className="empresa-details">
+          <h2>
+            <a href={webUrl} target="_blank" rel="noopener noreferrer">
+              {nombre}
+            </a>
+          </h2>
           <p>{direccion}</p>
-          <div className="host-stats">
-            <Link to="/Evaluacion">{evaluaciones} Evaluaciones</Link>
+          <div className="empresa-stats">
+            <Link to="/evaluacion">{evaluaciones} Comentarios</Link>
             <div className="rating-container">
               <Link to="/rating-pagina" className="rating-link">{rating} Valoración</Link>
               <EstrellasRating rating={rating} onRatingChange={handleRatingChange} />
@@ -27,18 +32,18 @@ const EmpresaCard = ({ nombre, direccion, evaluaciones, valoracion, caracteristi
           </div>
         </div>
       </div>
-      <div className="host-extra-info">
+      <div className="empresa-extra-info">
         {caracteristicas.map((caracteristica, index) => (
           <div key={index} className="caracteristica">
-            <input type="checkbox" />
+            <input type="checkbox" defaultChecked />
             <p>{caracteristica}</p>
           </div>
         ))}
       </div>
-      <p className="host-description">
+      <p className="empresa-description">
         {descripcion}
       </p>
-      <Link to="/Evaluacion" className="show-more-link">Mostrar más evaluaciones</Link>
+      <Link to={detallesUrl} className="show-more-link">Más detalles de la empresa</Link>
       <p>
         <i className="fas fa-map-marker-alt"></i> 
         <a href={mapaUrl} target="_blank" rel="noopener noreferrer">
@@ -47,6 +52,19 @@ const EmpresaCard = ({ nombre, direccion, evaluaciones, valoracion, caracteristi
       </p>
     </div>
   );
+};
+
+EmpresaCard.propTypes = {
+  nombre: PropTypes.string.isRequired,
+  direccion: PropTypes.string.isRequired,
+  evaluaciones: PropTypes.number.isRequired,
+  valoracion: PropTypes.number.isRequired,
+  caracteristicas: PropTypes.arrayOf(PropTypes.string).isRequired,
+  descripcion: PropTypes.string.isRequired,
+  mapaUrl: PropTypes.string.isRequired,
+  webUrl: PropTypes.string.isRequired,
+  logoUrl: PropTypes.string,
+  detallesUrl: PropTypes.string.isRequired
 };
 
 export default EmpresaCard;

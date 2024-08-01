@@ -1,0 +1,85 @@
+.lista-agencias {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.empresa-card {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.empresa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empresa-logo {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.empresa-rating {
+  display: flex;
+  align-items: center;
+}
+
+.empresa-rating .stars {
+  margin-right: 10px;
+}
+
+.empresa-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.empresa-description {
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.empresa-contact {
+  margin-top: 20px;
+}
+
+.empresa-contact a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.empresa-contact a:hover {
+  text-decoration: underline;
+}
+
+.empresa-map {
+  margin-top: 20px;
+}
+
+.empresa-map img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.empresa-comment-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.empresa-comment-link:hover {
+  text-decoration: underline;
+}
