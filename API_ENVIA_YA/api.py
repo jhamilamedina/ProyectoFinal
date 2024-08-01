@@ -164,12 +164,12 @@ class AgenciasLimaAPIView(APIView):
             agencia_lima = get_object_or_404(AgenciasLima, id=id)
             serializer = AgenciaslimaDetailSerializer(agencia_lima)
             empresa = agencia_lima.empresa
-            distritos = agencia_lima.distrito
+            distritos = agencia_lima.distritos.all()
             
             return Response({
             'agencias_lima': serializer.data,
             'empresa': EmpresaDetailSerializer(empresa).data,
-            'distritos': DistritosDetailSerializer(distritos).data
+            'distritos': DistritosDetailSerializer(distritos, many=True).data
         })
         else:
             agencias_Lima = AgenciasLima.objects.all()
@@ -285,21 +285,6 @@ class DepartamentosAPIView(APIView):
             serializer = DepartamentosSerializers(departamentos, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
-        serializer = DepartamentosSerializers(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Datos creados con éxito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-    def put(self, request, id=None, format=None):
-        departamento = get_object_or_404(Departamentos, id=id)
-        serializer = DepartamentosSerializers(departamento, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Datos actualizados con exito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProvinciasAPIView(APIView):
@@ -319,20 +304,6 @@ class ProvinciasAPIView(APIView):
             serializer = ProvinciasSerializers(provincias, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
-        serializer = ProvinciasSerializers(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Datos creados con exito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request, id=None, format=None):
-        provincia = get_object_or_404(Provincias, id=id)
-        serializer = ProvinciasSerializers(provincia, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Datos actualizados con exito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DistritosAPIView(APIView):
@@ -351,18 +322,3 @@ class DistritosAPIView(APIView):
             distritos = Distritos.objects.all()
             serializer = DistritosSerializers(distritos, many=True)
         return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = DistritosSerializers(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Datos creados con exito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request, id=None, format=None):
-        distrito = get_object_or_404(Distritos, id=id)
-        serializer = DistritosSerializers(distrito, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Datos actualizados con exito', 'data': serializer.data}, status=status.HTTP_202_ACCEPTED)
-        return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
