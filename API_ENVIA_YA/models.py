@@ -10,7 +10,7 @@ class Empresas(models.Model):
     actualizado = models.DateTimeField(auto_now=True)
 
 class Estrellas(models.Model):
-    empresa_id = models.ForeignKey(Empresas, on_delete=models.CASCADE)
+    empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE)
     estrella_1 = models.IntegerField(default=0)
     estrella_2 = models.IntegerField(default=0)
     estrella_3 = models.IntegerField(default=0)
@@ -18,7 +18,7 @@ class Estrellas(models.Model):
     estrella_5 = models.IntegerField(default=0)
 
 class Valoraciones(models.Model):
-    empresas_id = models.ForeignKey(Empresas, on_delete=models.CASCADE)
+    empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE)
     puntualidad = models.IntegerField(default=0)
     seguridad = models.IntegerField(default=0)
     economica = models.IntegerField(default=0)
@@ -37,8 +37,8 @@ class Usuarios(models.Model):
     actualizado = models.DateTimeField(auto_now=True)
 
 class Comentarios(models.Model):
-    empresas_id = models.ForeignKey(Empresas, on_delete=models.CASCADE)
-    usuarios_id = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
     comentario = models.TextField()
 
@@ -46,16 +46,16 @@ class Departamentos(models.Model):
     nombre = models.CharField(max_length=100)
 
 class Provincias(models.Model):
-    departamentos_id = models.ForeignKey(Departamentos, on_delete=models.CASCADE)
+    departamento = models.ForeignKey(Departamentos, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
 
 class Distritos(models.Model):
-    provincias_id = models.ForeignKey(Provincias, on_delete=models.CASCADE)
+    provincia = models.ForeignKey(Provincias, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
 
 class AgenciasLima(models.Model):
-    empresas_id = models.ForeignKey(Empresas, on_delete=models.CASCADE)
-    distritos_id = models.ForeignKey(Distritos, on_delete=models.CASCADE)
+    empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE)
+    distritos = models.ManyToManyField(Distritos)
     foto = models.ImageField(upload_to='agencias/', null=True, blank=True)
     nombre_referencial = models.CharField(max_length=100)
     direccion = models.CharField(max_length=100)
