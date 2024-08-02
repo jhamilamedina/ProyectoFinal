@@ -21,10 +21,10 @@ class EmpresasAPIView(APIView):
             agenciaslima = AgenciasLima.objects.filter(empresa=empresa)
             return Response({
                 'Empresa': serializer.data,
-                'Sus agencias': AgenciaslimaDetailSerializer(agenciaslima, many=True).data,
-                'Sus valoraciones': ValoracionDetailSerializer(valoraciones, many=True).data,
-                'Sus estrellas': EstrellaDetailSerializer(estrellas, many=True).data,
-                'Sus comentarios': ComentariosDetailSerializer(comentarios, many=True).data
+                'Agencias': AgenciaslimaDetailSerializer(agenciaslima, many=True).data,
+                'Valoraciones': ValoracionDetailSerializer(valoraciones, many=True).data,
+                'Estrellas': EstrellaDetailSerializer(estrellas, many=True).data,
+                'Comentarios': ComentariosDetailSerializer(comentarios, many=True).data
             })
         else:
             empresas = Empresas.objects.all()
@@ -208,7 +208,7 @@ class UsuariosAPIView(APIView):
             comentarios = Comentarios.objects.filter(usuario=usuario)
             return Response({
                 'Usuario': serializer.data,
-                'Sus comentarios': ComentariosDetailSerializer(comentarios, many=True).data
+                'Comentarios': ComentariosDetailSerializer(comentarios, many=True).data
             })
         else:
             usuarios = Usuarios.objects.all()
@@ -216,6 +216,9 @@ class UsuariosAPIView(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
+        email = request.data.get('email')
+        if Usuarios.objects.filter(email=email).exists():
+            return Response({'Ya existe un usuario con ese correo electronico'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UsuarioSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -224,6 +227,10 @@ class UsuariosAPIView(APIView):
 
     def put(self, request, id=None, format=None):
         usuario = get_object_or_404(Usuarios, id=id)
+        data = request.data
+        email = data.get('email')
+        if Usuarios.objects.filter(email=email).exclude(id=id).exists():
+            return Response({'Ya existe un usuario con este coreo electrinico'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UsuarioSerializers(usuario, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
