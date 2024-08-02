@@ -20,7 +20,7 @@ class EmpresasAPIView(APIView):
             comentarios = Comentarios.objects.filter(empresa=empresa)
             agenciaslima = AgenciasLima.objects.filter(empresa=empresa)
             return Response({
-                'empresa': serializer.data,
+                'Empresa': serializer.data,
                 'Sus agencias': AgenciaslimaDetailSerializer(agenciaslima, many=True).data,
                 'Sus valoraciones': ValoracionDetailSerializer(valoraciones, many=True).data,
                 'Sus estrellas': EstrellaDetailSerializer(estrellas, many=True).data,
@@ -167,9 +167,9 @@ class AgenciasLimaAPIView(APIView):
             distritos = agencia_lima.distritos.all()
             
             return Response({
-            'agencias_lima': serializer.data,
-            'empresa': EmpresaDetailSerializer(empresa).data,
-            'distritos': DistritosDetailSerializer(distritos, many=True).data
+            'Agencias_lima': serializer.data,
+            'Empresa': EmpresaDetailSerializer(empresa).data,
+            'Distritos': DistritosDetailSerializer(distritos, many=True).data
         })
         else:
             agencias_Lima = AgenciasLima.objects.all()
@@ -207,7 +207,7 @@ class UsuariosAPIView(APIView):
             serializer = UsuarioDetailSerializer(usuario)
             comentarios = Comentarios.objects.filter(usuario=usuario)
             return Response({
-                'usuario': serializer.data,
+                'Usuario': serializer.data,
                 'Sus comentarios': ComentariosDetailSerializer(comentarios, many=True).data
             })
         else:
@@ -277,8 +277,8 @@ class DepartamentosAPIView(APIView):
             serializer = DepartamentosSerializers(departamento)
             provincias = Provincias.objects.filter(departamento=departamento)
             return Response({
-                'departamento': serializer.data,
-                'provincias': ProvinciasDetailSerializer(provincias, many=True).data
+                'Departamento': serializer.data,
+                'Provincias': ProvinciasDetailSerializer(provincias, many=True).data
             })
         else:
             departamentos = Departamentos.objects.all()
@@ -295,9 +295,11 @@ class ProvinciasAPIView(APIView):
             provincia = get_object_or_404(Provincias, id=id)
             serializer = ProvinciasSerializers(provincia)
             distritos = Distritos.objects.filter(provincia=provincia)
+            departamento = provincia.departamento
             return Response({
-                'provincia': serializer.data,
-                'distrito': DistritosDetailSerializer(distritos, many=True).data
+                'Provincia': serializer.data,
+                'Distritos': DistritosDetailSerializer(distritos, many=True).data,
+                'Departamento': DepartamentosSerializers(departamento).data
             })
         else:
             provincias = Provincias.objects.all()
@@ -315,8 +317,8 @@ class DistritosAPIView(APIView):
             serializer = DistritosSerializers(distrito)
             provincia = Provincias.objects.filter(distrito=distrito)
             return Response({
-                'distrito': serializer.data,
-                'provincia': ProvinciasSerializers(provincia, many=True).data
+                'Distrito': serializer.data,
+                'Provincia': ProvinciasSerializers(provincia, many=True).data
             })
         else:
             distritos = Distritos.objects.all()
