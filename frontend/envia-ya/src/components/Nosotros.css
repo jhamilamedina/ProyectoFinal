@@ -1,0 +1,50 @@
+.nosotros-container {
+  margin: 20px auto;
+  padding: 40px;
+  max-width: 800px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Heading Styling */
+.nosotros-container h1 {
+  font-size: 3em;
+  color: #1a0b42;
+  margin-bottom: 20px;
+  text-align:left;
+  font-weight: 700;
+}
+
+.nosotros-container h2 {
+  font-size: 2em;
+  color: #0e0101;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Paragraph Styling */
+.nosotros-container p {
+  font-size: 1.1em;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Additional Styling for Emphasis */
+.nosotros-container p:last-child {
+  margin-bottom: 0;
+}
+
+/* Link Styling */
+.nosotros-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.nosotros-container a:hover {
+  text-decoration: underline;
+}

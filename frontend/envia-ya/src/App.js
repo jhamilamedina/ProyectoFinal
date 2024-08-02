@@ -13,31 +13,28 @@ import Inicio from './components/Inicio';
 import Contacto from './components/Contacto';
 import Privacidad from './components/Privacidad';
 
-import './App.css'
-
 function App() {
   return (
     <Router>
       <div className='app-container'>
       <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path='/destinos' element={<Destinos />} />
-            <Route path='/empresas' element={<Empresas />} />
-            <Route path='/Evaluacion' element={<Evaluacion />} />
-            <Route path='/EstrellasRating' element={<EstrellasRating />} />
-            <Route path="/rating-pagina" component={() => <div>Valoración...</div>} />
-            <Route path='/mas-evaluaciones' component={() => <div>Más evaluaciones...</div>} />
-            <Route path='/Nosotros' element={<Nosotros />} />
-            <Route path='/Inicio' element={<Inicio />} />
-            <Route path='/Ayuda' element={<Ayuda />} />
-            <Route path='/Contacto' element={<Contacto />} />
-            <Route path='/Privacidad' element={<Privacidad />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path='/destinos' element={<Destinos />} />
+          <Route path='/empresas' element={<Empresas />} />
+          <Route path='/Evaluacion' element={<Evaluacion />} />
+          <Route path='/EstrellasRating' element={<EstrellasRating />} />
+          <Route path="/rating-pagina" component={() => <div>Valoración...</div>} />
+          <Route path='/mas-evaluaciones' component={() => <div>Más evaluaciones...</div>} />
+          <Route path='/Nosotros' element={<Nosotros />} />
+          <Route path='/Inicio' element={<Inicio />} />
+          <Route path='/Ayuda' element={<Ayuda />} />
+          <Route path='/Contacto' element={<Contacto />} />
+          <Route path='/Privacidad' element={<Privacidad />} />
+        </Routes>
+      </main>
+      <Footer />
     </Router>
   );
 }
