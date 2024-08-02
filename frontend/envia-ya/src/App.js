@@ -12,11 +12,14 @@ import Nosotros from './components/Nosotros';
 import Inicio from './components/Inicio';
 import Contacto from './components/Contacto';
 import Privacidad from './components/Privacidad';
+import DetallesAgencias from './components/DetallesAgencias';
+import ListaAgencias from './components/ListaAgencias';
+import DetallesShalom from './components/DetallesShalom';
+import ListaShalom from './components/ListaShalom';
 
 function App() {
   return (
     <Router>
-      <div className='app-container'>
       <Header />
       <main>
         <Routes>
@@ -32,6 +35,10 @@ function App() {
           <Route path='/Ayuda' element={<Ayuda />} />
           <Route path='/Contacto' element={<Contacto />} />
           <Route path='/Privacidad' element={<Privacidad />} />
+          <Route path='/DetallesAgencias' element={<DetallesAgencias />} />
+          <Route path='/ListaAgencias' element={<ListaAgencias />} />
+          <Route path='/DetallesShalom' element={<DetallesShalom />} />
+          <Route path='/ListaShalom' element={<ListaShalom />} />
         </Routes>
       </main>
       <Footer />
