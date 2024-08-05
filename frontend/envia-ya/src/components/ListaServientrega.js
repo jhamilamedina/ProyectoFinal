@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './ListaAgencias.css';
-import olvaImage from '../assets/olva1.png';
+import './ListaServientrega.css';
+import servientregaImage from '../assets/servientrega.png';
 
 const ConocenosMas = () => {
   const [rating, setRating] = useState(0);
@@ -21,50 +21,51 @@ const ConocenosMas = () => {
   };
 
   const exampleComments = [
-    { name: "Luis Sanchez", rating: 4, comment: "Pude enviar de forma exitosa mi encomienda pero tardó un poco." },
-    { name: "Sara Vega", rating: 5, comment: "Ya he hecho más de 15 envíos, y todos han llegado muy bien. Lo recomiendo al 100%." },
-    { name: "Mario Torres", rating: 3, comment: "Excelente servicio." }
+    { name: "Maria Gonzales", rating: 4, comment: "Muy buena la atención" },
+    { name: "Rogelio Díaz", rating: 5, comment: "He solicitado un envío la semana pasada y me llegó a tiempo" },
+    { name: "Rosa Vazques", rating: 3, comment: "Buen servicio" }
   ];
 
   const agencies = [
     {
-      name: "OLVA COURIER - Cercado de Lima",
-      address: "Avenida Garcilazo de la Vega 1358, Cercado de Lima",
-      hours: "Horario de atención: 9:30am a 7pm - lunes a sábado."
+      name: "Servientrega - Breña",
+      address: "Avenida Argentina 515, Breña, Lima",
+      hours: "Horario de atención: 8:30am a 6:30pm - lunes a sábado"
     },
     {
-      name: "OLVA COURIER - Rimac",
-      address: "Las Tapadas 198, Rimac, Lima",
-      hours: "Horario de atención: 9:30am a 7:30pm - lunes a sábado."
+      name: "Servientrega - Miraflores",
+      address: "Avenida Javier Prado, Miraflores, Lima",
+      hours: "Horario de atención: 8:30am a 6:30pm - lunes a sábado"
     },
     {
-      name: "OLVA COURIER - La Victoria",
-      address: "Jirón Antonio Bazo 1280, La Victoria, Lima",
-      hours: "Horario de atención: 8:00am a 6:30pm - lunes a sábado."
+      name: "Servientrega - San Luis",
+      address: "Avenida Agustín de la Rosa Toro 490, San Luis, Lima",
+      hours: "Horario de atención: 9:00am a 7:00pm - lunes a sábado"
     },
     {
-      name: "OLVA COURIER - Miraflores",
-      address: "Avenida Comande Espinar 659, Miraflores, Lima",
-      hours: "Horario de atención: 8:00am a 7:00pm - lunes a sábado."
+      name: "Servientrega - Cercado de Lima",
+      address: "Jirón de la Torre Ugarte 155, Cercado de Lima, Lima",
+      hours: "Horario de atención: 8:30am a 7:00pm - lunes a sábado"
     }
   ];
 
   return (
     <div className="conocenos-mas">
       <div className="company-info">
-        <img src={olvaImage} alt="Fachada de la empresa Olva Courier" className="company-photo" />
+        <img src={servientregaImage} alt="Fachada de Servientrega" className="company-photo" />
         <div className="company-details">
-          <h2>Olva Courier</h2>
-          <p>En OLVA, nos esforzamos por ofrecer un servicio de calidad que supere las expectativas de nuestros clientes. Trabajamos con actitudes positivas y vivimos nuestros valores en nuestro día a día.</p>
-          <p>Olva Courier es una empresa peruana de logística y mensajería que ofrece una amplia gama de servicios para el envío de paquetes y documentos</p>
-          <p>La sede principal de Olva Courier se encuentra en:</p>
-          <p>Avenida Argentina 4458, Callao 07001, Perú</p>
-          <p>Horario de Entrega de Envíos:</p>
+          <h2>Servientrega</h2>
+          <p><strong>Servientrega</strong> es una empresa líder en el sector de mensajería y logística en América Latina. Ofrece una amplia gama de servicios que incluyen transporte y distribución de paquetería y documentos a nivel nacional e internacional.</p>
+          <p>La compañía se destaca por su capacidad para proporcionar soluciones logísticas integrales, que abarcan desde el envío exprés de paquetes hasta la gestión completa de la cadena de suministro. Su red de operaciones se extiende por numerosos países en América Latina, con una presencia destacada en Colombia.</p>
+          <h3>Sede Principal</h3>
+          <p><strong>Dirección:</strong> Carrera 72 # 25-22, Bogotá, Colombia</p>
+          <h3>Horario de Atención</h3>
           <ul>
-            <li>Lunes a Viernes: 8:00 AM a 5:00 PM</li>
-            <li>Sábados: 8:00 AM a 3:00 PM</li>
+            <li><strong>Lunes a Viernes:</strong> 8:00 AM - 6:00 PM</li>
+            <li><strong>Sábados:</strong> 9:00 AM - 1:00 PM</li>
+            <li><strong>Domingos y festivos:</strong> Cerrado</li>
           </ul>
-          <p>Sitio Web: <a href="https://www.olvacourier.com/" target="_blank" rel="noopener noreferrer">https://www.olvacourier.com/</a></p>
+          <p><strong>Sitio Web:</strong> <a href="https://www.servientrega.com/" target="_blank" rel="noopener noreferrer">https://www.servientrega.com/</a></p>
         </div>
       </div>
       <div className="agencies">
@@ -83,7 +84,7 @@ const ConocenosMas = () => {
       </div>
       <div className="comments-section">
         <h2>Comentarios</h2>
-        <p>Deja tu comentarios (solo si estás logueado)</p>
+        <p>Deja tu comentario (solo si estás logueado)</p>
         <div className="rating">
           {[...Array(5)].map((star, index) => {
             index += 1;
@@ -104,7 +105,7 @@ const ConocenosMas = () => {
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Deja tu comentario aquí"
+          placeholder="solo si estás logueado"
           className="comment-box"
         />
         <button onClick={handleSubmit} className="submit-button">Enviar</button>

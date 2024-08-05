@@ -1,87 +1,137 @@
-import React from 'react';
-import DetallesShalom from './DetallesShalom';
-import './DetallesShalom.css';
+import React, { useState } from 'react';
+import './ListaShalom.css';
+import shalomImage from '../assets/shalom.png';
 
-const ListaShalom = () => {
-  const empresasData = [
+const ConocenosMas = () => {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [comment, setComment] = useState("");
+
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
+
+  const handleSubmit = () => {
+    if (comment.trim()) {
+      alert(`Rating: ${rating}\nComment: ${comment}`);
+      setComment("");
+    } else {
+      alert("Por favor deja tu comentario");
+    }
+  };
+
+  const exampleComments = [
+    { name: "Maria Gonzales", rating: 4, comment: "Muy buena la atención" },
+    { name: "Rogelio Díaz", rating: 5, comment: "He solicitado un envio la semana pasada y me llego a tiempo" },
+    { name: "Rosa Vazques", rating: 3, comment: "Buen servicio" }
+  ];
+
+  const agencies = [
     {
-      nombre: "Shalom",
-      direccion: "Avenida Garcilazo de la Vega 1358 Cercado de Lima",
-      evaluaciones: 2,
-      valoracion: 4,
-      telefono: "7140909",
-      horarios: "9:30am a 7pm lunes a sábado",
-      web: "https://www.olvacourier.com/",
-      correo: "ventas@olva.com.pe",
-      cochera: "No",
-      recojoDomicilio: "No",
-      entregaDomicilio: "Sí",
-      seguimientoPedido: "Sí",
-      mapaUrl: "https://maps.app.goo.gl/eAYMu6dSNMoKkpXt9",
-      mapaImageUrl: "", // Asegúrate de tener la imagen del mapa
-      logoUrl: "https://lh5.googleusercontent.com/p/AF1QipNI8_JonuQlBaXwMw9nGKu_ES1V6nX2DfJjuRm_=w426-h240-k-no" // Asegúrate de tener la imagen del logo
+      name: "Shalom - Rimac",
+      address: "Avenida Amancaes 644, Rimac, Lima",
+      hours: "Horario de atención: 8:30am a 7:00pm - lunes a sábado."
     },
     {
-      nombre: "Olva Courier",
-      direccion: "Las Tapadas 198, Rimac, Lima",
-      evaluaciones: 3,
-      valoracion: 3,
-      telefono: "912156055",
-      horarios: "9:30am a 7:30pm lunes a sábado",
-      web: "https://www.olvacourier.com/",
-      correo: "ventas@olva.com.pe",
-      cochera: "No",
-      recojoDomicilio: "Si",
-      entregaDomicilio: "Sí",
-      seguimientoPedido: "no",
-      mapaUrl: "https://maps.app.goo.gl/pXgZaY3gkkLkhk6J6",
-      mapaImageUrl: "", // Asegúrate de tener la imagen del mapa
-      logoUrl: "" // Asegúrate de tener la imagen del logo
+      name: "Shalom - La Victoria",
+      address: "Jirón Luna Pizarro, La Victoria, Lima",
+      hours: "Horario de atención: 7:00am a 5:30pm - lunes a sábado."
     },
     {
-      nombre: "Olva Courier",
-      direccion: "Jirón Antonio Bazo 1280, La Victoria, Lima",
-      evaluaciones: 2,
-      valoracion: 5,
-      telefono: "7140908",
-      horarios: "9:30am a 7pm lunes a sábado",
-      web: "https://www.olvacourier.com/",
-      correo: "ventas@olva.com.pe",
-      cochera: "Sí",
-      recojoDomicilio: "No",
-      entregaDomicilio: "Sí",
-      seguimientoPedido: "Sí",
-      mapaUrl: "https://maps.app.goo.gl/B4W32YXbNF2YywDK7",
-      mapaImageUrl: "", // Asegúrate de tener la imagen del mapa
-      logoUrl: "" // Asegúrate de tener la imagen del logo
+      name: "Shalom - Breña",
+      address: "Avenida República de Venezuela 1670, Breña, Lima",
+      hours: "Horario de atención: 9:00am a 7:00pm - lunes a sábado."
     },
     {
-      nombre: "Olva Courier",
-      direccion: "Avenida Comande Espinar 659, Miraflores, Lima",
-      evaluaciones: 3,
-      valoracion: 3,
-      telefono: "987655900",
-      horarios: "8:00am a 7:00pm lunes a sábado",
-      web: "https://www.olvacourier.com/",
-      correo: "ventas@olva.com.pe",
-      cochera: "Sí",
-      recojoDomicilio: "No",
-      entregaDomicilio: "Sí",
-      seguimientoPedido: "Sí",
-      mapaUrl: "https://maps.app.goo.gl/iDSyvBgCV1N7oLk79",
-      mapaImageUrl: "", // Asegúrate de tener la imagen del mapa
-      logoUrl: "" // Asegúrate de tener la imagen del logo
-    },
-    
+      name: "Shalom - Miraflores",
+      address: "Avenida José Pardo 533, Miraflores, Lima",
+      hours: "Horario de atención: 8:00am a 6:30pm - lunes a sábado."
+    }
   ];
 
   return (
-    <div className="lista-agencias">
-      {empresasData.map((empresa, index) => (
-        <DetallesShalom key={index} empresa={empresa} />
-      ))}
+    <div className="conocenos-mas">
+      <div className="company-info">
+        <img src={shalomImage} alt="Fachada de la empresa Shalom" className="company-photo" />
+        <div className="company-details">
+          <h2>Shalom</h2>
+          <p><strong>Shalom Transportes y Encomiendas</strong> es una empresa peruana especializada en el envío de paquetes y mercancías a nivel nacional. A continuación, se presentan los detalles más relevantes sobre la empresa:</p>
+          <h3>Servicios</h3>
+          <p>Shalom ofrece varios tipos de servicios de envío:</p>
+          <ul>
+            <li><strong>Retiro en Agencia:</strong> Los clientes pueden recoger sus envíos en cualquiera de las agencias de Shalom.</li>
+            <li><strong>Servicio Urgente:</strong> Entregas rápidas con prioridad.</li>
+            <li><strong>Reparto de Mercancías:</strong> Servicio de entrega de mercancías a domicilio.</li>
+          </ul>
+          <h3>La sede principal de Shalom se encuentra en:</h3>
+          <p>Carretera Central Km. 16.5, Lt. 5 Paradero, al costado del grifo Repsol, Ent A Huaycán, Ate, Lima 15476, Perú.</p>
+          <h3>Horario de Atención:</h3>
+          <ul>
+            <li><strong>Lunes a Viernes:</strong> 10:00 AM a 8:00 PM</li>
+            <li><strong>Sábados:</strong> 10:00 AM a 8:00 PM</li>
+          </ul>
+          <p><strong>Sitio Web:</strong> <a href="https://www.shalom.com.pe/" target="_blank" rel="noopener noreferrer">https://www.shalom.com.pe/</a></p>
+        </div>
+      </div>
+      <div className="agencies">
+        <h2>Conoce algunas de nuestras Agencias</h2>
+        <ul>
+          {agencies.map((agency, index) => (
+            <li key={index}>
+              <div className="agency-details">
+                <span className="agency-name">{agency.name}</span>
+                <div className="agency-address">{agency.address}</div>
+                <div className="agency-hours">{agency.hours}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="comments-section">
+        <h2>Comentarios</h2>
+        <p>Deja tu comentarios (solo si estás logueado)</p>
+        <div className="rating">
+          {[...Array(5)].map((star, index) => {
+            index += 1;
+            return (
+              <button
+                type="button"
+                key={index}
+                className={index <= (hover || rating) ? "on" : "off"}
+                onClick={() => handleRating(index)}
+                onMouseEnter={() => setHover(index)}
+                onMouseLeave={() => setHover(rating)}
+              >
+                <span className="star">&#9733;</span>
+              </button>
+            );
+          })}
+        </div>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="solo si estas logueado"
+          className="comment-box"
+        />
+        <button onClick={handleSubmit} className="submit-button">Enviar</button>
+
+        {/* Comentarios de ejemplo */}
+        <div className="example-comments">
+          {exampleComments.map((example, index) => (
+            <div key={index} className="comment">
+              <strong>{example.name}</strong>
+              <div className="rating">
+                {[...Array(5)].map((star, i) => (
+                  <span key={i} className={`star ${i < example.rating ? 'on' : 'off'}`}>&#9733;</span>
+                ))}
+              </div>
+              <p>{example.comment}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ListaShalom;
+export default ConocenosMas;
