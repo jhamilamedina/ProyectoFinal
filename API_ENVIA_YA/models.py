@@ -62,4 +62,4 @@ class AgenciasLima(models.Model):
     link_mapa = models.CharField(max_length=200)
     horario_de_atencion = models.CharField(max_length=45)
     telefono = models.CharField(max_length=20)
-    cochera = models.BooleanField()
+    cochera = models.BooleanField(null= True, blank=True)
