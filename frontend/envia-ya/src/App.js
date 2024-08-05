@@ -12,10 +12,14 @@ import Nosotros from './components/Nosotros';
 import Inicio from './components/Inicio';
 import Contacto from './components/Contacto';
 import Privacidad from './components/Privacidad';
-import DetallesAgencias from './components/DetallesAgencias';
 import ListaAgencias from './components/ListaAgencias';
-import DetallesShalom from './components/DetallesShalom';
 import ListaShalom from './components/ListaShalom';
+import ListaDHL from './components/ListaDHL';
+import ListaServientrega from './components/ListaServientrega';
+import ListaFedEX from './components/ListaFedEx';
+import ListaUps from './components/ListaUps';
+import ListaUrbano from './components/ListaUrbano';
+import ListaTransmar from './components/ListaTransmar';
 
 function App() {
   return (
@@ -35,10 +39,14 @@ function App() {
           <Route path='/Ayuda' element={<Ayuda />} />
           <Route path='/Contacto' element={<Contacto />} />
           <Route path='/Privacidad' element={<Privacidad />} />
-          <Route path='/DetallesAgencias' element={<DetallesAgencias />} />
           <Route path='/ListaAgencias' element={<ListaAgencias />} />
-          <Route path='/DetallesShalom' element={<DetallesShalom />} />
           <Route path='/ListaShalom' element={<ListaShalom />} />
+          <Route path='/ListaDHL' element={<ListaDHL />} />
+          <Route path='/ListaServientrega' element={<ListaServientrega />} />
+          <Route path='/ListaFedEX' element={<ListaFedEX />} />
+          <Route path='/ListaUps' element={<ListaUps />} />
+          <Route path='/ListaUrbano' element={<ListaUrbano />} />
+          <Route path='/ListaTransmar' element={<ListaTransmar />} />
         </Routes>
       </main>
       <Footer />
