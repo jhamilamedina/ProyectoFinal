@@ -3,6 +3,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
 from .models import Empresas, Valoraciones, Estrellas,Usuarios, AgenciasLima, Comentarios, Departamentos, Provincias, Distritos
 from .serializers import EmpresaSerializer, ValoracionSerializers, EstrellasSerializers, UsuarioSerializers, AgenciasLimaSerializers, ComentariosSerializers, DepartamentosSerializers, ProvinciasSerializers, DistritosSerializers
 from .serializers import EmpresaDetailSerializer, AgenciaslimaDetailSerializer, DistritosDetailSerializer, ValoracionDetailSerializer, EstrellaDetailSerializer, ComentariosDetailSerializer, UsuarioDetailSerializer, ProvinciasDetailSerializer
@@ -139,7 +141,7 @@ class EstrellasAPIView(APIView):
         except Estrellas.DoesNotExist:
             return Response({'detail': 'estrella no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
         
-        data = request.data
+        data = request.data(partial=True)
         estrella.estrella_1 += data.get('estrella_1', 0)
         estrella.estrella_2 += data.get('estrella_2', 0)
         estrella.estrella_3 += data.get('estrella_3', 0)
@@ -195,7 +197,6 @@ class AgenciasLimaAPIView(APIView):
         agencia_lima = get_object_or_404(AgenciasLima, id=id)
         agencia_lima.delete()
         return Response({'message': 'Datos eliminados con éxito'}, status=status.HTTP_204_NO_CONTENT)
-
 
 
 class UsuariosAPIView(APIView):
@@ -331,3 +332,21 @@ class DistritosAPIView(APIView):
             distritos = Distritos.objects.all()
             serializer = DistritosSerializers(distritos, many=True)
         return Response(serializer.data)
+
+class DistritosagenciasAPIView(APIView):
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
+
+    def get(self, request, id=None, format=None):
+        if id:
+            distrito = get_object_or_404(Distritos, id=id)
+            serializer = DistritosDetailSerializer(distrito)
+            agencias = AgenciasLima.objects.filter(distritos=distrito)
+            return Response({
+                'Distrito': serializer.data,
+                'Agencias': AgenciaslimaDetailSerializer(agencias, many=True).data
+            })
+        else:
+            return Response({'detail': 'ID de distrito no proporcionado.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
