@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'API_ENVIA_YA',
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg'
 ]
 
 REST_FRAMEWORK = {
