@@ -1,6 +1,7 @@
 import React from 'react';
 import DetallesAgencias from './DetallesAgencias';
 import './DetallesAgencias.css';
+import { imageShalom } from '../assets/agencias_fotos/shalom_mexico.jpeg'
 
 const ListaAgencias = () => {
   const empresasData = [

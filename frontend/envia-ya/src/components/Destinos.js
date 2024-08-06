@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Filter from './Filter';
 import './Destinos.css';
 import shalomImage from '../assets/agencias_fotos/shalom_mexico.jpeg'
