@@ -55,7 +55,7 @@ class Distritos(models.Model):
 
 class AgenciasLima(models.Model):
     empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE)
-    distritos = models.ManyToManyField(Distritos)
+    distritos = models.ManyToManyField(Distritos, related_name='agencias')
     foto = models.ImageField(upload_to='agencias/', null=True, blank=True)
     nombre_referencial = models.CharField(max_length=100)
     direccion = models.CharField(max_length=100)
