@@ -1,38 +1,64 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Filter.css';
 
 const Filter = ({ onSearch }) => {
-    const districsLima = ['Miraflores', 'San Isidro', 'Barranco', 'Surco', 'La Molina', 'La Victoria'];
-    const destinations = {
-        "Lima": {
-          "Lima": ["Miraflores", "San Isidro", "Barranco", "Surco", "La Molina"],
-          "Callao": ["Bellavista", "Carmen de La Legua", "La Perla", "La Punta", "Ventanilla"]
-        },
-        "Arequipa": {
-          "Arequipa": ["Cayma", "Cerro Colorado", "Characato", "Chiguata", "Jacobo Hunter"],
-          "Camana": ["Camana", "Mariscal Caceres", "Nicolas de Pierola", "Ocoña", "Quilca"]
-        }
-    };
-
+    const [departments, setDepartments] = useState([]);
+    const [provinces, setProvinces] = useState([]);
+    const [districts, setDistricts] = useState([]);
     const [origin, setOrigin] = useState('');
     const [department, setDepartment] = useState('');
     const [province, setProvince] = useState('');
     const [district, setDistrict] = useState('');
 
-    const handleDepartmentChange = (e) => {
-        setDepartment(e.target.value);
-        setProvince(''); // Reset province
-        setDistrict(''); // Reset district
-    };
+    useEffect(() => {
+        // Fetch departments
+        axios.get('http://localhost:8000/api/departamentos/')
+            .then(response => {
+                setDepartments(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching departments:', error);
+            });
+    }, []);
 
-    const handleProvinceChange = (e) => {
-        setProvince(e.target.value);
-        setDistrict(''); // Reset district
-    };
+    useEffect(() => {
+        // Fetch provinces
+        if (department) {
+            axios.get(`http://localhost:8000/api/departamentos/${department}/`)
+                .then(response => {
+                    setProvinces(response.data.provincias);
+                    setProvince('');
+                    setDistrict('');
+                })
+                .catch(error => {
+                    console.error('Error fetching provinces:', error);
+                });
+        } else {
+            setProvinces([]);
+            setProvince('');
+            setDistrict('');
+        }
+    }, [department]);
+
+    useEffect(() => {
+        if (province) {
+            axios.get(`http://localhost:8000/api/provincias/${province}/`)
+                .then(response => {
+                    setDistricts(response.data.distrito);
+                    setDistrict('');
+                })
+                .catch(error => {
+                    console.error('Error fetching districts:', error);
+                });
+        } else {
+            setDistricts([]);
+            setDistrict('');
+        }
+    }, [province]);
 
     const handleSearch = () => {
-        onSearch({ origin, department, province, district});
+        onSearch({ origin, department, province, district });
     };
 
     return (
@@ -43,19 +69,18 @@ const Filter = ({ onSearch }) => {
                     Origen (Lima Metropolitana):
                     <select value={origin} onChange={(e) => setOrigin(e.target.value)}>
                         <option value="">Seleccione un distrito</option>
-                        {districsLima.map((district) => (
-                            <option key={district} value={district}>{district}</option>
-                        ))}
+                        <option value="Miraflores">Miraflores</option>
+                        <option value="San Isidro">San Isidro</option>
                     </select>
                 </label>
             </div>
             <div>
                 <label>
                     Departamento:
-                    <select value={department} onChange={handleDepartmentChange}>
+                    <select value={department} onChange={(e) => setDepartment(e.target.value)}>
                         <option value="">Seleccione un departamento</option>
-                        {Object.keys(destinations).map((dept) => (
-                            <option key={dept} value={dept}>{dept}</option>
+                        {departments.map((dept) => (
+                            <option key={dept.id} value={dept.id}>{dept.nombre}</option>
                         ))}
                     </select>
                 </label>
@@ -63,14 +88,10 @@ const Filter = ({ onSearch }) => {
             <div>
                 <label>
                     Provincia:
-                    <select
-                        value={province}
-                        onChange={handleProvinceChange}
-                        disabled={!department}
-                    >
+                    <select value={province} onChange={(e) => setProvince(e.target.value)} disabled={!department}>
                         <option value="">Seleccione una provincia</option>
-                        {department && Object.keys(destinations[department]).map((prov) => (
-                            <option key={prov} value={prov}>{prov}</option>
+                        {provinces.map((prov) => (
+                            <option key={prov.id} value={prov.id}>{prov.nombre}</option>
                         ))}
                     </select>
                 </label>
@@ -78,14 +99,10 @@ const Filter = ({ onSearch }) => {
             <div>
                 <label>
                     Distrito:
-                    <select
-                        value={district}
-                        onChange={(e) => setDistrict(e.target.value)}
-                        disabled={!province}
-                    >
+                    <select value={district} onChange={(e) => setDistrict(e.target.value)} disabled={!province}>
                         <option value="">Seleccione un distrito</option>
-                        {province && destinations[department][province].map((dist) => (
-                            <option key={dist} value={dist}>{dist}</option>
+                        {districts.map((dist) => (
+                            <option key={dist.id} value={dist.id}>{dist.nombre}</option>
                         ))}
                     </select>
                 </label>
