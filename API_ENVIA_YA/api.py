@@ -198,6 +198,8 @@ class AgenciasLimaAPIView(APIView):
         return Response({'message': 'Datos eliminados con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
 class LoginAPIView(APIView):
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
+    
     def post(self, request, format=None):
         email = request.data.get('email')
         contrasenia = request.data.get('contrasenia')
