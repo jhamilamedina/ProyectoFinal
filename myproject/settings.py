@@ -39,13 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'API_ENVIA_YA',
     'rest_framework',
-<<<<<<< HEAD
-    'drf_yasg',
-    'corsheaders'
-=======
     'rest_framework.authtoken',
     'drf_yasg'
->>>>>>> origin/feature-backend
 ]
 
 REST_FRAMEWORK = {
