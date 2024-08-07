@@ -4,7 +4,6 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
-from rest_framework.authtoken.models import Token
 from .models import Empresas, Valoraciones, Estrellas,Usuarios, AgenciasLima, Comentarios, Departamentos, Provincias, Distritos
 from .serializers import EmpresaSerializer, ValoracionSerializers, EstrellasSerializers, UsuarioSerializers, AgenciasLimaSerializers, ComentariosSerializers, DepartamentosSerializers, ProvinciasSerializers, DistritosSerializers
 from .serializers import EmpresaDetailSerializer, AgenciaslimaDetailSerializer, DistritosDetailSerializer, ValoracionDetailSerializer, EstrellaDetailSerializer, ComentariosDetailSerializer, UsuarioDetailSerializer, ProvinciasDetailSerializer
@@ -141,7 +140,7 @@ class EstrellasAPIView(APIView):
         except Estrellas.DoesNotExist:
             return Response({'detail': 'estrella no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
         
-        data = request.data(partial=True)
+        data = request.data
         estrella.estrella_1 += data.get('estrella_1', 0)
         estrella.estrella_2 += data.get('estrella_2', 0)
         estrella.estrella_3 += data.get('estrella_3', 0)
@@ -197,6 +196,21 @@ class AgenciasLimaAPIView(APIView):
         agencia_lima = get_object_or_404(AgenciasLima, id=id)
         agencia_lima.delete()
         return Response({'message': 'Datos eliminados con éxito'}, status=status.HTTP_204_NO_CONTENT)
+
+class LoginAPIView(APIView):
+    def post(self, request, format=None):
+        email = request.data.get('email')
+        contrasenia = request.data.get('contrasenia')
+
+        user = authenticate(request, email=email, contrasenia=contrasenia)
+
+        if user is not None:
+            return Response({
+                'message': 'Inicio de sesión exitoso',
+                'Nombre': user.nombre
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({'detail': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class UsuariosAPIView(APIView):
