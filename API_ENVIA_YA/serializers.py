@@ -11,7 +11,7 @@ class EmpresaSerializer(serializers.ModelSerializer):
 class EmpresaDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empresas
-        fields = ['id', 'nombre', 'sede_principal', 'descripcion', 'sitio_web']
+        fields = ['id','logo', 'nombre', 'sede_principal', 'descripcion', 'sitio_web']
 
 
 # Serializa la tabla valoracion
@@ -73,7 +73,7 @@ class AgenciasLimaSerializers(serializers.ModelSerializer):
 class AgenciaslimaDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = AgenciasLima
-        fields = ['id', 'nombre_referencial', 'direccion', 'link_mapa', 'horario_de_atencion', 'telefono', 'cochera']
+        fields = ['id', 'nombre_referencial', 'foto', 'direccion', 'link_mapa', 'horario_de_atencion', 'telefono', 'cochera']
 
 
 # Serializa la tabla Departamentos
