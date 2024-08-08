@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
+from django.contrib.auth import authenticate
 from .models import Empresas, Valoraciones, Estrellas,Usuarios, AgenciasLima, Comentarios, Departamentos, Provincias, Distritos
 from .serializers import EmpresaSerializer, ValoracionSerializers, EstrellasSerializers, UsuarioSerializers, AgenciasLimaSerializers, ComentariosSerializers, DepartamentosSerializers, ProvinciasSerializers, DistritosSerializers
 from .serializers import EmpresaDetailSerializer, AgenciaslimaDetailSerializer, DistritosDetailSerializer, ValoracionDetailSerializer, EstrellaDetailSerializer, ComentariosDetailSerializer, UsuarioDetailSerializer, ProvinciasDetailSerializer
@@ -20,11 +21,11 @@ class EmpresasAPIView(APIView):
             comentarios = Comentarios.objects.filter(empresa=empresa)
             agenciaslima = AgenciasLima.objects.filter(empresa=empresa)
             return Response({
-                'empresa': serializer.data,
-                'Sus agencias': AgenciaslimaDetailSerializer(agenciaslima, many=True).data,
-                'Sus valoraciones': ValoracionDetailSerializer(valoraciones, many=True).data,
-                'Sus estrellas': EstrellaDetailSerializer(estrellas, many=True).data,
-                'Sus comentarios': ComentariosDetailSerializer(comentarios, many=True).data
+                'Empresa': serializer.data,
+                'Agencias': AgenciaslimaDetailSerializer(agenciaslima, many=True).data,
+                'Valoraciones': ValoracionDetailSerializer(valoraciones, many=True).data,
+                'Estrellas': EstrellaDetailSerializer(estrellas, many=True).data,
+                'Comentarios': ComentariosDetailSerializer(comentarios, many=True).data
             })
         else:
             empresas = Empresas.objects.all()
@@ -167,9 +168,9 @@ class AgenciasLimaAPIView(APIView):
             distritos = agencia_lima.distritos.all()
             
             return Response({
-            'agencias_lima': serializer.data,
-            'empresa': EmpresaDetailSerializer(empresa).data,
-            'distritos': DistritosDetailSerializer(distritos, many=True).data
+            'Agencias_lima': serializer.data,
+            'Empresa': EmpresaDetailSerializer(empresa).data,
+            'Distritos': DistritosDetailSerializer(distritos, many=True).data
         })
         else:
             agencias_Lima = AgenciasLima.objects.all()
@@ -196,6 +197,20 @@ class AgenciasLimaAPIView(APIView):
         agencia_lima.delete()
         return Response({'message': 'Datos eliminados con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
+class LoginAPIView(APIView):
+    def post(self, request, format=None):
+        email = request.data.get('email')
+        contrasenia = request.data.get('contrasenia')
+
+        user = authenticate(request, email=email, contrasenia=contrasenia)
+
+        if user is not None:
+            return Response({
+                'message': 'Inicio de sesión exitoso',
+                'Nombre': user.nombre
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({'detail': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class UsuariosAPIView(APIView):
@@ -207,8 +222,8 @@ class UsuariosAPIView(APIView):
             serializer = UsuarioDetailSerializer(usuario)
             comentarios = Comentarios.objects.filter(usuario=usuario)
             return Response({
-                'usuario': serializer.data,
-                'Sus comentarios': ComentariosDetailSerializer(comentarios, many=True).data
+                'Usuario': serializer.data,
+                'Comentarios': ComentariosDetailSerializer(comentarios, many=True).data
             })
         else:
             usuarios = Usuarios.objects.all()
@@ -216,6 +231,9 @@ class UsuariosAPIView(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
+        email = request.data.get('email')
+        if Usuarios.objects.filter(email=email).exists():
+            return Response({'Ya existe un usuario con ese correo electronico'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UsuarioSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -224,6 +242,10 @@ class UsuariosAPIView(APIView):
 
     def put(self, request, id=None, format=None):
         usuario = get_object_or_404(Usuarios, id=id)
+        data = request.data
+        email = data.get('email')
+        if Usuarios.objects.filter(email=email).exclude(id=id).exists():
+            return Response({'Ya existe un usuario con este coreo electrinico'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UsuarioSerializers(usuario, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -277,8 +299,8 @@ class DepartamentosAPIView(APIView):
             serializer = DepartamentosSerializers(departamento)
             provincias = Provincias.objects.filter(departamento=departamento)
             return Response({
-                'departamento': serializer.data,
-                'provincias': ProvinciasDetailSerializer(provincias, many=True).data
+                'Departamento': serializer.data,
+                'Provincias': ProvinciasDetailSerializer(provincias, many=True).data
             })
         else:
             departamentos = Departamentos.objects.all()
@@ -295,9 +317,11 @@ class ProvinciasAPIView(APIView):
             provincia = get_object_or_404(Provincias, id=id)
             serializer = ProvinciasSerializers(provincia)
             distritos = Distritos.objects.filter(provincia=provincia)
+            departamento = provincia.departamento
             return Response({
-                'provincia': serializer.data,
-                'distrito': DistritosDetailSerializer(distritos, many=True).data
+                'Provincia': serializer.data,
+                'Distritos': DistritosDetailSerializer(distritos, many=True).data,
+                'Departamento': DepartamentosSerializers(departamento).data
             })
         else:
             provincias = Provincias.objects.all()
@@ -315,10 +339,28 @@ class DistritosAPIView(APIView):
             serializer = DistritosSerializers(distrito)
             provincia = Provincias.objects.filter(distrito=distrito)
             return Response({
-                'distrito': serializer.data,
-                'provincia': ProvinciasSerializers(provincia, many=True).data
+                'Distrito': serializer.data,
+                'Provincia': ProvinciasSerializers(provincia, many=True).data
             })
         else:
             distritos = Distritos.objects.all()
             serializer = DistritosSerializers(distritos, many=True)
         return Response(serializer.data)
+
+class DistritosagenciasAPIView(APIView):
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
+
+    def get(self, request, id=None, format=None):
+        if id:
+            distrito = get_object_or_404(Distritos, id=id)
+            serializer = DistritosDetailSerializer(distrito)
+            agencias = AgenciasLima.objects.filter(distritos=distrito)
+            return Response({
+                'Distrito': serializer.data,
+                'Agencias': AgenciaslimaDetailSerializer(agencias, many=True).data
+            })
+        else:
+            return Response({'detail': 'ID de distrito no proporcionado.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+

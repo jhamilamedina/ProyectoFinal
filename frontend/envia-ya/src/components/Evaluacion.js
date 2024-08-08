@@ -4,7 +4,7 @@ import './Evaluacion.css';
 const Reviews = () => {
   return (
     <div className="reviews-container">
-      <h2>Comentarios</h2>
+      <h2>Evaluaciones</h2>
       <div className="reviews">
         <div className="review-card">
           <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit Etiam in tortor eu 
@@ -33,7 +33,7 @@ const Reviews = () => {
           </div>
         </div>
       </div>
-      
+      <a href="/mas-evaluaciones" className="show-more-link">Mostrar más evaluaciones</a>
     </div>
   );
 }

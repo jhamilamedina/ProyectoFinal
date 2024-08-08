@@ -1,5 +1,5 @@
 from django.urls import path
-from .api import EmpresasAPIView , ValoracionesAPIView, EstrellasAPIView, UsuariosAPIView, AgenciasLimaAPIView, ComentariosAPIView, DepartamentosAPIView, ProvinciasAPIView,DistritosAPIView
+from .api import EmpresasAPIView , ValoracionesAPIView, EstrellasAPIView, UsuariosAPIView, AgenciasLimaAPIView, ComentariosAPIView, DepartamentosAPIView, ProvinciasAPIView,DistritosAPIView, LoginAPIView, DistritosagenciasAPIView
 
 urlpatterns = [
     # Endpoint para listar y crear Empresas
@@ -16,6 +16,9 @@ urlpatterns = [
     path('api/estrellas/', EstrellasAPIView.as_view(), name='estrella-list-create'),
     # Endpoint para obtener, actualizar y eliminar datos de la  tabla Estrella
     path('api/estrellas/<int:id>/', EstrellasAPIView.as_view(), name='estrella-detail-update-delete'),
+
+    # Endpoint para inicio de session
+    path('api/login/', LoginAPIView.as_view(), name='login'), 
 
     # Endpoint para listar y crear usuarios
     path('api/usuarios/', UsuariosAPIView.as_view(), name='usuarios-list-create'),
@@ -47,4 +50,10 @@ urlpatterns = [
     path('api/distritos/', DistritosAPIView.as_view(), name='distritos-list-create'),
     # Endpoint para obtener, actualizar y eliminar un distrito
     path('api/distritos/<int:id>/', DistritosAPIView.as_view(), name='distritos-detail-update-delete'),
+
+    path('api/agenciasdistritos/', DistritosagenciasAPIView.as_view(), name='agencias-list'),
+    # Endpoint para obtener agencias por distrito
+    path('api/agenciasdistritos/<int:id>/', DistritosagenciasAPIView.as_view(), name='distritos-agencias'),
+
+
 ]
