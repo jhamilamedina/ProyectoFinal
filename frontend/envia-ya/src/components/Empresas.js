@@ -49,7 +49,7 @@ const Empresas = () => {
       caracteristicas: ["Puntualidad", "Seguridad", "Económica", "Amabilidad"],
       descripcion: "Servientrega es una compañía orientada a ofrecer soluciones integrales de logística en recolección, transporte, almacenamiento, empaque y embalaje, logística",
       mapaUrl: "https://www.google.com/maps/place/Av.+Argentina+1790,+Lima+15081/@-12.0449734,-77.0652634,17z/data=!4m6!3m5!1s0x9105c92d002f1e9d:0x4b1408d0f77b4f03!8m2!3d-12.0450014!4d-77.0651034!16s%2Fg%2F11fw279k2t?entry=ttu",
-      webUrl: "https://www.servientrega.com/",
+      webUrl: "/ListaServientrega",
       logoUrl: "",
       detallesUrl: "/ListaServientrega"
     },
@@ -61,7 +61,7 @@ const Empresas = () => {
       caracteristicas: ["Puntualidad", "Económica", "Amabilidad"],
       descripcion: "FedEx es una empresa de servicios de mensajería y logística que opera en Perú y a nivel mundial",
       mapaUrl: "https://www.google.com/maps/place/C.+M%C3%A1rtir+Jos%C3%A9+Olaya+260,+Miraflores+15074/@-12.1206129,-77.0328449,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c819b5cbd65d:0xc2ad0303ca0d4048!8m2!3d-12.1206182!4d-77.03027!16s%2Fg%2F11cs6c0c7w?entry=ttu",
-      webUrl: "https://www.fedex.com/",
+      webUrl: "/ListaFedEX",
       logoUrl: "",
       detallesUrl: "/ListaFedEX"
     },
@@ -73,7 +73,7 @@ const Empresas = () => {
       caracteristicas: ["Puntualidad", "Seguridad", "Económica", "Amabilidad"],
       descripcion: "UPS ofrece opciones para envíos de bajo y gran volumen.",
       mapaUrl: "https://www.google.com/maps/place/Flora+Trist%C3%A1n+310,+Magdalena+del+Mar+15076/@-12.0942405,-77.0599095,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c9acc5ac5557:0xf5b209e5a0b74f30!8m2!3d-12.0942458!4d-77.0573346!16s%2Fg%2F11fw24m26g?entry=ttu",
-      webUrl: "https://www.ups.com/",
+      webUrl: "/ListaUps",
       logoUrl: "",
       detallesUrl: "/ListaUps"
     },
@@ -85,7 +85,7 @@ const Empresas = () => {
       caracteristicas: ["Puntualidad", "Seguridad", "Económica"],
       descripcion: "Urbano es una empresa de servicios logísticos en Perú. Su enfoque está en planificación urbana y desarrollo.",
       mapaUrl: "https://www.google.com/maps/place/Av.+Materiales+3049,+Lima+15081/@-12.0428993,-77.0841263,17z/data=!3m1!4b1!4m6!3m5!1s0x9105ceb532688bf7:0x71c9a08a61f93b7a!8m2!3d-12.0429046!4d-77.0815514!16s%2Fg%2F11thrq7dj4?entry=ttu",
-      webUrl: "https://www.urbano.com.pe/",
+      webUrl: "/ListaUrbano",
       logoUrl: "",
       detallesUrl: "/ListaUrbano"
     },
@@ -97,7 +97,7 @@ const Empresas = () => {
       caracteristicas: ["Puntualidad", "Seguridad","Amabilidad"],
       descripcion: "Transmar es un grupo empresarial con 39 años de experiencia en el servicio de transporte",
       mapaUrl: "https://www.google.com/maps/place/Av+Nicol%C3%A1s+Arriola+197,+La+Victoria+15034/@-12.0886491,-77.0199107,17z/data=!3m1!4b1!4m6!3m5!1s0x9105c87c393eeb45:0x7a4341d31cd20ce7!8m2!3d-12.0886544!4d-77.0173358!16s%2Fg%2F11c1xg6z3x?entry=ttu",
-      webUrl: "https://www.transmar.com.pe/",
+      webUrl: "/ListaTransmar",
       logoUrl: "",
       detallesUrl: "/ListaTransmar"
     }
