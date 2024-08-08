@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -22,31 +22,33 @@ import ListaUrbano from './components/ListaUrbano';
 import ListaTransmar from './components/ListaTransmar';
 
 function App() {
+  const [userName, setUserName] = useState('');
+
   return (
     <Router>
-      <Header />
+      <Header userName={userName} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path='/destinos' element={<Destinos />} />
-          <Route path='/empresas' element={<Empresas />} />
-          <Route path='/Evaluacion' element={<Evaluacion />} />
-          <Route path='/EstrellasRating' element={<EstrellasRating />} />
-          <Route path="/rating-pagina" component={() => <div>Valoración...</div>} />
-          <Route path='/mas-evaluaciones' component={() => <div>Más evaluaciones...</div>} />
-          <Route path='/Nosotros' element={<Nosotros />} />
-          <Route path='/Inicio' element={<Inicio />} />
-          <Route path='/Ayuda' element={<Ayuda />} />
-          <Route path='/Contacto' element={<Contacto />} />
-          <Route path='/Privacidad' element={<Privacidad />} />
-          <Route path='/ListaAgencias' element={<ListaAgencias />} />
-          <Route path='/ListaShalom' element={<ListaShalom />} />
-          <Route path='/ListaDHL' element={<ListaDHL />} />
-          <Route path='/ListaServientrega' element={<ListaServientrega />} />
-          <Route path='/ListaFedEX' element={<ListaFedEX />} />
-          <Route path='/ListaUps' element={<ListaUps />} />
-          <Route path='/ListaUrbano' element={<ListaUrbano />} />
-          <Route path='/ListaTransmar' element={<ListaTransmar />} />
+          <Route path="/destinos" element={<Destinos />} />
+          <Route path="/empresas" element={<Empresas />} />
+          <Route path="/evaluacion" element={<Evaluacion />} />
+          <Route path="/estrellas-rating" element={<EstrellasRating />} />
+          <Route path="/rating-pagina" element={<div>Valoración...</div>} />
+          <Route path="/mas-evaluaciones" element={<div>Más evaluaciones...</div>} />
+          <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/inicio" element={<Inicio setUserName={setUserName} />} />
+          <Route path="/ayuda" element={<Ayuda />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/privacidad" element={<Privacidad />} />
+          <Route path="/ListaAgencias" element={<ListaAgencias />} />
+          <Route path="/ListaShalom" element={<ListaShalom />} />
+          <Route path="/ListaDHL" element={<ListaDHL />} />
+          <Route path="/ListaServientrega" element={<ListaServientrega />} />
+          <Route path="/ListaFedEX" element={<ListaFedEX />} />
+          <Route path="/ListaUps" element={<ListaUps />} />
+          <Route path="/ListaUrbano" element={<ListaUrbano />} />
+          <Route path="/ListaTransmar" element={<ListaTransmar />} />
         </Routes>
       </main>
       <Footer />
