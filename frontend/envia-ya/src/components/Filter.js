@@ -10,6 +10,7 @@ const Filter = ({ onSearch }) => {
     const [department, setDepartment] = useState('');
     const [province, setProvince] = useState('');
     const [district, setDistrict] = useState('');
+    const [agencies, setAgencies] = useState([]);
 
     useEffect(() => {
         // Fetch departments
@@ -27,7 +28,7 @@ const Filter = ({ onSearch }) => {
         if (department) {
             axios.get(`http://localhost:8000/api/departamentos/${department}/`)
                 .then(response => {
-                    setProvinces(response.data.provincias);
+                    setProvinces(response.data.Provincias);
                     setProvince('');
                     setDistrict('');
                 })
@@ -45,7 +46,7 @@ const Filter = ({ onSearch }) => {
         if (province) {
             axios.get(`http://localhost:8000/api/provincias/${province}/`)
                 .then(response => {
-                    setDistricts(response.data.distrito);
+                    setDistricts(response.data.Distritos);
                     setDistrict('');
                 })
                 .catch(error => {
@@ -58,7 +59,15 @@ const Filter = ({ onSearch }) => {
     }, [province]);
 
     const handleSearch = () => {
-        onSearch({ origin, department, province, district });
+        if (district) {
+            axios.get(`http://localhost:8000/api/agenciasdistritos/${district}/`)
+                .then(response => {
+                    setAgencies(response.data.Agencias);
+                })
+                .catch(error => {
+                    console.error('Error fetching agencies', error);
+                });
+        }
     };
 
     return (
@@ -100,7 +109,7 @@ const Filter = ({ onSearch }) => {
                 <label>
                     Distrito:
                     <select value={district} onChange={(e) => setDistrict(e.target.value)} disabled={!province}>
-                        <option value="">Seleccione un distrito</option>
+                        <option value="">|Seleccione un distrito</option>
                         {districts.map((dist) => (
                             <option key={dist.id} value={dist.id}>{dist.nombre}</option>
                         ))}
@@ -108,6 +117,26 @@ const Filter = ({ onSearch }) => {
                 </label>
             </div>
             <button onClick={handleSearch}>Buscar</button>
+            <div className="agencies-list">
+                <h3>Agencias en el distrito seleccionado:</h3>
+                {agencies.length > 0 ? (
+                    <ul>
+                        {agencies.map((agency) => (
+                            <li key={agency.id}>
+                                <h4>{agency.nombre_referencial}</h4>
+                                <p>{agency.direccion}</p>
+                                <p>Horario de atención: {agency.horario_de_atencion}</p>
+                                <p>Teléfono: {agency.telefono}</p>
+                                <p>Cochera: {agency.cochera ? 'Sí' : 'No'}</p>
+                                <a href={agency.link_mapa} target="_blank" rel="noopener noreferrer">Ver en mapa</a>
+                                <br></br>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No se encontraron agencias para el distrito seleccionado :c</p>
+                )}
+            </div>
         </div>
     );
 };
