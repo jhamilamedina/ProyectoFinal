@@ -16,7 +16,7 @@ const FAQ = () => {
       <p>No. Solo te mostraremos información transparente de las agencias de envíos. Te facilitaremos todos sus datos de contacto y servicios para que realices los envíos directamente desde sus páginas.</p>
       <h2>¿Tienen alguna guía para poder usar la página?</h2>
       <p>Sí, te adjunto el PDF para que puedas realizar tu navegación de manera más fácil.</p>
-      <p><a href="enlace-al-pdf">Descargar Guía</a></p>
+      <p><a href="/infografia_envia_ya.pdf" target="_blank" rel="noopener noreferrer">Descargar Guía</a></p>
       <h2>
         <Link to="/contacto">¿Aún tienes dudas? Contáctanos aquí</Link>
       </h2>

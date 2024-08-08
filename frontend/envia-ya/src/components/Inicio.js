@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './Inicio.css';
 
-const App = () => {
+const Inicio = ({ setUserName }) => {
   const [formData, setFormData] = useState({
     nombres: '',
-    apellidos: '',
+    email: '',
     contraseña: ''
   });
 
@@ -15,8 +15,15 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setUserName(formData.nombres);
     console.log('Formulario enviado:', formData);
-    
+    alert('Cuenta creada correctamente');
+    // Resetear el formulario
+    setFormData({
+      nombres: '',
+      email: '',
+      contraseña: ''
+    });
   };
 
   return (
@@ -35,9 +42,9 @@ const App = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="apellidos">Email:</label>
+          <label htmlFor="email">Email:</label>
           <input 
-            type="text" 
+            type="email" 
             id="email" 
             name="email" 
             value={formData.email} 
@@ -60,6 +67,6 @@ const App = () => {
       </form>
     </div>
   );
-}
+};
 
-export default App;
+export default Inicio;

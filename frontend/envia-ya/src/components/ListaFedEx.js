@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './ListaShalom.css';
-import shalomImage from '../assets/shalom.png';
+import './ListaFedEx.css';
+import FedExImage from '../assets/FedEx.jpeg';
 
 const ConocenosMas = () => {
   const [rating, setRating] = useState(0);
@@ -22,55 +22,49 @@ const ConocenosMas = () => {
 
   const exampleComments = [
     { name: "Maria Gonzales", rating: 4, comment: "Muy buena la atención" },
-    { name: "Rogelio Díaz", rating: 5, comment: "He solicitado un envio la semana pasada y me llego a tiempo" },
+    { name: "Rogelio Díaz", rating: 5, comment: "He solicitado un envío la semana pasada y me llegó a tiempo" },
     { name: "Rosa Vazques", rating: 3, comment: "Buen servicio" }
   ];
 
   const agencies = [
     {
-      name: "Shalom - Rimac",
-      address: "Avenida Amancaes 644, Rimac, Lima",
-      hours: "Horario de atención: 8:30am a 7:00pm - lunes a sábado."
+      name: "FedEx - Miraflores",
+      address: "Calle Alcanfores 350, Miraflores, Lima",
+      hours: "Horario de atención: 8:30am a 7:30pm - lunes a sábado"
     },
     {
-      name: "Shalom - La Victoria",
-      address: "Jirón Luna Pizarro, La Victoria, Lima",
-      hours: "Horario de atención: 7:00am a 5:30pm - lunes a sábado."
+      name: "FedEx - San Luis",
+      address: "Avenida Ricardo Basilio 1382, San Luis, Lima",
+      hours: "Horario de atención: 9:00am a 6:00pm - lunes a sábado"
     },
     {
-      name: "Shalom - Breña",
-      address: "Avenida República de Venezuela 1670, Breña, Lima",
-      hours: "Horario de atención: 9:00am a 7:00pm - lunes a sábado."
+      name: "FedEx - Cercado de Lima",
+      address: "Calle Los Cedros 350, Cercado de Lima, Lima",
+      hours: "Horario de atención: 8:30am a 6:30pm - lunes a sábado"
     },
     {
-      name: "Shalom - Miraflores",
-      address: "Avenida José Pardo 533, Miraflores, Lima",
-      hours: "Horario de atención: 8:00am a 6:30pm - lunes a sábado."
+      name: "FedEx - Rimac",
+      address: "Calle Lomas de Almancaes 548, Rimac, Lima",
+      hours: "Horario de atención: 7:00am a 6:00pm - lunes a sábado"
     }
   ];
 
   return (
     <div className="conocenos-mas">
       <div className="company-info">
-        <img src={shalomImage} alt="Fachada de la empresa Shalom" className="company-photo" />
+        <img src={FedExImage} alt="Fachada de FedEx" className="company-photo" />
         <div className="company-details">
-          <h2>Shalom</h2>
-          <p><strong>Shalom Transportes y Encomiendas</strong> es una empresa peruana especializada en el envío de paquetes y mercancías a nivel nacional. A continuación, se presentan los detalles más relevantes sobre la empresa:</p>
-          <h3>Servicios</h3>
-          <p>Shalom ofrece varios tipos de servicios de envío:</p>
+          <h2>FedEx</h2>
+          <p><strong>FedEx</strong> es una empresa global de logística y mensajería conocida por su servicio de entrega rápida y eficiente. Ofrece soluciones de transporte terrestre, aéreo y marítimo, así como servicios de logística y cadena de suministro en todo el mundo.</p>
+          <h3>Sede Principal</h3>
+          <p><strong>Dirección:</strong> 3875 Airways Blvd, Memphis, TN 38116, Estados Unidos</p>
+          <h3>Horario de Atención</h3>
           <ul>
-            <li><strong>Retiro en Agencia:</strong> Los clientes pueden recoger sus envíos en cualquiera de las agencias de Shalom.</li>
-            <li><strong>Servicio Urgente:</strong> Entregas rápidas con prioridad.</li>
-            <li><strong>Reparto de Mercancías:</strong> Servicio de entrega de mercancías a domicilio.</li>
+            <li><strong>Lunes a Viernes:</strong> 8:00 AM - 6:00 PM</li>
+            <li><strong>Sábados:</strong> 9:00 AM - 1:00 PM</li>
+            <li><strong>Domingos y festivos:</strong> Cerrado</li>
           </ul>
-          <h3>La sede principal de Shalom se encuentra en:</h3>
-          <p>Carretera Central Km. 16.5, Lt. 5 Paradero, al costado del grifo Repsol, Ent A Huaycán, Ate, Lima 15476, Perú.</p>
-          <h3>Horario de Atención:</h3>
-          <ul>
-            <li><strong>Lunes a Viernes:</strong> 10:00 AM a 8:00 PM</li>
-            <li><strong>Sábados:</strong> 10:00 AM a 8:00 PM</li>
-          </ul>
-          <p><strong>Sitio Web:</strong> <a href="https://www.shalom.com.pe/" target="_blank" rel="noopener noreferrer">https://www.shalom.com.pe/</a></p>
+          <p><strong>Sitio Web:</strong> <a href="https://www.fedex.com" target="_blank" rel="noopener noreferrer">https://www.fedex.com</a></p>
         </div>
       </div>
       <div className="agencies">
@@ -89,7 +83,7 @@ const ConocenosMas = () => {
       </div>
       <div className="comments-section">
         <h2>Comentarios</h2>
-        <p>Deja tu comentarios (solo si estás logueado)</p>
+        <p>Deja tu comentario (solo si estás logueado)</p>
         <div className="rating">
           {[...Array(5)].map((star, index) => {
             index += 1;
@@ -110,7 +104,7 @@ const ConocenosMas = () => {
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="solo si estas logueado"
+          placeholder="solo si estás logueado"
           className="comment-box"
         />
         <button onClick={handleSubmit} className="submit-button">Enviar</button>

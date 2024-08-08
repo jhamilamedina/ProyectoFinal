@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './ListaShalom.css';
-import shalomImage from '../assets/shalom.png';
+import './ListaDHL.css';
+import DHLImage from '../assets/DHL.jpg';
 
 const ConocenosMas = () => {
   const [rating, setRating] = useState(0);
@@ -28,49 +28,43 @@ const ConocenosMas = () => {
 
   const agencies = [
     {
-      name: "Shalom - Rimac",
-      address: "Avenida Amancaes 644, Rimac, Lima",
-      hours: "Horario de atención: 8:30am a 7:00pm - lunes a sábado."
-    },
-    {
       name: "Shalom - La Victoria",
-      address: "Jirón Luna Pizarro, La Victoria, Lima",
-      hours: "Horario de atención: 7:00am a 5:30pm - lunes a sábado."
+      address: "Jirón Antonio Bazo 613, La Victoria, Lima",
+      hours: "Horario de atención: 9:00am a 6:30pm - lunes a sábado"
     },
     {
       name: "Shalom - Breña",
-      address: "Avenida República de Venezuela 1670, Breña, Lima",
-      hours: "Horario de atención: 9:00am a 7:00pm - lunes a sábado."
+      address: "Jirón Huaraz 1592, Breña, Lima",
+      hours: "Horario de atención: 8:30am a 6:30pm - lunes a sábado"
     },
     {
       name: "Shalom - Miraflores",
-      address: "Avenida José Pardo 533, Miraflores, Lima",
-      hours: "Horario de atención: 8:00am a 6:30pm - lunes a sábado."
+      address: "Avenida Alfredo Benavides 708, Miraflores, Lima",
+      hours: "Horario de atención: 9:00am a 7:00pm - lunes a sábado"
+    },
+    {
+      name: "Shalom - San Luis",
+      address: "Avenida San Luis 2211, San Luis",
+      hours: "Horario de atención: 9:00am a 6:30pm - lunes a sábado"
     }
   ];
 
   return (
     <div className="conocenos-mas">
       <div className="company-info">
-        <img src={shalomImage} alt="Fachada de la empresa Shalom" className="company-photo" />
+        <img src={DHLImage} alt="Fachada de DHL" className="company-photo" />
         <div className="company-details">
-          <h2>Shalom</h2>
-          <p><strong>Shalom Transportes y Encomiendas</strong> es una empresa peruana especializada en el envío de paquetes y mercancías a nivel nacional. A continuación, se presentan los detalles más relevantes sobre la empresa:</p>
-          <h3>Servicios</h3>
-          <p>Shalom ofrece varios tipos de servicios de envío:</p>
+          <h2>DHL</h2>
+          <p><strong>DHL</strong> es una empresa global de logística y mensajería que se dedica al transporte rápido y seguro de paquetes y documentos a nivel mundial. Ofrece una amplia gama de servicios, incluyendo envíos exprés internacionales, transporte terrestre, marítimo y aéreo, así como soluciones de cadena de suministro y logística para empresas. Con operaciones en más de 220 países y territorios, DHL es una de las compañías líderes en el sector, facilitando el comercio y la conectividad global.</p>
+          <h3>Sede Principal</h3>
+          <p><strong>DHL International GmbH</strong><br />
+            Apartado de correos 100 239 - 53145 Bonn<br />
+            Alemania</p>
+          <h3>Horario de Atención</h3>
           <ul>
-            <li><strong>Retiro en Agencia:</strong> Los clientes pueden recoger sus envíos en cualquiera de las agencias de Shalom.</li>
-            <li><strong>Servicio Urgente:</strong> Entregas rápidas con prioridad.</li>
-            <li><strong>Reparto de Mercancías:</strong> Servicio de entrega de mercancías a domicilio.</li>
+            <li><strong>Lunes a Viernes:</strong> 9:00 AM a 5:00 PM</li>
           </ul>
-          <h3>La sede principal de Shalom se encuentra en:</h3>
-          <p>Carretera Central Km. 16.5, Lt. 5 Paradero, al costado del grifo Repsol, Ent A Huaycán, Ate, Lima 15476, Perú.</p>
-          <h3>Horario de Atención:</h3>
-          <ul>
-            <li><strong>Lunes a Viernes:</strong> 10:00 AM a 8:00 PM</li>
-            <li><strong>Sábados:</strong> 10:00 AM a 8:00 PM</li>
-          </ul>
-          <p><strong>Sitio Web:</strong> <a href="https://www.shalom.com.pe/" target="_blank" rel="noopener noreferrer">https://www.shalom.com.pe/</a></p>
+          <p><strong>Sitio Web:</strong> <a href="https://www.dhl.com/pe-es/home.html" target="_blank" rel="noopener noreferrer">https://www.dhl.com/pe-es/home.html</a></p>
         </div>
       </div>
       <div className="agencies">
@@ -89,7 +83,7 @@ const ConocenosMas = () => {
       </div>
       <div className="comments-section">
         <h2>Comentarios</h2>
-        <p>Deja tu comentarios (solo si estás logueado)</p>
+        <p>Deja tu comentario (solo si estás logueado)</p>
         <div className="rating">
           {[...Array(5)].map((star, index) => {
             index += 1;

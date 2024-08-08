@@ -3,15 +3,16 @@ import './Contacto.css';
 import { Link } from 'react-router-dom';
 
 const App = () => {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     nombres: '',
-    empresa: '',
     email: '',
     celular: '',
     distrito: '',
     mensaje: '',
-    aceptoPolitica: false // Estado para el checkbox
-  });
+    aceptoPolitica: false
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -23,12 +24,23 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.aceptoPolitica) {
+    const { nombres, email, celular, distrito, mensaje, aceptoPolitica } = formData;
+
+    if (!nombres || !email || !celular || !distrito || !mensaje) {
+      alert('Te falta llenar todos los campos.');
+      return;
+    }
+
+    if (!aceptoPolitica) {
       alert('Debes aceptar la política de privacidad.');
       return;
     }
+
+    alert('Datos enviados correctamente');
     console.log('Formulario enviado:', formData);
-    // Aquí puedes agregar la lógica para enviar el formulario
+
+    // Resetear el formulario
+    setFormData(initialFormData);
   };
 
   return (
@@ -42,17 +54,6 @@ const App = () => {
             id="nombres" 
             name="nombres" 
             value={formData.nombres} 
-            onChange={handleChange} 
-            required 
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="empresa">Empresa:</label>
-          <input 
-            type="text" 
-            id="empresa" 
-            name="empresa" 
-            value={formData.empresa} 
             onChange={handleChange} 
             required 
           />
