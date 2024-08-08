@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ListaAgencias.css';
 import olvaImage from '../assets/olva1.png';
 
-const ConocenosMas = () => {
+const ConocenosMas = ({ userName }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [comment, setComment] = useState("");
@@ -83,7 +83,7 @@ const ConocenosMas = () => {
       </div>
       <div className="comments-section">
         <h2>Comentarios</h2>
-        <p>Deja tu comentarios (solo si estás logueado)</p>
+        <p>{userName ? "Deja tu comentario aquí" : "Solo si estás logueado"}</p>
         <div className="rating">
           {[...Array(5)].map((star, index) => {
             index += 1;
@@ -102,24 +102,28 @@ const ConocenosMas = () => {
           })}
         </div>
         <textarea
+          placeholder={`${
+            userName ? `Escribe tu comentario aquí, ${userName}` : "Inicia sesión para comentar"
+          }`}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Deja tu comentario aquí"
-          className="comment-box"
+          disabled={!userName}
         />
-        <button onClick={handleSubmit} className="submit-button">Enviar</button>
-
-        {/* Comentarios de ejemplo */}
+        <button onClick={handleSubmit} disabled={!userName}>Enviar</button>
         <div className="example-comments">
-          {exampleComments.map((example, index) => (
-            <div key={index} className="comment">
-              <strong>{example.name}</strong>
-              <div className="rating">
-                {[...Array(5)].map((star, i) => (
-                  <span key={i} className={`star ${i < example.rating ? 'on' : 'off'}`}>&#9733;</span>
-                ))}
+          {exampleComments.map((c, index) => (
+            <div key={index} className="example-comment">
+              <div className="comment-header">
+                <span className="comment-name">{c.name}</span>
+                <div className="comment-rating">
+                  {[...Array(5)].map((star, i) => (
+                    <span key={i} className={i < c.rating ? "on" : "off"}>
+                      &#9733;
+                    </span>
+                  ))}
+                </div>
               </div>
-              <p>{example.comment}</p>
+              <div className="comment-text">{c.comment}</div>
             </div>
           ))}
         </div>
