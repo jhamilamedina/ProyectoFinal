@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './EstrellasRating.css';
 
 const EstrellasRating = ({ rating, onRatingChange }) => {
   const [currentRating, setCurrentRating] = useState(rating);
   const [hover, setHover] = useState(null);
-
-  useEffect(() => {
-    setCurrentRating(rating);
-  }, [rating]);
 
   const handleRatingChange = (ratingValue) => {
     setCurrentRating(ratingValue);

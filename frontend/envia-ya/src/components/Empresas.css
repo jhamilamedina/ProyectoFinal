@@ -1,107 +1,75 @@
+<<<<<<< HEAD
 .empresa-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   padding: 20px;
+=======
+.host-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+>>>>>>> a97333ce70f400e8436eb22c8d33ffd0639c98ac
 }
 
-/* Estilo para cada tarjeta de empresa */
-.empresa-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.host-card {
+  max-width: 300px; /* Ajusta el ancho según tus necesidades */
+  margin: 20px; /* Espacio entre las tarjetas */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
 }
 
-/* Estilo para la información de la empresa */
-.empresa-info {
+.host-info {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
 }
 
-.empresa-logo {
-  width: 50px;
-  height: 50px;
+.logo {
+  max-width: 100px; /* Ajusta el tamaño del logo según tus necesidades */
   margin-right: 16px;
 }
 
-.empresa-details {
-  flex: 1;
-}
-
-.empresa-details h2 {
+.host-details h2 {
   margin: 0;
-  font-size: 1.2em;
-  font-weight: bold;
 }
 
-.empresa-details p {
-  margin: 4px 0;
-  color: #555;
+.host-stats p {
+  margin: 5px 0;
 }
 
-.empresa-stats {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.rating-container {
-  display: flex;
-  align-items: center;
-}
-
-.rating-link {
-  margin-right: 8px;
-}
-
-/* Estilo para las características */
-.empresa-extra-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 16px;
+.host-extra-info {
+  margin-top: 10px;
 }
 
 .caracteristica {
   display: flex;
   align-items: center;
+  margin: 2px 0; /* Reduce el margen entre las características */
 }
 
-.caracteristica input[type="checkbox"] {
-  margin-right: 8px;
+.caracteristica input {
+  margin-right: 0px; /* Reduce el espacio entre el checkbox y el texto */
 }
 
-/* Estilo para la descripción de la empresa */
-.empresa-description {
-  color: #555;
-  margin-bottom: 16px;
+.caracteristica p {
+  margin: 0; /* Elimina el margen del párrafo */
 }
 
-/* Enlace para más detalles */
+.host-description {
+  margin: 20px 0;
+}
+
 .show-more-link {
   display: inline-block;
-  margin-bottom: 16px;
-  color: #007BFF;
+  margin-top: 10px;
   text-decoration: none;
+  color: #007BFF;
+  cursor: pointer;
 }
 
 .show-more-link:hover {
-  text-decoration: underline;
-}
-
-/* Estilo para el enlace de mapa */
-.empresa-card p i {
-  margin-right: 8px;
-}
-
-.empresa-card a {
-  color: #007BFF;
-  text-decoration: none;
-}
-
-.empresa-card a:hover {
   text-decoration: underline;
 }

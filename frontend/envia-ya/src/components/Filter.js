@@ -1,38 +1,80 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Filter.css';
 
 const Filter = ({ onSearch }) => {
-    const districsLima = ['Miraflores', 'San Isidro', 'Barranco', 'Surco', 'La Molina', 'La Victoria'];
-    const destinations = {
-        "Lima": {
-          "Lima": ["Miraflores", "San Isidro", "Barranco", "Surco", "La Molina"],
-          "Callao": ["Bellavista", "Carmen de La Legua", "La Perla", "La Punta", "Ventanilla"]
-        },
-        "Arequipa": {
-          "Arequipa": ["Cayma", "Cerro Colorado", "Characato", "Chiguata", "Jacobo Hunter"],
-          "Camana": ["Camana", "Mariscal Caceres", "Nicolas de Pierola", "Ocoña", "Quilca"]
-        }
-    };
-
+    const [departments, setDepartments] = useState([]);
+    const [provinces, setProvinces] = useState([]);
+    const [districts, setDistricts] = useState([]);
     const [origin, setOrigin] = useState('');
     const [department, setDepartment] = useState('');
     const [province, setProvince] = useState('');
     const [district, setDistrict] = useState('');
+    const [agencies, setAgencies] = useState([]);
 
-    const handleDepartmentChange = (e) => {
-        setDepartment(e.target.value);
-        setProvince(''); // Reset province
-        setDistrict(''); // Reset district
-    };
+    useEffect(() => {
+        // Fetch departments
+        axios.get('http://localhost:8000/api/departamentos/')
+            .then(response => {
+                setDepartments(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching departments:', error);
+            });
+    }, []);
 
-    const handleProvinceChange = (e) => {
-        setProvince(e.target.value);
-        setDistrict(''); // Reset district
-    };
+    useEffect(() => {
+        // Fetch provinces
+        if (department) {
+            axios.get(`http://localhost:8000/api/departamentos/${department}/`)
+                .then(response => {
+                    setProvinces(response.data.Provincias);
+                    setProvince('');
+                    setDistrict('');
+                })
+                .catch(error => {
+                    console.error('Error fetching provinces:', error);
+                });
+        } else {
+            setProvinces([]);
+            setProvince('');
+            setDistrict('');
+        }
+    }, [department]);
+
+    useEffect(() => {
+        if (province) {
+            axios.get(`http://localhost:8000/api/provincias/${province}/`)
+                .then(response => {
+                    setDistricts(response.data.Distritos);
+                    setDistrict('');
+                })
+                .catch(error => {
+                    console.error('Error fetching districts:', error);
+                });
+        } else {
+            setDistricts([]);
+            setDistrict('');
+        }
+    }, [province]);
 
     const handleSearch = () => {
-        onSearch({ origin, department, province, district});
+        if (district) {
+            axios.get(`http://localhost:8000/api/agenciasdistritos/${district}/`)
+                .then(response => {
+                    let filteredAgencies = response.data.Agencias;
+
+                    if (origin) {
+                        filteredAgencies = filteredAgencies.filter(agency =>
+                            agency.direccion.includes(origin)
+                        );
+                    }
+                    setAgencies(filteredAgencies);
+                })
+                .catch(error => {
+                    console.error('Error fetching agencies', error);
+                });
+        }
     };
 
     return (
@@ -43,19 +85,18 @@ const Filter = ({ onSearch }) => {
                     Origen (Lima Metropolitana):
                     <select value={origin} onChange={(e) => setOrigin(e.target.value)}>
                         <option value="">Seleccione un distrito</option>
-                        {districsLima.map((district) => (
-                            <option key={district} value={district}>{district}</option>
-                        ))}
+                        <option value="Miraflores">Miraflores</option>
+                        <option value="San Isidro">San Isidro</option>
                     </select>
                 </label>
             </div>
             <div>
                 <label>
                     Departamento:
-                    <select value={department} onChange={handleDepartmentChange}>
+                    <select value={department} onChange={(e) => setDepartment(e.target.value)}>
                         <option value="">Seleccione un departamento</option>
-                        {Object.keys(destinations).map((dept) => (
-                            <option key={dept} value={dept}>{dept}</option>
+                        {departments.map((dept) => (
+                            <option key={dept.id} value={dept.id}>{dept.nombre}</option>
                         ))}
                     </select>
                 </label>
@@ -63,14 +104,10 @@ const Filter = ({ onSearch }) => {
             <div>
                 <label>
                     Provincia:
-                    <select
-                        value={province}
-                        onChange={handleProvinceChange}
-                        disabled={!department}
-                    >
+                    <select value={province} onChange={(e) => setProvince(e.target.value)} disabled={!department}>
                         <option value="">Seleccione una provincia</option>
-                        {department && Object.keys(destinations[department]).map((prov) => (
-                            <option key={prov} value={prov}>{prov}</option>
+                        {provinces.map((prov) => (
+                            <option key={prov.id} value={prov.id}>{prov.nombre}</option>
                         ))}
                     </select>
                 </label>
@@ -78,19 +115,35 @@ const Filter = ({ onSearch }) => {
             <div>
                 <label>
                     Distrito:
-                    <select
-                        value={district}
-                        onChange={(e) => setDistrict(e.target.value)}
-                        disabled={!province}
-                    >
-                        <option value="">Seleccione un distrito</option>
-                        {province && destinations[department][province].map((dist) => (
-                            <option key={dist} value={dist}>{dist}</option>
+                    <select value={district} onChange={(e) => setDistrict(e.target.value)} disabled={!province}>
+                        <option value="">|Seleccione un distrito</option>
+                        {districts.map((dist) => (
+                            <option key={dist.id} value={dist.id}>{dist.nombre}</option>
                         ))}
                     </select>
                 </label>
             </div>
             <button onClick={handleSearch}>Buscar</button>
+            <div className="agencies-list">
+                <h3>Agencias en el distrito seleccionado:</h3>
+                {agencies.length > 0 ? (
+                    <ul>
+                        {agencies.map((agency) => (
+                            <li key={agency.id}>
+                                <h4>{agency.nombre_referencial}</h4>
+                                <p>{agency.direccion}</p>
+                                <p>Horario de atención: {agency.horario_de_atencion}</p>
+                                <p>Teléfono: {agency.telefono}</p>
+                                <p>Cochera: {agency.cochera ? 'Sí' : 'No'}</p>
+                                <a href={agency.link_mapa} target="_blank" rel="noopener noreferrer">Ver en mapa</a>
+                                <br></br>
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No se encontraron agencias para el distrito seleccionado :c</p>
+                )}
+            </div>
         </div>
     );
 };
