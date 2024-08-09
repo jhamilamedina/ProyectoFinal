@@ -45,7 +45,6 @@ urlpatterns = [
     # Endpoint para obtener, actualizar y eliminar una Provincia
     path('api/provincias/<int:id>/', ProvinciasAPIView.as_view(), name='provincias-detail-update-delete'),
 
-
     # Endpoint para listar y crear distritos
     path('api/distritos/', DistritosAPIView.as_view(), name='distritos-list-create'),
     # Endpoint para obtener, actualizar y eliminar un distrito
@@ -53,7 +52,5 @@ urlpatterns = [
 
     path('api/agenciasdistritos/', DistritosagenciasAPIView.as_view(), name='agencias-list'),
     # Endpoint para obtener agencias por distrito
-    path('api/agenciasdistritos/<int:id>/', DistritosagenciasAPIView.as_view(), name='distritos-agencias'),
-
-
+    path('api/agenciasdistritos/<int:id>/', DistritosagenciasAPIView.as_view(), name='distritos-agencias')
 ]

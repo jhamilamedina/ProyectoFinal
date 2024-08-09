@@ -1,13 +1,16 @@
 from django.db import models
 
 class Empresas(models.Model):
-    logo = models.ImageField(upload_to='logos/', null=True, blank=True)
+    logo = models.CharField(max_length=100, null=True, blank=True)
     nombre = models.CharField(max_length=60, db_index=True)
     sede_principal = models.CharField(max_length=45)
     descripcion = models.TextField()
     sitio_web = models.URLField(max_length=200)
     creado = models.DateTimeField(auto_now_add=True)
     actualizado = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.nombre
 
 class Estrellas(models.Model):
     empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE)
@@ -48,21 +51,33 @@ class Comentarios(models.Model):
 class Departamentos(models.Model):
     nombre = models.CharField(max_length=45)
 
+    def __str__(self):
+        return self.nombre
+
 class Provincias(models.Model):
     departamento = models.ForeignKey(Departamentos, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=45)
+
+    def __str__(self):
+        return self.nombre
 
 class Distritos(models.Model):
     provincia = models.ForeignKey(Provincias, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.nombre
+
 class AgenciasLima(models.Model):
     empresa = models.ForeignKey(Empresas, on_delete=models.CASCADE)
     distritos = models.ManyToManyField(Distritos, related_name='agencias')
-    foto = models.ImageField(upload_to='agencias/', null=True, blank=True)
     nombre_referencial = models.CharField(max_length=100)
+    foto = models.CharField(max_length=100, null=True, blank=True)
     direccion = models.CharField(max_length=100)
     link_mapa = models.CharField(max_length=200)
     horario_de_atencion = models.CharField(max_length=45)
     telefono = models.CharField(max_length=20)
     cochera = models.BooleanField(null= True, blank=True)
+
+    def __str__(self):
+        return self.nombre_referencial
