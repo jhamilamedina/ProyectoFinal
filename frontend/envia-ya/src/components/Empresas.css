@@ -1,15 +1,13 @@
-<<<<<<< HEAD
 .empresa-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   padding: 20px;
-=======
+}
 .host-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
->>>>>>> a97333ce70f400e8436eb22c8d33ffd0639c98ac
 }
 
 .host-card {
