@@ -55,8 +55,17 @@ const ConocenosMas = () => {
         <img src={servientregaImage} alt="Fachada de Servientrega" className="company-photo" />
         <div className="company-details">
           <h2>Servientrega</h2>
-          <p><strong>Servientrega</strong> es una empresa líder en el sector de mensajería y logística en América Latina. Ofrece una amplia gama de servicios que incluyen transporte y distribución de paquetería y documentos a nivel nacional e internacional.</p>
-          <p>La compañía se destaca por su capacidad para proporcionar soluciones logísticas integrales, que abarcan desde el envío exprés de paquetes hasta la gestión completa de la cadena de suministro. Su red de operaciones se extiende por numerosos países en América Latina, con una presencia destacada en Colombia.</p>
+          <p><strong>Servientrega</strong> es una empresa colombiana de mensajería y logística, fundada en 1982. Con una amplia experiencia en el sector, Servientrega se especializa en la prestación de servicios de envío y logística a nivel nacional e internacional. La compañía ha crecido considerablemente y se ha posicionado como uno de los líderes en el mercado de mensajería en América Latina.</p>
+          <h3>Servicios Ofrecidos</h3>
+          <ul>
+            <li><strong>Envíos Nacionales:</strong> Servicios de mensajería y paquetería a nivel nacional en Colombia, con opciones de entrega express y estándar. Servicios de logística para grandes volúmenes y cargas especiales.</li>
+            <li><strong>Envíos Internacionales:</strong> Soluciones de mensajería y logística para envíos internacionales. Coordinación con operadores globales para garantizar tiempos de entrega eficientes y seguros.</li>
+            <li><strong>Logística Integral:</strong> Gestión de cadena de suministro que incluye almacenamiento, distribución y optimización de procesos logísticos. Servicios personalizados para empresas, adaptados a sus necesidades específicas.</li>
+            <li><strong>Envíos Internacionales de Paquetes y Documentos:</strong> Envíos rápidos y seguros de paquetes y documentos a nivel mundial. Soluciones para comercio electrónico y devoluciones internacionales.</li>
+            <li><strong>Servicio de Mensajería Express:</strong> Entregas urgentes y rápidas para paquetes y documentos. Opciones de seguimiento en tiempo real y servicios de entrega en el mismo día.</li>
+          </ul>
+          <h3>Infraestructura y Cobertura</h3>
+          <p>Servientrega cuenta con una extensa red de sucursales y puntos de atención en Colombia, así como una red de agentes y operadores internacionales. La empresa tiene presencia en varios países de América Latina, facilitando envíos internacionales y operaciones logísticas regionales.</p>
           <h3>Sede Principal</h3>
           <p><strong>Dirección:</strong> Carrera 72 # 25-22, Bogotá, Colombia</p>
           <h3>Horario de Atención</h3>

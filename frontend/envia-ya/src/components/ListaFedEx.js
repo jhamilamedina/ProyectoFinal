@@ -55,9 +55,19 @@ const ConocenosMas = () => {
         <img src={FedExImage} alt="Fachada de FedEx" className="company-photo" />
         <div className="company-details">
           <h2>FedEx</h2>
-          <p><strong>FedEx</strong> es una empresa global de logística y mensajería conocida por su servicio de entrega rápida y eficiente. Ofrece soluciones de transporte terrestre, aéreo y marítimo, así como servicios de logística y cadena de suministro en todo el mundo.</p>
+          <p><strong>FedEx</strong>, o Federal Express, es una empresa multinacional de logística y servicios de mensajería con sede en Memphis, Tennessee, Estados Unidos. Fundada en 1971, FedEx comenzó sus operaciones en 1973 bajo el nombre original de Federal Express.</p>
+          <h3>Servicios</h3>
+          <ul>
+            <li><strong>FedEx Express:</strong> Servicios de mensajería y entrega exprés a nivel global.</li>
+            <li><strong>FedEx Ground:</strong> Entregas terrestres económicas en los EE.UU. y Canadá.</li>
+            <li><strong>FedEx Freight:</strong> Servicios de carga y transporte de mercancías pesadas.</li>
+            <li><strong>FedEx Office:</strong> Servicios de impresión y oficina, anteriormente conocido como Kinko's.</li>
+            <li><strong>FedEx Supply Chain:</strong> Soluciones de cadena de suministro y logística.</li>
+          </ul>
+          <h3>Operaciones</h3>
+          <p>FedEx opera en más de 220 países y territorios, con una de las flotas aéreas más grandes del mundo, que cuenta con más de 600 aviones. Su hub principal es el aeropuerto de Memphis (MEM), conocido como el "Superhub".</p>
           <h3>Sede Principal</h3>
-          <p><strong>Dirección:</strong> 3875 Airways Blvd, Memphis, TN 38116, Estados Unidos</p>
+          <p><strong>Dirección:</strong> Av. Tomás Valle 313, Independencia, Lima 15314, Perú</p>
           <h3>Horario de Atención</h3>
           <ul>
             <li><strong>Lunes a Viernes:</strong> 8:00 AM - 6:00 PM</li>

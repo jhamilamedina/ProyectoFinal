@@ -55,9 +55,25 @@ const ConocenosMas = () => {
         <img src={UpsImage} alt="Fachada de UPS" className="company-photo" />
         <div className="company-details">
           <h2>UPS</h2>
-          <p><strong>UPS</strong> (United Parcel Service) es una empresa global de logística y mensajería conocida por sus servicios de transporte y distribución. Ofrece soluciones de envío exprés, logística de cadena de suministro, y transporte terrestre y aéreo en todo el mundo.</p>
+          <p><strong>UPS</strong> (United Parcel Service) es una empresa global de logística y mensajería conocida por sus servicios de transporte y distribución. Fundada en 1907 como American Messenger Company y rebautizada como United Parcel Service en 1919, UPS comenzó con una flota de bicicletas y motocicletas antes de expandir su red para incluir camiones y aviones.</p>
+          <h3>Servicios</h3>
+          <ul>
+            <li><strong>UPS Ground:</strong> Servicios de entrega terrestre que abarcan los EE.UU., Canadá, y México, con tiempos de entrega basados en la distancia y el tipo de servicio seleccionado.</li>
+            <li><strong>UPS Air:</strong> Ofrece servicios de entrega urgente y programada a nivel nacional e internacional. Incluye opciones de entrega en un día, dos días y otros plazos.</li>
+            <li><strong>UPS Freight:</strong> Proporciona servicios de carga de mercancías pesadas y menos que carga (LTL), con cobertura en EE.UU., Canadá y México.</li>
+            <li><strong>UPS Supply Chain Solutions:</strong> Ofrece servicios integrales de gestión de la cadena de suministro, que incluyen logística, gestión de inventarios, distribución y soluciones de cadena de suministro personalizadas.</li>
+            <li><strong>UPS Store:</strong> Red de franquicias que proporciona servicios de impresión, envío de paquetes y soluciones de oficina a nivel nacional.</li>
+            <li><strong>UPS Capital:</strong> Servicios financieros y seguros, incluyendo protección de paquetes y soluciones de financiamiento.</li>
+          </ul>
+          <h3>Operaciones</h3>
+          <ul>
+            <li><strong>Red Global:</strong> UPS opera en más de 220 países y territorios, con una red extensa que abarca entregas internacionales y nacionales.</li>
+            <li><strong>Hub Principal:</strong> El hub más importante de UPS es el Worldport en Louisville, Kentucky, que es uno de los centros de clasificación de paquetes más grandes del mundo.</li>
+          </ul>
+         
           <h3>Sede Principal</h3>
-          <p><strong>Dirección:</strong> 55 Glenlake Parkway NE, Atlanta, GA 30328, Estados Unidos</p>
+          <p><strong>Dirección:</strong> Av. Víctor Andrés Belaúnde 147, Oficina 701, Edificio Center Tower,
+          San Isidro, Lima 27, Perú</p>
           <h3>Horario de Atención</h3>
           <ul>
             <li><strong>Lunes a Viernes:</strong> 8:00 AM - 6:00 PM</li>
