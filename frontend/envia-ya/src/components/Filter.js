@@ -62,7 +62,14 @@ const Filter = ({ onSearch }) => {
         if (district) {
             axios.get(`http://localhost:8000/api/agenciasdistritos/${district}/`)
                 .then(response => {
-                    setAgencies(response.data.Agencias);
+                    let filteredAgencies = response.data.Agencias;
+
+                    if (origin) {
+                        filteredAgencies = filteredAgencies.filter(agency =>
+                            agency.direccion.includes(origin)
+                        );
+                    }
+                    setAgencies(filteredAgencies);
                 })
                 .catch(error => {
                     console.error('Error fetching agencies', error);
