@@ -16,7 +16,7 @@ _Nota: Envia Ya es una plataforma informativa. No permite realizar pagos ni rese
 ---
 **LinkedIn del autor(es):** 
 
-Eduar vallejos chumbe - https://www.linkedin.com/in/eduar-vallejos-chumbe/
+Eduar Vallejos Chumbe - https://www.linkedin.com/in/eduar-vallejos-chumbe/
 
 Maly Jhamila Medina Maylle - 
 
