@@ -22,7 +22,7 @@ Maly Jhamila Medina Maylle -
 
 Misael Jair Bazán Franco - https://www.linkedin.com/in/misael-baz%C3%A1n-franco-95805b25a?originalSubdomain=pe 
 
-Jorgelina Isabel Silva Mauricio - 
+Jorgelina Isabel Silva Mauricio - https://www.linkedin.com/in/jorgelina2292
 
 ---
 
