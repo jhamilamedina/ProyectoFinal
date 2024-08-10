@@ -16,7 +16,13 @@ _Nota: Envia Ya es una plataforma informativa. No permite realizar pagos ni rese
 ---
 **LinkedIn del autor(es):** 
 
-Eduar vallejos chuMbe - https://www.linkedin.com/in/eduar-vallejos-chumbe/
+Eduar vallejos chumbe - https://www.linkedin.com/in/eduar-vallejos-chumbe/
+
+Maly Jhamila Medina Maylle - 
+
+Misael Jair Bazán Franco - https://www.linkedin.com/in/misael-baz%C3%A1n-franco-95805b25a?originalSubdomain=pe 
+
+Jorgelina Isabel Silva Mauricio - 
 
 ---
 
@@ -24,12 +30,14 @@ Eduar vallejos chuMbe - https://www.linkedin.com/in/eduar-vallejos-chumbe/
 - [Instalacion](#instalacion)
 - [Uso](#uso)
 - [Contribuciones](#contribuciones)
-- [Proyectos Relacionados](#preyectos-relacionados)
+- [Proyectos Relacionados](#proyectos-relacionados)
 - [Licencia](#licencia)
 
 ## Instalacion
 
 Para instalar y ejecutar el proyecto localmente, sigue estos pasos:
+
+Debe tener `Python` instalado: https://www.python.org
 
 1. Clona el repositorio:
 
@@ -48,17 +56,20 @@ source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
 ```
 
 3. Instala las dependencias:
+
 ``` bash
 pip install -r requirements.txt
 ```
 
 4. Realiza las migraciones de la base de datos:
+
 ``` bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 5. Ejecuta el servidor:
+
 ``` bash
 python manage.py runserver
 ```
@@ -68,6 +79,7 @@ python manage.py runserver
 Una vez instalado, puedes acceder a la aplicación en `http://localhost:8000`. Algunas de las funcionalidades principales incluyen:
 
 - Consultar la información de las empresas de envío
+- Crear una cuenta
 - Leer y publicar comentarios y valoraciones.
 - Filtrar agencias por distrito de destino.
 
@@ -87,4 +99,5 @@ Una vez instalado, puedes acceder a la aplicación en `http://localhost:8000`. A
 - proyecto relacionado 2
 
 ## Licencia
+
 Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
