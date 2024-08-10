@@ -18,7 +18,7 @@ _Nota: Envia Ya es una plataforma informativa. No permite realizar pagos ni rese
 
 Eduar Vallejos Chumbe - https://www.linkedin.com/in/eduar-vallejos-chumbe/
 
-Maly Jhamila Medina Maylle - 
+Maly Jhamila Medina Maylle - https://www.linkedin.com/in/malyjmedina/
 
 Misael Jair Bazán Franco - https://www.linkedin.com/in/misael-baz%C3%A1n-franco-95805b25a?originalSubdomain=pe 
 
