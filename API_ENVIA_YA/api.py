@@ -13,7 +13,9 @@ class EmpresasAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de una o varias empresas.
         if id:
+            # Si se proporciona un ID, obtenemos los detalles de una empresa específica.
             empresa = get_object_or_404(Empresas,id=id)
             serializer = EmpresaDetailSerializer(empresa)
             valoraciones = Valoraciones.objects.filter(empresa=empresa)
@@ -28,11 +30,13 @@ class EmpresasAPIView(APIView):
                 'Comentarios': ComentariosDetailSerializer(comentarios, many=True).data
             })
         else:
+            # Si no se proporciona un ID, obtenemos todas las empresas.
             empresas = Empresas.objects.all()
             serializer = EmpresaSerializer(empresas, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        # Método POST para crear una nueva empresa.
         serializer = EmpresaSerializer(data=request.data)
         if serializer.is_valid():
             empresa = serializer.save()
@@ -41,6 +45,7 @@ class EmpresasAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, id=None, format=None):
+        # Método POST para crear una nueva empresa.
         empresa = get_object_or_404(Empresas, id=id)
         serializer = EmpresaSerializer(empresa, data=request.data, partial=True)
         if serializer.is_valid():
@@ -49,6 +54,7 @@ class EmpresasAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
+        # Método DELETE para eliminar una empresa por su ID.
         empresa = get_object_or_404(Empresas, id=id)
         empresa.delete()
         return Response({'message': 'Datos eliminados con  exito', 'id': id}, status=status.HTTP_204_NO_CONTENT)
@@ -66,6 +72,7 @@ class ValoracionesAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        # Método POST para crear una nueva valoración.
         empresa_id = request.data.get('empresa')
         try:
             empresa = Empresas.objects.get(id=empresa_id)
@@ -82,6 +89,7 @@ class ValoracionesAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, id=None, format=None):
+        # Método POST para crear una nueva valoración.
         try:
             valoracion = Valoraciones.objects.get(id=id)
         except Valoraciones.DoesNotExist:
@@ -102,6 +110,7 @@ class ValoracionesAPIView(APIView):
         return Response({'message': 'Valoración actualizada con éxito.', 'data': serializer.data}, status=status.HTTP_200_OK)
 
     def delete(self, request, id, format=None):
+        # Método DELETE para eliminar una valoración por su ID.
         valoracion = get_object_or_404(Valoraciones, id=id)
         valoracion.delete()
         return Response({'message': 'Datos eliminados con  exito'}, status=status.HTTP_204_NO_CONTENT)
@@ -110,6 +119,7 @@ class EstrellasAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de una o varias calificaciones de estrellas.
         if id:
             estrella = get_object_or_404(Estrellas, id=id)
             serializer = EstrellasSerializers(estrella)
@@ -119,6 +129,7 @@ class EstrellasAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        # Método POST para crear una nueva calificación de estrellas.
         empresa_id = request.data.get('empresa')
         try:
             empresa = Empresas.objects.get(id=empresa_id)
@@ -135,6 +146,7 @@ class EstrellasAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, id=None, format=None):
+        # Método PUT para actualizar una calificación de estrellas existente.
         try:
             estrella = Estrellas.objects.get(id=id)
         except Estrellas.DoesNotExist:
@@ -152,6 +164,7 @@ class EstrellasAPIView(APIView):
         return Response({'message': 'estrellas actualizadas con éxito.', 'data': serializer.data}, status=status.HTTP_200_OK)
 
     def delete(self, request, id, format=None):
+        # Método DELETE para eliminar una calificación de estrellas por su ID.
         estrella = get_object_or_404(Estrellas, id=id)
         estrella.delete()
         return Response({'message': 'Datos eliminados con  exito'}, status=status.HTTP_204_NO_CONTENT)
@@ -161,6 +174,7 @@ class AgenciasLimaAPIView(APIView):
 
 
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de una o varias agenciasLima.
         if id:
             agencia_lima = get_object_or_404(AgenciasLima, id=id)
             serializer = AgenciaslimaDetailSerializer(agencia_lima)
@@ -178,6 +192,7 @@ class AgenciasLimaAPIView(APIView):
             return Response(serializer.data)
 
     def post(self, request, format=None):
+        # Método POST para crear una nueva agenciaLima.
         serializer = AgenciasLimaSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -185,6 +200,7 @@ class AgenciasLimaAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id=None, format=None):
+        # Método PUT para actualizar los datos de una agenciaLima.
         agencia_lima = get_object_or_404(AgenciasLima, id=id)
         serializer = AgenciasLimaSerializers(agencia_lima, data=request.data, partial=True)
         if serializer.is_valid():
@@ -193,6 +209,7 @@ class AgenciasLimaAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
+        # Método DELETE para eliminar una agenciaLima por su ID.
         agencia_lima = get_object_or_404(AgenciasLima, id=id)
         agencia_lima.delete()
         return Response({'message': 'Datos eliminados con éxito'}, status=status.HTTP_204_NO_CONTENT)
@@ -201,17 +218,25 @@ class LoginAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def post(self, request, format=None):
+        # Extraemos el email y la contraseña del cuerpo de la solicitud
         email = request.data.get('email')
         contrasenia = request.data.get('contrasenia')
 
+        # Intentamos autenticar al usuario utilizando el email como nombre de usuario
+        # y la contraseña proporcionada. El método `authenticate` busca un usuario
+        # con estas credenciales y devuelve un objeto de usuario si tiene éxito.
         user = authenticate(request, email=email, contrasenia=contrasenia)
 
         if user is not None:
+            # Si la autenticación es exitosa, retornamos un mensaje de éxito y
+            # algunos detalles del usuario (en este caso, el nombre).
             return Response({
                 'message': 'Inicio de sesión exitoso',
                 'Nombre': user.nombre
             }, status=status.HTTP_200_OK)
         else:
+            # Si la autenticación falla, devolvemos una respuesta con un mensaje de error
+            # y un código de estado 401 indicando que las credenciales son inválidas.
             return Response({'detail': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -219,6 +244,7 @@ class UsuariosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
         
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de uno o varios usuarios.
         if id:
             usuario = get_object_or_404(Usuarios, id=id)
             serializer = UsuarioDetailSerializer(usuario)
@@ -233,6 +259,7 @@ class UsuariosAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        # Método POST para crear un nuevo usuario.
         email = request.data.get('email')
         if Usuarios.objects.filter(email=email).exists():
             return Response({'Ya existe un usuario con ese correo electronico'}, status=status.HTTP_400_BAD_REQUEST)
@@ -243,6 +270,7 @@ class UsuariosAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id=None, format=None):
+        # Método PUT para actualizar los datos de un usuario.
         usuario = get_object_or_404(Usuarios, id=id)
         data = request.data
         email = data.get('email')
@@ -255,6 +283,7 @@ class UsuariosAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
+        # Método DELETE para eliminar un usuario por su ID.
         usuario = get_object_or_404(Usuarios, id=id)
         usuario.delete()
         return Response({'message': 'Usuario eliminado con exito'}, status=status.HTTP_204_NO_CONTENT)
@@ -264,6 +293,7 @@ class ComentariosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de uno o varios comentarios.
         if id:
             comentario = get_object_or_404(Comentarios, id=id)
             serializer = ComentariosSerializers(comentario)
@@ -273,6 +303,7 @@ class ComentariosAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        # Método POST para crear un nuevo comentario.
         serializer = ComentariosSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -280,6 +311,7 @@ class ComentariosAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id=None, format=None):
+        # Método PUT para actualizar un comentario existente.
         comentario = get_object_or_404(Comentarios, id=id)
         serializer = ComentariosSerializers(comentario, data=request.data, partial=True)
         if serializer.is_valid():
@@ -288,6 +320,7 @@ class ComentariosAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id, format=None):
+        # Método DELETE para eliminar un comentario por su ID.
         comentario = get_object_or_404(Comentarios, id=id)
         comentario.delete()
         return Response({'message': 'Comentario eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
@@ -296,6 +329,7 @@ class DepartamentosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de uno o varios Departamentos.
         if id:
             departamento = get_object_or_404(Departamentos, id=id)
             serializer = DepartamentosSerializers(departamento)
@@ -315,6 +349,7 @@ class ProvinciasAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de uno o varias Provincias.
         if id:
             provincia = get_object_or_404(Provincias, id=id)
             serializer = ProvinciasSerializers(provincia)
@@ -336,6 +371,7 @@ class DistritosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de uno o varios Distritos.
         if id:
             distrito = get_object_or_404(Distritos, id=id)
             serializer = DistritosSerializers(distrito)
@@ -353,6 +389,7 @@ class DistritosagenciasAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
 
     def get(self, request, id=None, format=None):
+        # Método GET para obtener los datos de uno o varias agenciasLima segun el ID de un Distrito.
         if id:
             distrito = get_object_or_404(Distritos, id=id)
             serializer = DistritosDetailSerializer(distrito)
