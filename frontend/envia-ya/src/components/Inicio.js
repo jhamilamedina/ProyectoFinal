@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Inicio.css';
 
-const Inicio = ({ setUserName }) => {
+const Inicio = ({ setUserName, setUserEmail }) => {
   const [formData, setFormData] = useState({
     nombres: '',
     email: '',
@@ -11,11 +11,18 @@ const Inicio = ({ setUserName }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    // Genera automáticamente un correo basado en el nombre
+    if (name === 'nombres') {
+      const generatedEmail = value.toLowerCase().replace(/\s+/g, '') + '@correo.com';
+      setFormData((prevData) => ({ ...prevData, email: generatedEmail }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setUserName(formData.nombres);
+    setUserEmail(formData.email);
     console.log('Formulario enviado:', formData);
     alert('Cuenta creada correctamente');
     // Resetear el formulario

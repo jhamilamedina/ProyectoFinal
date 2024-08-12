@@ -1,7 +1,7 @@
-import React from 'react';
-import DetallesAgencias from './DetallesAgencias';
-import './DetallesAgencias.css';
-import { imageShalom } from '../assets/agencias_fotos/shalom_mexico.jpeg'
+import React, { useState } from 'react';
+// import DetallesAgencias from './DetallesAgencias';
+// import './DetallesAgencias.css';
+import olvaImage from '../assets/olva1.png'
 
 const ConocenosMas = ({ userName }) => {
   const [rating, setRating] = useState(0);
