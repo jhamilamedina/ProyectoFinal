@@ -14,11 +14,13 @@
 }
 
 .company-photo {
-  width: 90%;
+  width: 400%;
   max-width: 350px;
-  height: auto;
+  height: 400px; 
   margin: 0 auto;
   display: block;
+  object-fit: cover; 
+  border-radius: 10px; 
 }
 
 .company-details {

@@ -55,24 +55,30 @@ const ConocenosMas = () => {
         <img src={shalomImage} alt="Fachada de la empresa Shalom" className="company-photo" />
         <div className="company-details">
           <h2>Shalom</h2>
-          <p><strong>Shalom Transportes y Encomiendas</strong> es una empresa peruana especializada en el envío de paquetes y mercancías a nivel nacional. A continuación, se presentan los detalles más relevantes sobre la empresa:</p>
-          <h3>Servicios</h3>
-          <p>Shalom ofrece varios tipos de servicios de envío:</p>
+          <p><strong>Shalom Transportes y Encomiendas</strong> es una empresa peruana especializada en el envío de paquetes y mercancías a nivel nacional.</p>
+
+          <p>Shalom nació en Lima, Perú, con la misión de proporcionar un servicio de transporte seguro, eficiente y accesible. Con el tiempo, la empresa ha crecido exponencialmente, ampliando su cobertura a lo largo y ancho del país, así como estableciendo alianzas estratégicas que le permiten operar en el ámbito internacional.</p>
+          
+          <h3>Servicios Ofrecidos</h3>
           <ul>
-            <li><strong>Retiro en Agencia:</strong> Los clientes pueden recoger sus envíos en cualquiera de las agencias de Shalom.</li>
-            <li><strong>Servicio Urgente:</strong> Entregas rápidas con prioridad.</li>
-            <li><strong>Reparto de Mercancías:</strong> Servicio de entrega de mercancías a domicilio.</li>
+            <li><strong>Envíos Nacionales:</strong> Paquetes y Documentos, Encomiendas Especiales.</li>
+            <li><strong>Transporte de Carga Pesada:</strong> Transporte de maquinaria industrial, vehículos y equipos especializados.</li>
+            <li><strong>Logística Integral para Empresas:</strong> Gestión de Inventarios, Distribución y Almacenamiento.</li>
+            <li><strong>Servicios Internacionales:</strong> Envíos internacionales, gestión aduanera, y seguimiento en tiempo real.</li>
           </ul>
           <h3>La sede principal de Shalom se encuentra en:</h3>
           <p>Carretera Central Km. 16.5, Lt. 5 Paradero, al costado del grifo Repsol, Ent A Huaycán, Ate, Lima 15476, Perú.</p>
+          
           <h3>Horario de Atención:</h3>
           <ul>
             <li><strong>Lunes a Viernes:</strong> 10:00 AM a 8:00 PM</li>
             <li><strong>Sábados:</strong> 10:00 AM a 8:00 PM</li>
           </ul>
+          
           <p><strong>Sitio Web:</strong> <a href="https://www.shalom.com.pe/" target="_blank" rel="noopener noreferrer">https://www.shalom.com.pe/</a></p>
         </div>
       </div>
+      
       <div className="agencies">
         <h2>Conoce algunas de nuestras Agencias</h2>
         <ul>
@@ -87,6 +93,7 @@ const ConocenosMas = () => {
           ))}
         </ul>
       </div>
+      
       <div className="comments-section">
         <h2>Comentarios</h2>
         <p>Deja tu comentarios (solo si estás logueado)</p>

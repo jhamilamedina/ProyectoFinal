@@ -28,24 +28,24 @@ const ConocenosMas = () => {
 
   const agencies = [
     {
-      name: "UPS - Miraflores",
-      address: "Calle Alcanfores 350, Miraflores, Lima",
-      hours: "Horario de atención: 8:00am a 6:00pm - lunes a sábado"
+      name: "Transmar - Rimac",
+      address: "Avenida 28 de Julio 1511, Rimac, Lima",
+      hours: "Horario de atención: 7:00am a 6:30pm - Lunes a sábado"
     },
     {
-      name: "UPS - San Isidro",
-      address: "Avenida Pardo 600, San Isidro, Lima",
-      hours: "Horario de atención: 9:00am a 5:00pm - lunes a sábado"
+      name: "Transmar - La Victoria",
+      address: "Avenida Bauzate y Meza 680, La Victoria, Lima",
+      hours: "Horario de atención: 8:00am a 6:00pm - Lunes a sábado"
     },
     {
-      name: "UPS - Surco",
-      address: "Avenida Caminos del Inca 1234, Surco, Lima",
-      hours: "Horario de atención: 10:00am a 7:00pm - lunes a sábado"
+      name: "Transmar - Breña",
+      address: "Jirón Pucallpa 266, Breña, Lima",
+      hours: "Horario de atención: 8:00am a 7:30pm - Lunes a sábado"
     },
     {
-      name: "UPS - Callao",
-      address: "Avenida Colonial 789, Callao, Lima",
-      hours: "Horario de atención: 8:30am a 5:30pm - lunes a sábado"
+      name: "Transmar - Miraflores",
+      address: "Avenida Nicolás Arriola 197, Miraflores, Lima",
+      hours: "Horario de atención: 8:00am a 6:00pm - Lunes a sábado"
     }
   ];
 
@@ -56,8 +56,11 @@ const ConocenosMas = () => {
         <div className="company-details">
           <h2>Transmar</h2>
           <p><strong>Transmar</strong> es una empresa líder en logística y mensajería, especializada en ofrecer soluciones de transporte y distribución eficientes a nivel global. Con un enfoque en la entrega exprés y la gestión de la cadena de suministro, Transmar se destaca por su compromiso con la puntualidad y la calidad en el servicio.</p>
+          <p>Desarrollando y cultivando a través de cuatro décadas de experiencia en la industria en el sector del transporte y la logística, así como nuestra creciente presencia en el terreno en los principales puertos de la región, nos han dado una capacidad incomparable para satisfacer las necesidades de los clientes.</p>
+          <p><strong>Fiabilidad:</strong> En Transmar, honramos los compromisos de nuestros clientes, aprovechando nuestra experiencia en la industria y nuestra tecnología de punta para entregar los productos de la manera más confiable y rápida.</p>
+          <p><strong>Seguridad:</strong> Otorgamos un gran valor a la seguridad de nuestras operaciones marítimas, manteniendo los más altos estándares de conciencia de seguridad, disciplina del personal y responsabilidad individual.</p>
           <h3>Sede Principal</h3>
-          <p><strong>Dirección:</strong> 55 Glenlake Parkway NE, Atlanta, GA 30328, Estados Unidos</p>
+          <p><strong>Dirección:</strong> Av. Tomás Valle C.C. Plaza Norte (Stand 17-18) Independecia - Lima</p>
           <h3>Horario de Atención</h3>
           <ul>
             <li><strong>Lunes a Viernes:</strong> 8:00 AM - 6:00 PM</li>
