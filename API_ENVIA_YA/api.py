@@ -375,7 +375,7 @@ class DistritosAPIView(APIView):
         if id:
             distrito = get_object_or_404(Distritos, id=id)
             serializer = DistritosSerializers(distrito)
-            provincia = Provincias.objects.filter(distrito=distrito)
+            provincia = Provincias.objects.filter(distritos=distrito)
             return Response({
                 'Distrito': serializer.data,
                 'Provincia': ProvinciasSerializers(provincia, many=True).data
