@@ -70,7 +70,7 @@
   background: none; 
   color: #0db50d; 
   text-decoration: underline; 
-  outline: none; 
+  
 }
 
 .perfil-boton-container {
@@ -98,4 +98,21 @@
 .perfil-boton:hover {
   background-color: #45a049;
   transform: scale(1.05);
+}
+.eliminar-cuenta-boton {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  outline: none;
+  text-align:left;
+}
+
+.eliminar-cuenta-boton:focus,
+.eliminar-cuenta-boton:active {
+  outline: none; 
+  color: rgb(233, 233, 239); 
 }
