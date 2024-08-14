@@ -1,6 +1,6 @@
 import os
 import django
-from random import sample
+from random import sample, randint
 
 # Configurar Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
@@ -119,21 +119,90 @@ for nombre_dept in nombres_departamentos:
 
 # Datos de prueba para empresas
 datos_empresas = [
-    {'logo': 'images/olva courier.png', 'nombre': 'Olva Courier', 'sede_principal': 'Avenida Argentina 4458, Callao, Perú', 'descripcion': 'Como especialistas en última milla, brindan servicios de calidad en transporte de encomiendas  a domicilio o a cualquiera de sus tiendas o agentes a nivel nacional', 'sitio_web': 'https://www.olvacourier.com'},
+    {'logo': 'static/images/olva courier.png', 'nombre': 'Olva Courier', 'sede_principal': 'Avenida Argentina 4458, Callao, Perú', 'descripcion': """En OLVA, nos esforzamos por ofrecer un servicio de calidad que supere las expectativas de nuestros clientes. Trabajamos con actitudes positivas y vivimos nuestros valores en nuestro día a día.
 
-    {'logo': 'images/shalom.png', 'nombre': 'Shalom', 'sede_principal': 'Avenida México 1187,Cercado de Lima, Perú', 'descripcion': 'Shalom tiene una amplia red de distribución de puntos de entrega y acopio en los 24 departamentos del Perú', 'sitio_web': 'https://shalom.com.pe'},
+    Es una empresa peruana de mensajería y logística, reconocida por ofrecer servicios de envío de documentos, paquetes y mercancías a nivel nacional. Fundada en 1987, Olva Courier ha crecido para convertirse en una de las principales empresas de su sector en Perú, con una amplia red de agencias que cubre todo el país.
 
-    {'logo': 'images/dhl.png','nombre': 'DHL', 'sede_principal': 'Av. Inca Garcilaso de la Vega 1337, Cercado de Lima, Lima', 'descripcion': 'DHL es una empresa líder en logística a nivel mundial, especializada en envíos internacionales, servicios de mensajería y transporte', 'sitio_web': 'https://www.dhl.com/pe-es/home.html'},
+    Servicios Ofrecidos
+    Envíos Nacionales: Olva Courier ofrece servicios de envío de documentos y paquetes a cualquier destino dentro del Perú, con opciones de entrega en agencia o a domicilio.
+    Envíos Internacionales: También proporciona servicios para envíos al extranjero, facilitando la logística de exportación e importación.
+    Olva Box: Un servicio especializado en compras internacionales que permite a los usuarios adquirir productos de tiendas en el extranjero y recibirlos en Perú.
+    Soluciones para Empresas: Ofrecen servicios personalizados para empresas, incluyendo la gestión de envíos masivos, distribución de productos y logística para comercio electrónico.
+    Seguimiento de Envíos: Los clientes pueden rastrear sus envíos en tiempo real a través de la plataforma en línea de Olva Courier.
+    Cobertura
+    Olva Courier cuenta con una red de más de 300 agencias en todo el país, lo que le permite llegar a las principales ciudades y a zonas rurales de difícil acceso. Además, su infraestructura incluye centros de distribución y una flota de vehículos que aseguran la entrega rápida y segura de los envíos.""", 'sitio_web': 'https://www.olvacourier.com'},
 
-    {'logo': 'images/servientrega.png', 'nombre': 'Servientrega', 'sede_principal': 'Av. Argentina 1790, Cercado de Lima, Lima', 'descripcion': 'Servientrega es una compañía orientada a ofrecer soluciones integrales de logística en recolección, transporte, almacenamiento, empaque y embalaje, logística promocional y distribución de documentos y mercancías', 'sitio_web': 'https://servientrega.com.pe/'},
 
-    {'logo': 'images/fedex.png', 'nombre': 'FedEx', 'sede_principal': 'Pasaje Martir Olaya 260', 'descripcion': 'FedEx es una empresa de servicios de mensajería y logística que opera en Perú y a nivel mundial', 'sitio_web': 'https://www.fedex.com/es-pe/home.html'},
+    {'logo': 'static/images/shalom.png', 'nombre': 'Shalom', 'sede_principal': 'Avenida México 1187,Cercado de Lima, Perú', 'descripcion': """Shalom Transportes y Encomiendas es una empresa peruana especializada en el envío de paquetes y mercancías a nivel nacional.
 
-    {'logo': 'images/ups.png', 'nombre': 'Ups', 'sede_principal': 'Jr. Flora Tristan 310, Magdalena, Lima', 'descripcion': 'UPS ofrece opciones para envíos de bajo y gran volumen.', 'sitio_web': 'www.ups.com'},
+    Shalom nació en Lima, Perú, con la misión de proporcionar un servicio de transporte seguro, eficiente y accesible. Con el tiempo, la empresa ha crecido exponencialmente, ampliando su cobertura a lo largo y ancho del país, así como estableciendo alianzas estratégicas que le permiten operar en el ámbito internacional.
 
-    {'logo': 'images/urbano.png', 'nombre': 'Urbano', 'sede_principal': 'Avenida Materiales 3049, Cercado de Lima, Lima', 'descripcion': 'Urbano es una empresa de servicios logísticos en Perú. Su enfoque está en planificación urbana y desarrollo.', 'sitio_web': 'https://www.urbano.com.pe'},
+    Servicios Ofrecidos
+    Envíos Nacionales: Paquetes y Documentos, Encomiendas Especiales.
+    Transporte de Carga Pesada: Transporte de maquinaria industrial, vehículos y equipos especializados.
+    Logística Integral para Empresas: Gestión de Inventarios, Distribución y Almacenamiento.
+    Servicios Internacionales: Envíos internacionales, gestión aduanera, y seguimiento en tiempo real.""", 'sitio_web': 'https://shalom.com.pe'},
 
-    {'logo': 'images/transmar.png', 'nombre': 'Transmar', 'sede_principal': 'Avenida Nicolás Arriola 197, La Victoria', 'descripcion': 'Transmar es un grupo empresarial con 39 años de experiencia en el servicio de transporte de pasajeros, transporte de personal, encomiendas y transferencia de dinero.', 'sitio_web': 'https://transmar.pe'},
+
+    {'logo': 'static/images/dhl.png','nombre': 'DHL', 'sede_principal': 'Av. Inca Garcilaso de la Vega 1337, Cercado de Lima, Lima', 'descripcion': """DHL es una empresa global de logística y mensajería que opera en más de 220 países y territorios. Fundada en 1969 por Adrian Dalsey, Larry Hillblom y Robert Lynn, sus siglas derivan de los apellidos de los fundadores. DHL comenzó ofreciendo servicios de mensajería aérea, un concepto innovador que revolucionó la logística al permitir la entrega rápida de documentos a nivel internacional.
+
+    Servicios Ofrecidos
+    DHL Express: Especializado en envíos urgentes y entregas internacionales rápidas. Ofrece soluciones de transporte para documentos y paquetes con tiempos de entrega garantizados.
+    DHL Global Forwarding: Gestión de fletes aéreos, marítimos y terrestres. Proporciona soluciones de transporte para grandes volúmenes de carga, incluyendo la coordinación y el despacho aduanero.
+    DHL Freight: Transporte terrestre de cargas completas y parciales en toda Europa. Ofrece soluciones personalizadas para empresas que requieren transporte especializado.
+    DHL Supply Chain: Logística de contratación para empresas, que incluye gestión de almacenes, distribución y optimización de la cadena de suministro. Este servicio es fundamental para empresas que buscan externalizar partes críticas de su logística.
+    DHL ECommerce: Soluciones para el comercio electrónico, que incluyen la gestión de devoluciones, entregas a domicilio y opciones de entrega flexible.
+    DHL SameDay: Servicios de entrega urgente el mismo día, ideal para envíos críticos que no pueden esperar.
+    Infraestructura y Cobertura
+    DHL cuenta con una vasta infraestructura global que incluye más de 350,000 empleados y alrededor de 260 aviones dedicados exclusivamente a sus operaciones logísticas. Su red global le permite manejar una gran variedad de envíos, desde pequeños paquetes hasta cargas industriales.""", 'sitio_web': 'https://www.dhl.com/pe-es/home.html'},
+
+
+    {'logo': 'static/images/servientrega.png', 'nombre': 'Servientrega', 'sede_principal': 'Av. Argentina 1790, Cercado de Lima, Lima', 'descripcion': 'Servientrega es una compañía orientada a ofrecer soluciones integrales de logística en recolección, transporte, almacenamiento, empaque y embalaje, logística promocional y distribución de documentos y mercancías', 'sitio_web': 'https://servientrega.com.pe/'},
+
+
+    {'logo': 'static/images/fedex.png', 'nombre': 'FedEx', 'sede_principal': 'Pasaje Martir Olaya 260', 'descripcion': """FedEx, o Federal Express, es una empresa multinacional de logística y servicios de mensajería con sede en Memphis, Tennessee, Estados Unidos. Fundada en 1971, FedEx comenzó sus operaciones en 1973 bajo el nombre original de Federal Express.
+
+    Servicios
+    FedEx Express: Servicios de mensajería y entrega exprés a nivel global.
+    FedEx Ground: Entregas terrestres económicas en los EE.UU. y Canadá.
+    FedEx Freight: Servicios de carga y transporte de mercancías pesadas.
+    FedEx Office: Servicios de impresión y oficina, anteriormente conocido como Kinko's.
+    FedEx Supply Chain: Soluciones de cadena de suministro y logística.
+    Operaciones
+    FedEx opera en más de 220 países y territorios, con una de las flotas aéreas más grandes del mundo, que cuenta con más de 600 aviones. Su hub principal es el aeropuerto de Memphis (MEM), conocido como el "Superhub".""", 'sitio_web': 'https://www.fedex.com/es-pe/home.html'},
+
+
+    {'logo': 'static/images/ups.png', 'nombre': 'Ups', 'sede_principal': 'Jr. Flora Tristan 310, Magdalena, Lima', 'descripcion': """UPS (United Parcel Service) es una empresa global de logística y mensajería conocida por sus servicios de transporte y distribución. Fundada en 1907 como American Messenger Company y rebautizada como United Parcel Service en 1919, UPS comenzó con una flota de bicicletas y motocicletas antes de expandir su red para incluir camiones y aviones.
+
+    Servicios
+    UPS Ground: Servicios de entrega terrestre que abarcan los EE.UU., Canadá, y México, con tiempos de entrega basados en la distancia y el tipo de servicio seleccionado.
+    UPS Air: Ofrece servicios de entrega urgente y programada a nivel nacional e internacional. Incluye opciones de entrega en un día, dos días y otros plazos.
+    UPS Freight: Proporciona servicios de carga de mercancías pesadas y menos que carga (LTL), con cobertura en EE.UU., Canadá y México.
+    UPS Supply Chain Solutions: Ofrece servicios integrales de gestión de la cadena de suministro, que incluyen logística, gestión de inventarios, distribución y soluciones de cadena de suministro personalizadas.
+    UPS Store: Red de franquicias que proporciona servicios de impresión, envío de paquetes y soluciones de oficina a nivel nacional.
+    UPS Capital: Servicios financieros y seguros, incluyendo protección de paquetes y soluciones de financiamiento.
+    Operaciones
+    Red Global: UPS opera en más de 220 países y territorios, con una red extensa que abarca entregas internacionales y nacionales.
+    Hub Principal: El hub más importante de UPS es el Worldport en Louisville, Kentucky, que es uno de los centros de clasificación de paquetes más grandes del mundo.""", 'sitio_web': 'www.ups.com'},
+
+
+    {'logo': 'static/images/urbano.png', 'nombre': 'Urbano', 'sede_principal': 'Avenida Materiales 3049, Cercado de Lima, Lima', 'descripcion': """Urbano es una empresa dedicada a ofrecer soluciones integrales de transporte y logística, con un enfoque en mejorar la eficiencia y cobertura en áreas urbanas y rurales.
+
+    Fundada para ofrecer soluciones de transporte y logística, con un enfoque en mejorar la eficiencia y la cobertura en áreas urbanas y rurales.
+    La empresa ha crecido para abarcar una red amplia de agencias y servicios, adaptándose a las necesidades cambiantes del mercado.
+    Servicios
+    Transporte de Mercancías: Ofrece servicios de transporte para paquetes y encomiendas, con opciones para envíos urgentes y estándar.
+    Logística: Proporciona soluciones logísticas integrales que incluyen gestión de inventarios, distribución y cadena de suministro.
+    Red de Agencias: Cuenta con una red de agencias en varias localidades para facilitar la entrega y recepción de mercancías.""", 'sitio_web': 'https://www.urbano.com.pe'},
+
+
+    {'logo': 'static/images/transmar.png', 'nombre': 'Transmar', 'sede_principal': 'Avenida Nicolás Arriola 197, La Victoria', 'descripcion': """Transmar es una empresa líder en logística y mensajería, especializada en ofrecer soluciones de transporte y distribución eficientes a nivel global. Con un enfoque en la entrega exprés y la gestión de la cadena de suministro, Transmar se destaca por su compromiso con la puntualidad y la calidad en el servicio.
+
+    Desarrollando y cultivando a través de cuatro décadas de experiencia en la industria en el sector del transporte y la logística, así como nuestra creciente presencia en el terreno en los principales puertos de la región, nos han dado una capacidad incomparable para satisfacer las necesidades de los clientes.
+
+    Fiabilidad: En Transmar, honramos los compromisos de nuestros clientes, aprovechando nuestra experiencia en la industria y nuestra tecnología de punta para entregar los productos de la manera más confiable y rápida.
+
+    Seguridad: Otorgamos un gran valor a la seguridad de nuestras operaciones marítimas, manteniendo los más altos estándares de conciencia de seguridad, disciplina del personal y responsabilidad individual.""", 'sitio_web': 'https://transmar.pe'},
 ]
 
 datos_agencias = [
@@ -211,24 +280,24 @@ for datos_empresa in datos_empresas:
     # Crear una Valoración para la Empresa
     Valoraciones.objects.create(
         empresa=empresa,
-        puntualidad=0,
-        seguridad=0,
-        economica=0,
-        amabilidad=0,
-        caro=0,
-        inseguro=0,
-        impuntual=0,
-        poco_amables=0
+        puntualidad=randint(0, 20),
+        seguridad=randint(0, 20),
+        economica=randint(0, 20),
+        amabilidad=randint(0, 20),
+        caro=randint(0, 20),
+        inseguro=randint(0, 20),
+        impuntual=randint(0, 20),
+        poco_amables=randint(0, 20)
     )
     
     # Crear Estrellas para la Empresa
     Estrellas.objects.create(
         empresa=empresa,
-        estrella_1=0,
-        estrella_2=0,
-        estrella_3=0,
-        estrella_4=0,
-        estrella_5=0
+        estrella_1=randint(0, 5),
+        estrella_2=randint(0, 5),
+        estrella_3=randint(0, 5),
+        estrella_4=randint(0, 5),
+        estrella_5=randint(0, 5),
     )
 
 print("Datos de prueba creados exitosamente.")
