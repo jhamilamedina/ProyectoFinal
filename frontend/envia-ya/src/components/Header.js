@@ -38,7 +38,7 @@ const Header = ({ userName, userEmail }) => {
           <li><Link to="/destinos">Destinos</Link></li>
           <li><Link to="/empresas">Empresas</Link></li>
           <li><Link to="/nosotros">Nosotros</Link></li>
-          <li><Link to="/Inicio">Inicio de Sesión</Link></li>
+          <li><Link to="/Registro">Inicio / Registro</Link></li>
         </ul>
       </nav>
       {userName && (

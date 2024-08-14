@@ -3,12 +3,12 @@
 import React from 'react';
 import './Empresas.css';
 
-const EmpresaCard = ({ nombre, direccion, descripcion, sitio_web }) => {
+const EmpresaCard = ({ id, nombre, direccion, descripcion, sitio_web }) => {
   return (
     <div className="host-card">
       <div className="host-info">
         <div className="host-details">
-          <h2>{nombre}</h2>
+          <h2><a href={`http://localhost:3000/empresas/${id}/`}>{nombre}</a></h2>
           <p>{direccion}</p>
         </div>
       </div>

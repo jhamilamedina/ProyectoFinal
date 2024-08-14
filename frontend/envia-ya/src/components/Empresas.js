@@ -23,6 +23,7 @@ const Empresas = () => {
         {empresas.map((empresa) => (
           <EmpresaCard
             key={empresa.id}
+            id={empresa.id}
             nombre={empresa.nombre}
             direccion={empresa.sede_principal}
             descripcion={empresa.descripcion}
