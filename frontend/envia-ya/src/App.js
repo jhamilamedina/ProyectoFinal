@@ -21,14 +21,29 @@ import ListaUps from './components/ListaUps';
 import ListaUrbano from './components/ListaUrbano';
 import ListaTransmar from './components/ListaTransmar';
 import Perfil from './components/Perfil';
+import EliminoCuenta from './components/EliminoCuenta';
 
 function App() {
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState(localStorage.getItem('nombre') || '');
+  const [userEmail, setUserEmail] = useState(localStorage.getItem('correo') || '');
+  const [fotoPerfil, setFotoPerfil] = useState(localStorage.getItem('foto') || '/ruta/imagen/default.jpg');
+
+  const handleLogout = () => {
+    // Limpiar datos del perfil en localStorage
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('correo');
+    localStorage.removeItem('foto');
+    
+    // Limpiar el estado del usuario
+    setUserName('');
+    setUserEmail('');
+    setFotoPerfil('/ruta/imagen/default.jpg');
+  };
 
   return (
     <Router>
-      <Header userName={userName} />
+      <Header userName={userName} onLogout={handleLogout} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -51,7 +66,23 @@ function App() {
           <Route path="/lista-ups" element={<ListaUps />} />
           <Route path="/lista-urbano" element={<ListaUrbano />} />
           <Route path="/lista-transmar" element={<ListaTransmar />} />
-          <Route path="/perfil" element={<Perfil userName={userName} userEmail={userEmail} />} />
+          <Route 
+            path="/perfil" 
+            element={<Perfil 
+              userName={userName} 
+              setUserName={setUserName} 
+              setUserEmail={setUserEmail} 
+              setFotoPerfil={setFotoPerfil} 
+            />} 
+          />
+          <Route 
+            path="/eliminar-cuenta" 
+            element={<EliminoCuenta 
+              setUserName={setUserName} 
+              setUserEmail={setUserEmail} 
+              setFotoPerfil={setFotoPerfil} 
+            />} 
+          />
         </Routes>
       </main>
       <Footer />
