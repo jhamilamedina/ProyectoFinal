@@ -23,14 +23,29 @@ import ListaTransmar from './components/ListaTransmar';
 import Perfil from './components/Perfil';
 import EmpresaDetail from './components/EmpresaDetail';
 import Registro from './components/Registro';
+import EliminoCuenta from './components/EliminoCuenta';
 
 function App() {
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState(localStorage.getItem('nombre') || '');
+  const [userEmail, setUserEmail] = useState(localStorage.getItem('correo') || '');
+  const [fotoPerfil, setFotoPerfil] = useState(localStorage.getItem('foto') || '/ruta/imagen/default.jpg');
+
+  const handleLogout = () => {
+    // Limpiar datos del perfil en localStorage
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('correo');
+    localStorage.removeItem('foto');
+    
+    // Limpiar el estado del usuario
+    setUserName('');
+    setUserEmail('');
+    setFotoPerfil('/ruta/imagen/default.jpg');
+  };
 
   return (
     <Router>
-      <Header userName={userName} />
+      <Header userName={userName} onLogout={handleLogout} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -47,6 +62,14 @@ function App() {
           <Route path="/ayuda" element={<Ayuda />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/privacidad" element={<Privacidad />} />
+          <Route path="/lista-agencias" element={<ListaAgencias />} />
+          <Route path="/lista-shalom" element={<ListaShalom />} />
+          <Route path="/lista-dhl" element={<ListaDHL />} />
+          <Route path="/lista-servientrega" element={<ListaServientrega />} />
+          <Route path="/lista-fedex" element={<ListaFedEX />} />
+          <Route path="/lista-ups" element={<ListaUps />} />
+          <Route path="/lista-urbano" element={<ListaUrbano />} />
+          <Route path="/lista-transmar" element={<ListaTransmar />} />
           <Route path="/perfil" element={<Perfil userName={userName} userEmail={userEmail} />} />
         </Routes>
       </main>

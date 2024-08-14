@@ -1,0 +1,57 @@
+.eliminar-cuenta-container {
+  text-align: center;
+  margin-top: 50px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 50px auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+.eliminar-cuenta-container h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.eliminar-cuenta-container p {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.eliminar-cuenta-boton {
+  font-size: 1.2em;
+  padding: 12px 30px;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.eliminar-cuenta-boton.si {
+  border: 2px solid #e74c3c;
+  background-color: #e74c3c;
+  color: white;
+}
+
+.eliminar-cuenta-boton.si:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.eliminar-cuenta-boton.no {
+  border: 2px solid #3498db;
+  background-color: #3498db;
+  color: white;
+}
+
+.eliminar-cuenta-boton.no:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}

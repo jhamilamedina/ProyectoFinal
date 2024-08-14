@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import logo from '../assets/logo.jpeg';
 
-const Header = ({ userName, userEmail }) => {
+const Header = ({ userName, userEmail, onLogout }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const Header = ({ userName, userEmail }) => {
   };
 
   const handleViewProfile = () => {
-    navigate('/perfil'); // No es necesario pasar userName y userEmail si ya se cargan desde localStorage
+    navigate('/perfil');
   };
 
   const handleLogout = () => {
@@ -22,8 +22,13 @@ const Header = ({ userName, userEmail }) => {
     localStorage.removeItem('correo');
     localStorage.removeItem('foto');
 
+    // Llamar la función de logout pasada como prop
+    if (onLogout) {
+      onLogout();
+    }
+
     // Redirigir a la página de inicio
-    navigate('/home'); // Cambia la ruta según tus necesidades
+    navigate('/'); // Cambia la ruta según tus necesidades
   };
 
   return (
