@@ -66,6 +66,7 @@ pip install -r requirements.txt
 ``` bash
 python manage.py makemigrations
 python manage.py migrate
+python populate_data.py
 ```
 
 5. Ejecuta el servidor:
