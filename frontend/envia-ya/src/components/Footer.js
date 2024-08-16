@@ -14,9 +14,9 @@ const Footer = () => {
                         días del año.
                     </p>
                     <div className="footer__socials">
-                        <a href="#"><i className="ri-facebook-circle-fill"></i></a>
-                        <a href="#"><i className="ri-instagram-line"></i></a>
-                        <a href="#"><i className="ri-twitter-fill"></i></a>
+                        <a href=""><i className="ri-facebook-circle-fill"></i></a>
+                        <a href=""><i className="ri-instagram-line"></i></a>
+                        <a href=""><i className="ri-twitter-fill"></i></a>
                     </div>
                 </div>
                 <div className="footer__col">
@@ -24,7 +24,7 @@ const Footer = () => {
                     <Link to="/inicio">Inicio</Link>
                     <Link to="/nosotros">Nosotros</Link>
                     <Link to="/empresas">Empresas</Link>
-                    <Link to="/contacto">Contacto</Link>
+                    <Link to="/ayuda">Ayuda</Link>
                 </div>
                 <div className="footer__col">
                     <h4>Recursos</h4>

@@ -2,29 +2,101 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    margin: 22px;
+    gap: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    border: 1px solid #cccccc; /* Gris suave */
+    border-radius: 10px;
+    background-color: #f4f4f4; /* Gris claro */
+}
+
+.filter-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #1a1a1a; /* Tono más oscuro */
 }
 
 .filter-container label {
-font-weight: bold;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 5px;
 }
 
 .filter-container select {
     padding: 10px;
     font-size: 1em;
+    border: 1px solid #b3b3b3; /* Gris oscuro */
+    border-radius: 5px;
+    background-color: #f8f8f8; /* Gris muy claro */
+    width: 100%;
+    max-width: 300px;
 }
 
 .filter-container button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #61dafb;
+    background-color: #5e2293; /* Azul serio */
     border: none;
     border-radius: 5px;
-    margin-top: 20px;
+    color: #fff;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .filter-container button:hover {
-    background-color: #21a1f1;
+    background-color: #340d4c; /* Azul más oscuro */
+}
+
+.agencies-list {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #0a0101; /* Gris oscuro */
+    border-radius: 10px;
+    background-color: #ffffff; /* Blanco */
+}
+
+.agencies-list h3 {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    color: #1a1a1a; /* Tono más oscuro */
+}
+
+.agencies-list ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas de igual ancho */
+    gap: 20px; /* Espacio entre las columnas */
+}
+
+.agencies-list li {
+    padding: 15px;
+    border: 1px solid #000000; /* Gris neutro */
+    border-radius: 8px;
+    background-color: #f0f0f0; /* Fondo más neutro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+}
+
+.agencies-list h4 {
+    font-size: 1.2em;
+    margin: 0 0 10px;
+    color: #1a1a1a; /* Tono más oscuro */
+}
+
+.agencies-list p {
+    margin: 5px 0;
+    color: #100f0f;
+}
+
+.agencies-list a {
+    color: #0b192b;
+    text-decoration: none;
+}
+
+.agencies-list a:hover {
+    text-decoration: underline;
 }
