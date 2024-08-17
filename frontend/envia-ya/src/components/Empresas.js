@@ -18,7 +18,7 @@ const Empresas = () => {
 
   return (
     <div className="empresas-container">
-      <h2>Lista de Empresas:</h2>
+      <h2>Lista de Empresas</h2>
       <div className="empresas-list">
         {empresas.map((empresa) => (
           <EmpresaCard

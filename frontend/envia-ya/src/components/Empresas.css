@@ -1,73 +1,60 @@
-.empresa-grid {
+.empresas-container {
+  padding: 40px;
+  background-color: #f5f5f5; /* Color de fondo suave */
+}
+
+.empresas-container h2 {
+  text-align: center; /* Centrar el título */
+  color: #333; /* Color oscuro para mejor contraste */
+  font-size: 2.5em; /* Tamaño grande del título */
+  font-weight: 700; /* Peso fuerte para el título */
+  margin-bottom: 40px; /* Espacio debajo del título */
+
+  padding-bottom: 5px; /* Espacio adicional debajo de la línea */
+}
+
+.empresas-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 30px; /* Espacio entre las tarjetas */
   padding: 20px;
 }
-.host-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
 
-.host-card {
-  max-width: 300px; /* Ajusta el ancho según tus necesidades */
-  margin: 20px; /* Espacio entre las tarjetas */
+.empresa-card {
+  background-color: #fff; /* Fondo blanco para las tarjetas */
+  border: 1px solid #191818; /* Borde sutil */
+  border-radius: 8px; /* Bordes redondeados */
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
 }
 
-.host-info {
-  display: flex;
-  align-items: center;
+.empresa-card:hover {
+  transform: translateY(-5px); /* Levantar la tarjeta al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
 }
 
-.logo {
-  max-width: 100px; /* Ajusta el tamaño del logo según tus necesidades */
-  margin-right: 16px;
-}
-
-.host-details h2 {
+.empresa-card h3 {
   margin: 0;
+  font-size: 1.5em; /* Tamaño grande del nombre de la empresa */
+  color: #010f1d; /* Color azul para el nombre */
+  margin-bottom: 10px; /* Espacio debajo del nombre */
 }
 
-.host-stats p {
-  margin: 5px 0;
+.empresa-card p {
+  color: #0b0a0a; /* Color gris para el texto */
+  margin: 8px 0; /* Espacio entre párrafos */
+  font-size: 1em; /* Tamaño de fuente estándar */
+  line-height: 1.5; /* Espaciado de línea adecuado */
 }
 
-.host-extra-info {
-  margin-top: 10px;
+.empresa-card a {
+  color: #007bff; /* Color azul para los enlaces */
+  text-decoration: none; /* Quitar subrayado */
+  font-weight: 500; /* Peso moderado para los enlaces */
 }
 
-.caracteristica {
-  display: flex;
-  align-items: center;
-  margin: 2px 0; /* Reduce el margen entre las características */
-}
-
-.caracteristica input {
-  margin-right: 0px; /* Reduce el espacio entre el checkbox y el texto */
-}
-
-.caracteristica p {
-  margin: 0; /* Elimina el margen del párrafo */
-}
-
-.host-description {
-  margin: 20px 0;
-}
-
-.show-more-link {
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #007BFF;
-  cursor: pointer;
-}
-
-.show-more-link:hover {
-  text-decoration: underline;
+.empresa-card a:hover {
+  text-decoration: underline; /* Subrayar al pasar el mouse */
+  color: #01080e; /* Azul más oscuro al pasar el mouse */
 }
