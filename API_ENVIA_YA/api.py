@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
-from .models import Empresas, Valoraciones, Estrellas,Usuarios, AgenciasLima, Comentarios, Departamentos, Provincias, Distritos
+from .models import Empresas, Valoraciones, Estrellas, Usuarios, AgenciasLima, Comentarios, Departamentos, Provincias, Distritos
 from .serializers import EmpresaSerializer, ValoracionSerializers, EstrellasSerializers, UsuarioSerializers, AgenciasLimaSerializers, ComentariosSerializers, DepartamentosSerializers, ProvinciasSerializers, DistritosSerializers
 from .serializers import EmpresaDetailSerializer, AgenciaslimaDetailSerializer, DistritosDetailSerializer, ValoracionDetailSerializer, EstrellaDetailSerializer, ComentariosDetailSerializer, UsuarioDetailSerializer, ProvinciasDetailSerializer
 
@@ -198,21 +198,19 @@ class AgenciasLimaAPIView(APIView):
         return Response({'message': 'Datos eliminados con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
 class LoginAPIView(APIView):
-    parser_classes = (JSONParser, MultiPartParser, FormParser)
-
     def post(self, request, format=None):
         email = request.data.get('email')
-        contrasenia = request.data.get('contrasenia')
+        password = request.data.get('contrasenia')
 
-        user = authenticate(request, email=email, contrasenia=contrasenia)
+        user = get_object_or_404(Usuarios, email=email)
 
-        if user is not None:
+        if user.contrasenia == password:
             return Response({
                 'message': 'Inicio de sesión exitoso',
-                'Nombre': user.nombre
+                'nombre': user.nombre
             }, status=status.HTTP_200_OK)
         else:
-            return Response({'detail': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+            return  Response({'detail': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class UsuariosAPIView(APIView):
@@ -235,11 +233,14 @@ class UsuariosAPIView(APIView):
     def post(self, request, format=None):
         email = request.data.get('email')
         if Usuarios.objects.filter(email=email).exists():
-            return Response({'Ya existe un usuario con ese correo electronico'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': 'Ya existe un usuario con ese correo electrónico'}, status=status.HTTP_400_BAD_REQUEST)
+        
         serializer = UsuarioSerializers(data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Usuario creado con exito', 'data':serializer.data}, status=status.HTTP_201_CREATED)
+            user = serializer.save()
+            user.contrasenia = request.data.get('contrasenia')  # Almacena la contraseña en texto plano
+            user.save()
+            return Response({'message': 'Usuario creado con éxito', 'data': serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id=None, format=None):
@@ -363,6 +364,3 @@ class DistritosagenciasAPIView(APIView):
             })
         else:
             return Response({'detail': 'ID de distrito no proporcionado.'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-

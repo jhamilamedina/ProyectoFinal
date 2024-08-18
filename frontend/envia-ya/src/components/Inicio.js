@@ -1,79 +1,71 @@
 import React, { useState } from 'react';
-import './Inicio.css';
+import axios from 'axios';
 
-const Inicio = ({ setUserName, setUserEmail }) => {
+const Login = () => {
   const [formData, setFormData] = useState({
-    nombres: '',
     email: '',
-    contraseña: ''
+    contrasenia: '',
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const [mensaje, setMensaje] = useState('');
 
-    // Genera automáticamente un correo basado en el nombre
-    if (name === 'nombres') {
-      const generatedEmail = value.toLowerCase().replace(/\s+/g, '') + '@correo.com';
-      setFormData((prevData) => ({ ...prevData, email: generatedEmail }));
-    }
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserName(formData.nombres);
-    setUserEmail(formData.email);
-    console.log('Formulario enviado:', formData);
-    alert('Cuenta creada correctamente');
-    // Resetear el formulario
-    setFormData({
-      nombres: '',
-      email: '',
-      contraseña: ''
-    });
+
+    axios.post('http://localhost:8000/api/login/', formData)
+      .then(response => {
+        setMensaje(response.data.message);
+        // Aquí puedes guardar los datos del usuario en el estado global o en el localStorage
+        console.log(response.data);
+      })
+      .catch(error => {
+        if (error.response) {
+          const errorMessage = typeof error.response.data === 'string'
+            ? error.response.data
+            : JSON.stringify(error.response.data);
+          setMensaje(errorMessage);
+        } else {
+          setMensaje('Error en el inicio de sesión');
+        }
+      });
   };
 
   return (
-    <div className="form-container">
-      <h1>Crear Cuenta</h1>
+    <div>
+      <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="nombres">Nombres:</label>
+        <div>
+          <label>Email:</label>
           <input 
-            type="text" 
-            id="nombres" 
-            name="nombres" 
-            value={formData.nombres} 
-            onChange={handleChange} 
-            required 
+            type='email'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
+            required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
+        <div>
+          <label>Contraseña:</label>
           <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            value={formData.email} 
-            onChange={handleChange} 
-            required 
+            type='password'
+            name='contrasenia'
+            value={formData.contrasenia}
+            onChange={handleChange}
+            required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="contraseña">Contraseña:</label>
-          <input 
-            type="password" 
-            id="contraseña" 
-            name="contraseña" 
-            value={formData.contraseña} 
-            onChange={handleChange} 
-            required 
-          />
-        </div>
-        <button type="submit">Crear Cuenta</button>
+        <button type='submit'>Iniciar Sesión</button>
       </form>
+      {mensaje && <p>{mensaje}</p>}
     </div>
   );
 };
 
-export default Inicio;
+export default Login;
