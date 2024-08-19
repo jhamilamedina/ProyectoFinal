@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Inicio.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -21,8 +22,7 @@ const Login = () => {
 
     axios.post('http://localhost:8000/api/login/', formData)
       .then(response => {
-        setMensaje(response.data.message);
-        // Aquí puedes guardar los datos del usuario en el estado global o en el localStorage
+        setMensaje(`Inicio de sesión exitoso. Bienvenido, ${response.data.nombre}`);
         console.log(response.data);
       })
       .catch(error => {
@@ -32,13 +32,13 @@ const Login = () => {
             : JSON.stringify(error.response.data);
           setMensaje(errorMessage);
         } else {
-          setMensaje('Error en el inicio de sesión');
+          setMensaje('Error al iniciar sesión');
         }
       });
   };
 
   return (
-    <div className="login-container">
+    <div>
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -49,7 +49,7 @@ const Login = () => {
             value={formData.email}
             onChange={handleChange}
             required
-          />
+          /> 
         </div>
         <div>
           <label>Contraseña:</label>

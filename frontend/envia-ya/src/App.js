@@ -12,14 +12,6 @@ import Nosotros from './components/Nosotros';
 import Inicio from './components/Inicio';
 import Contacto from './components/Contacto';
 import Privacidad from './components/Privacidad';
-import ListaAgencias from './components/ListaAgencias';
-import ListaShalom from './components/ListaShalom';
-import ListaDHL from './components/ListaDHL';
-import ListaServientrega from './components/ListaServientrega';
-import ListaFedEX from './components/ListaFedEx';
-import ListaUps from './components/ListaUps';
-import ListaUrbano from './components/ListaUrbano';
-import ListaTransmar from './components/ListaTransmar';
 import Perfil from './components/Perfil';
 import EmpresaDetail from './components/EmpresaDetail';
 import Registro from './components/Registro';
@@ -62,14 +54,6 @@ function App() {
           <Route path="/ayuda" element={<Ayuda />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/privacidad" element={<Privacidad />} />
-          <Route path="/lista-agencias" element={<ListaAgencias />} />
-          <Route path="/lista-shalom" element={<ListaShalom />} />
-          <Route path="/lista-dhl" element={<ListaDHL />} />
-          <Route path="/lista-servientrega" element={<ListaServientrega />} />
-          <Route path="/lista-fedex" element={<ListaFedEX />} />
-          <Route path="/lista-ups" element={<ListaUps />} />
-          <Route path="/lista-urbano" element={<ListaUrbano />} />
-          <Route path="/lista-transmar" element={<ListaTransmar />} />
           <Route path="/perfil" element={<Perfil userName={userName} userEmail={userEmail} />} />
         </Routes>
       </main>
