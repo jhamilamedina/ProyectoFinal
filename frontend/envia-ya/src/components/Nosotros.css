@@ -2,24 +2,26 @@
   margin: 20px auto;
   padding: 40px;
   max-width: 800px;
-  background-color: #ffffff;
+  background-color: #f9f9f9; /* Fondo gris claro para mayor suavidad */
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra más suave y difusa */
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Heading Styling */
 .nosotros-container h1 {
-  font-size: 3em;
-  color: #1a0b42;
+  font-size: 2.5em;
+  color: #2c3e50; /* Azul grisáceo elegante */
   margin-bottom: 20px;
-  text-align:left;
+  text-align: left;
   font-weight: 700;
+  border-bottom: 3px solid #2980b9; /* Subrayado elegante */
+  padding-bottom: 10px;
 }
 
 .nosotros-container h2 {
   font-size: 2em;
-  color: #0e0101;
+  color: #34495e; /* Azul más suave */
   margin-top: 30px;
   margin-bottom: 20px;
   font-weight: 600;
@@ -28,7 +30,7 @@
 /* Paragraph Styling */
 .nosotros-container p {
   font-size: 1.1em;
-  color: #666;
+  color: #555; /* Gris oscuro para legibilidad */
   line-height: 1.8;
   margin-bottom: 20px;
   text-align: justify;
@@ -41,10 +43,12 @@
 
 /* Link Styling */
 .nosotros-container a {
-  color: #007bff;
+  color: #3498db; /* Azul suave */
   text-decoration: none;
+  font-weight: bold;
 }
 
 .nosotros-container a:hover {
+  color: #2980b9; /* Azul más intenso en hover */
   text-decoration: underline;
 }

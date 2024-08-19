@@ -6,29 +6,30 @@
     padding: 20px;
     margin: 20px auto;
     max-width: 800px;
-    border: 1px solid #cccccc; /* Gris suave */
+    border: 1px solid #7f8c8d; /* Gris suave */
     border-radius: 10px;
-    background-color: #f4f4f4; /* Gris claro */
+    background-color: #ecf0f1; /* Gris muy claro */
 }
 
 .filter-container h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
-    color: #1a1a1a; /* Tono más oscuro */
+    color: #34495e; /* Azul grisáceo */
 }
 
 .filter-container label {
     font-weight: bold;
     font-size: 1em;
     margin-bottom: 5px;
+    color: #16a085; /* Verde azulado */
 }
 
 .filter-container select {
     padding: 10px;
     font-size: 1em;
-    border: 1px solid #b3b3b3; /* Gris oscuro */
+    border: 1px solid #16a085; /* Verde azulado */
     border-radius: 5px;
-    background-color: #f8f8f8; /* Gris muy claro */
+    background-color: #bdc3c7; /* Gris claro */
     width: 100%;
     max-width: 300px;
 }
@@ -37,7 +38,7 @@
     padding: 12px 24px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #5e2293; /* Azul serio */
+    background-color: #2980b9; /* Azul sereno */
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -46,7 +47,7 @@
 }
 
 .filter-container button:hover {
-    background-color: #340d4c; /* Azul más oscuro */
+    background-color: #2c3e50; /* Azul oscuro */
 }
 
 .agencies-list {
@@ -54,15 +55,15 @@
     max-width: 800px;
     margin-top: 20px;
     padding: 20px;
-    border: 1px solid #0a0101; /* Gris oscuro */
+    border: 1px solid #7f8c8d; /* Gris suave */
     border-radius: 10px;
-    background-color: #ffffff; /* Blanco */
+    background-color: #f4f6f7; /* Gris claro */
 }
 
 .agencies-list h3 {
     font-size: 1.4em;
     margin-bottom: 20px;
-    color: #1a1a1a; /* Tono más oscuro */
+    color: #16a085; /* Verde azulado */
 }
 
 .agencies-list ul {
@@ -75,25 +76,25 @@
 
 .agencies-list li {
     padding: 15px;
-    border: 1px solid #000000; /* Gris neutro */
+    border: 1px solid #2980b9; /* Azul sereno */
     border-radius: 8px;
-    background-color: #f0f0f0; /* Fondo más neutro */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    background-color: #ecf0f1; /* Fondo neutro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
 }
 
 .agencies-list h4 {
     font-size: 1.2em;
     margin: 0 0 10px;
-    color: #1a1a1a; /* Tono más oscuro */
+    color: #2c3e50; /* Azul oscuro */
 }
 
 .agencies-list p {
     margin: 5px 0;
-    color: #100f0f;
+    color: #7f8c8d; /* Gris suave */
 }
 
 .agencies-list a {
-    color: #0b192b;
+    color: #c0392b; /* Rojo profundo */
     text-decoration: none;
 }
 

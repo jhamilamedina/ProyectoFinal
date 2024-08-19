@@ -1,8 +1,9 @@
 .footer {
-  background-color: #343a40;
-  color: #f8f9fa;
-  padding: 60px 0;
+  background-color: #343a40; /* Color de fondo oscuro */
+  color: #f8f9fa; /* Color de texto claro */
+  padding: 60px 0; /* Espaciado amplio */
   font-family: 'Helvetica Neue', Arial, sans-serif;
+  border-top: 1px solid #444; /* Borde superior sutil */
 }
 
 .footer__container {
@@ -18,13 +19,26 @@
   flex: 1;
   margin-right: 20px;
   margin-bottom: 30px;
+  position: relative; /* Para posicionar el borde */
 }
 
 .footer__col h4 {
   margin-bottom: 20px;
   font-size: 20px;
   font-weight: 600;
-  color: #e9ecef;
+  color: #e9ecef; /* Color del título */
+  position: relative;
+}
+
+.footer__col h4::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #007bff; /* Color de acento */
+  position: absolute;
+  bottom: -10px;
+  left: 0;
 }
 
 .footer__col p {
@@ -41,11 +55,12 @@
   color: #e9ecef;
   font-size: 24px;
   margin-right: 15px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease; /* Transición suave */
 }
 
 .footer__socials a:hover {
-  color: #007bff;
+  color: #007bff; /* Color de acento en hover */
+  transform: translateY(-2px); /* Efecto sutil de elevación */
 }
 
 .footer__col a {
@@ -58,29 +73,30 @@
 }
 
 .footer__col a:hover {
-  color: #007bff;
+  color: #007bff; /* Color de acento en hover */
 }
 
 .footer__bar {
   text-align: center;
   padding: 20px 0;
-  background-color: #23272b;
+  background-color: #23272b; /* Color de fondo más oscuro */
   font-size: 14px;
   color: #e9ecef;
 }
 
 .footer__bar p {
   margin: 0;
+  font-style: italic; /* Cursiva para un toque elegante */
 }
 
 @media (max-width: 768px) {
   .footer__container {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .footer__col {
-      margin-right: 0;
-      margin-bottom: 30px;
+    margin-right: 0;
+    margin-bottom: 30px;
   }
 }

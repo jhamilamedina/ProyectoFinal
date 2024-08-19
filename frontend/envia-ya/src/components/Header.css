@@ -1,64 +1,96 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #4B0082; /* Cambia el color según tus necesidades */
-  }
-  
-  .logo-slogan {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo {
-    width: 50px; /* Ajusta el tamaño del logo según sea necesario */
-    margin-right: 10px;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav-links li {
-    margin: 0 15px;
-  }
-  
-  .nav-links a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .user-section {
-    position: relative;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .user-dropdown {
-    position: absolute;
-    right: 0;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(27, 26, 26, 0.909);
-    margin-top: 10px;
-    width: 150px;
-  }
-  
-  .dropdown-item {
-    padding: 10px;
-    color: #4B0082;
-    text-align: left;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #eee;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px; /* Mayor padding para un aspecto más espacioso */
+  background-color: #2a1a6b; /* Azul más oscuro y sofisticado */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+  border-bottom: 2px solid #1c1e2b; /* Línea de separación más destacada */
+}
+
+.logo-slogan {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  width: 100px; /* Tamaño del logo ajustado */
+  height: 100px; /* Hacer el logo cuadrado */
+  border-radius: 30%; /* Bordes redondeados en forma de círculo */
+  margin-right: 2px; /* Espacio entre el logo y el eslogan */
+  border: 2px solid #afd116; /* Borde blanco alrededor del logo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil alrededor del logo */
+  object-fit: cover; /* Ajustar la imagen dentro del contenedor */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 20px; /* Espaciado más amplio entre los enlaces */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e0e0e0; /* Color blanco más suave */
+  font-weight: 600; /* Peso de fuente más destacado */
+  font-size: 16px; /* Tamaño de fuente ajustado */
+  transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves para color y escala */
+}
+
+.nav-links a:hover {
+  color: #1e90ff; /* Azul brillante en el estado hover */
+  transform: translateY(-2px); /* Efecto sutil de elevación en hover */
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el ícono y el texto */
+  color: #ecf0f1; /* Color blanco suave */
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 8px; /* Bordes más redondeados */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+  margin-top: 15px;
+  width: 200px; /* Ancho del dropdown más amplio */
+  z-index: 1000; /* Asegura que el dropdown esté encima de otros elementos */
+  border: 1px solid #ddd; /* Borde sutil para el dropdown */
+}
+
+.dropdown-item {
+  padding: 14px 20px; /* Mayor padding para un área de clic más cómoda */
+  color: #333; /* Color de texto más oscuro para un buen contraste */
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px; /* Tamaño de fuente más grande para mejor legibilidad */
+  transition: background-color 0.3s ease, padding-left 0.3s ease; /* Transiciones suaves */
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0; /* Fondo más claro en hover */
+  padding-left: 24px; /* Efecto sutil de desplazamiento a la izquierda */
+}
+.header h1 {
+  font-size:200%; /* Tamaño de fuente mayor */
+  color: #ffffff; /* Color blanco para contraste */
+  background-color: #321d87; /* Fondo de color más oscuro detrás del texto */
+  padding: 10px 20px; /* Espaciado interno para el texto */
+  border-radius: 10px; /* Bordes redondeados en el h1 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mayor legibilidad */
+  border: 2px solid #0e021e; /* Borde blanco alrededor del texto */
+}
+.logo-slogan h1 {
+  margin: 3; 
+}

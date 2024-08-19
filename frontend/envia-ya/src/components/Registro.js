@@ -39,7 +39,7 @@ const Registro = () => {
   };
 
   return (
-    <div>
+    <div className="registro-container"> {/* Aplicar la clase aquí */}
       <h2>Crear Cuenta</h2>
       <form onSubmit={handleSubmit}>
         <div>
