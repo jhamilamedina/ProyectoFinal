@@ -85,8 +85,48 @@ const Filter = ({ onSearch }) => {
                     Origen (Lima Metropolitana):
                     <select value={origin} onChange={(e) => setOrigin(e.target.value)}>
                         <option value="">Seleccione un distrito</option>
+                        <option value="Cercado de Lima">Cercado de Lima</option>
+                        <option value="Ancón">Ancón</option>
+                        <option value="Ate">Ate</option>
+                        <option value="Barranco">Barranco</option>
+                        <option value="Breña">Breña</option>
+                        <option value="Carabayllo">Carabayllo</option>
+                        <option value="Chaclacayo">Chaclacayo</option>
+                        <option value="Chorrillos">Chorrillos</option>
+                        <option value="Cieneguilla">Cieneguilla</option>
+                        <option value="Comas">Comas</option>
+                        <option value="El Agustino">El Agustino</option>
+                        <option value="Huaycán">Huaycán</option>
+                        <option value="Independencia">Independencia</option>
+                        <option value="Jesús María">Jesús María</option>
+                        <option value="La Molina">La Molina</option>
+                        <option value="La Victoria">La Victoria</option>
+                        <option value="Lince">Lince</option>
+                        <option value="Los Olivos">Los Olivos</option>
+                        <option value="Lurigancho">Lurigancho</option>
+                        <option value="Lurín">Lurín</option>
+                        <option value="Magdalena del Mar">Magdalena del Mar</option>
                         <option value="Miraflores">Miraflores</option>
-                        <option value="San Isidro">San Isidro</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
                     </select>
                 </label>
             </div>
@@ -94,7 +134,7 @@ const Filter = ({ onSearch }) => {
                 <label>
                     Departamento:
                     <select value={department} onChange={(e) => setDepartment(e.target.value)}>
-                        <option value="">Seleccione un departamento</option>
+                        <option value="">Seleccione un departamento*</option>
                         {departments.map((dept) => (
                             <option key={dept.id} value={dept.id}>{dept.nombre}</option>
                         ))}
@@ -105,7 +145,7 @@ const Filter = ({ onSearch }) => {
                 <label>
                     Provincia:
                     <select value={province} onChange={(e) => setProvince(e.target.value)} disabled={!department}>
-                        <option value="">Seleccione una provincia</option>
+                        <option value="">Seleccione una provincia*</option>
                         {provinces.map((prov) => (
                             <option key={prov.id} value={prov.id}>{prov.nombre}</option>
                         ))}
@@ -116,7 +156,7 @@ const Filter = ({ onSearch }) => {
                 <label>
                     Distrito:
                     <select value={district} onChange={(e) => setDistrict(e.target.value)} disabled={!province}>
-                        <option value="">|Seleccione un distrito</option>
+                        <option value="">Seleccione un distrito*</option>
                         {districts.map((dist) => (
                             <option key={dist.id} value={dist.id}>{dist.nombre}</option>
                         ))}

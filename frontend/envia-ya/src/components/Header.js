@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 import './Header.css';
 import logo from '../assets/logo.jpeg';
 
-const Header = ({ userName, userEmail, onLogout }) => {
+const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const { user, logout } = useContext(AuthContext); // Obtén el usuario del contexto
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -16,19 +18,7 @@ const Header = ({ userName, userEmail, onLogout }) => {
   };
 
   const handleLogout = () => {
-    // Limpiar datos del perfil en localStorage
-    localStorage.removeItem('nombre');
-    localStorage.removeItem('usuario');
-    localStorage.removeItem('correo');
-    localStorage.removeItem('foto');
-
-    // Llamar la función de logout pasada como prop
-    if (onLogout) {
-      onLogout();
-    }
-
-    // Redirigir a la página de inicio
-    navigate('/'); // Cambia la ruta según tus necesidades
+    logout(); // Llama la función de logout del contexto
   };
 
   return (
@@ -43,12 +33,12 @@ const Header = ({ userName, userEmail, onLogout }) => {
           <li><Link to="/destinos">Destinos</Link></li>
           <li><Link to="/empresas">Empresas</Link></li>
           <li><Link to="/nosotros">Nosotros</Link></li>
-          <li><Link to="/Registro">Inicio / Registro</Link></li>
+          <li><Link to="/registro">Inicio / Registro</Link></li>
         </ul>
       </nav>
-      {userName && (
+      {user && (
         <div className="user-section" onClick={toggleDropdown}>
-          Hola, {userName}
+          Hola, {user.nombre} {/* Muestra el nombre del usuario */}
           {showDropdown && (
             <div className="user-dropdown">
               <div className="dropdown-item" onClick={handleViewProfile}>Ver Perfil</div>

@@ -3,13 +3,14 @@
 import React from 'react';
 import './Empresas.css';
 
-const EmpresaCard = ({ id, nombre, direccion, descripcion, sitio_web }) => {
+const EmpresaCard = ({ id, logo, nombre, direccion, descripcion, sitio_web }) => {
   return (
     <div className="host-card">
       <div className="host-info">
         <div className="host-details">
+        <img src={`http://localhost:8000/${logo}`} alt={`${nombre} logo`} />
           <h2><a href={`http://localhost:3000/empresas/${id}/`}>{nombre}</a></h2>
-          <p>{direccion}</p>
+          <p><strong>Oficina Principal: </strong>{direccion}</p>
         </div>
       </div>
       <p className="host-description">

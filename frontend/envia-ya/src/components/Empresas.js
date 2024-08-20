@@ -24,6 +24,7 @@ const Empresas = () => {
           <EmpresaCard
             key={empresa.id}
             id={empresa.id}
+            logo={empresa.logo}
             nombre={empresa.nombre}
             direccion={empresa.sede_principal}
             descripcion={empresa.descripcion}
