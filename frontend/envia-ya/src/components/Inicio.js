@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +9,6 @@ const Login = () => {
   });
 
   const [mensaje, setMensaje] = useState('');
-  const { login } = useContext(AuthContext); // Accede al contexto de autenticación
   const navigate = useNavigate(); // Para redirigir al usuario
 
   const handleChange = (e) => {
@@ -25,11 +23,11 @@ const Login = () => {
 
     axios.post('http://localhost:8000/api/login/', formData)
       .then(response => {
-        // Llama a login del AuthContext y pasa los datos del usuario
-        login({
+        // Guardar los datos del usuario en localStorage
+        localStorage.setItem('user', JSON.stringify({
           nombre: response.data.nombre,
           correo: response.data.correo,
-        });
+        }));
         navigate('/');
       })
       .catch(error => {

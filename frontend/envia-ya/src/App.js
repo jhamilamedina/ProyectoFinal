@@ -14,7 +14,7 @@ import Privacidad from './components/Privacidad';
 import Perfil from './components/Perfil';
 import EmpresaDetail from './components/EmpresaDetail';
 import Registro from './components/Registro';
-import { AuthProvider } from './context/AuthContext';
+// import { AuthProvider } from './context/AuthContext';
 
 function App() {
   const [userName, setUserName] = useState(localStorage.getItem('nombre') || '');
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Router>
-      <AuthProvider>
+     
       <Header userName={userName} onLogout={handleLogout} />
       <main>
         <Routes>
@@ -49,7 +49,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
-      </AuthProvider>
+      
     </Router>
   );
 }

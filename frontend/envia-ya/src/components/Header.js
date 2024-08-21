@@ -1,12 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
 import './Header.css';
 import logo from '../assets/logo.jpeg';
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const { user, logout } = useContext(AuthContext); // Obtén el usuario del contexto
+
+  // Obtenemos el usuario desde localStorage
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -18,7 +20,9 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    logout(); // Llama la función de logout del contexto
+    // Borrar los datos del usuario de localStorage y recargar la página
+    localStorage.removeItem('user');
+    window.location.reload();
   };
 
   return (
@@ -38,7 +42,7 @@ const Header = () => {
       </nav>
       {user && (
         <div className="user-section" onClick={toggleDropdown}>
-          Hola, {user.nombre} {/* Muestra el nombre del usuario */}
+          Hola, {user.nombre}
           {showDropdown && (
             <div className="user-dropdown">
               <div className="dropdown-item" onClick={handleViewProfile}>Ver Perfil</div>

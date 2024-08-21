@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import DetallesAgencias from './DetallesAgencias';
+// import EmpresaDetail from './EmpresaDetail';
 // import './DetallesAgencias.css';
 import olvaImage from '../assets/olva1.png'
 
