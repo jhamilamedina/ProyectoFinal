@@ -58,7 +58,7 @@ class ValoracionesAPIView(APIView):
 
     def get(self, request, id=None, format=None):
         if id:
-            valoracion = get_object_or_404(Valoraciones,id=id)
+            valoracion = get_object_or_404(Valoraciones, empresa=id)
             serializer = ValoracionSerializers(valoracion)
         else:
             valoraciones = Valoraciones.objects.all()
@@ -67,25 +67,52 @@ class ValoracionesAPIView(APIView):
 
     def post(self, request, format=None):
         empresa_id = request.data.get('empresa')
+        usuario_id = request.user.id  # Obtén el ID del usuario autenticado
+
         try:
             empresa = Empresas.objects.get(id=empresa_id)
         except Empresas.DoesNotExist:
             return Response({'detail': 'Empresa no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
+        valoracion, created = Valoraciones.objects.get_or_create(empresa=empresa)
         
-        if Valoraciones.objects.filter(empresa=empresa).exists():
-            return Response({'detail': 'Ya existe una valoración para esta empresa.'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        serializer = ValoracionSerializers(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'Valoración creada con éxito.', 'data': serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+        if usuario_id in valoracion.usuarios:
+            return Response({'detail': 'Ya has valorado esta empresa.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not created:
+            # Si ya existe una valoración, actualízala
+            valoracion.puntualidad += request.data.get('puntualidad', 0)
+            valoracion.seguridad += request.data.get('seguridad', 0)
+            valoracion.economica += request.data.get('economica', 0)
+            valoracion.amabilidad += request.data.get('amabilidad', 0)
+            valoracion.caro += request.data.get('caro', 0)
+            valoracion.inseguro += request.data.get('inseguro', 0)
+            valoracion.impuntual += request.data.get('impuntual', 0)
+            valoracion.poco_amables += request.data.get('poco_amables', 0)
+            valoracion.usuarios.append(usuario_id)  # Añade el ID del usuario a la lista
+            valoracion.save()
+        else:
+            # Si es una nueva valoración, guarda el usuario en la lista
+            valoracion.usuarios = [usuario_id]
+            valoracion.puntualidad = request.data.get('puntualidad', 0)
+            valoracion.seguridad = request.data.get('seguridad', 0)
+            valoracion.economica = request.data.get('economica', 0)
+            valoracion.amabilidad = request.data.get('amabilidad', 0)
+            valoracion.caro = request.data.get('caro', 0)
+            valoracion.inseguro = request.data.get('inseguro', 0)
+            valoracion.impuntual = request.data.get('impuntual', 0)
+            valoracion.poco_amables = request.data.get('poco_amables', 0)
+            valoracion.save()
+
+        serializer = ValoracionSerializers(valoracion)
+        return Response({'message': 'Valoración creada/actualizada con éxito.', 'data': serializer.data}, status=status.HTTP_201_CREATED)
+
     def put(self, request, id=None, format=None):
-        try:
-            valoracion = Valoraciones.objects.get(id=id)
-        except Valoraciones.DoesNotExist:
-            return Response({'detail': 'Valoración no encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+        valoracion = get_object_or_404(Valoraciones, empresa=id)
+        usuario_id = request.user.id  # Obtén el ID del usuario autenticado
+
+        if usuario_id not in valoracion.usuarios:
+            return Response({'detail': 'No has valorado esta empresa.'}, status=status.HTTP_400_BAD_REQUEST)
         
         data = request.data
         valoracion.puntualidad += data.get('puntualidad', 0)
@@ -98,13 +125,24 @@ class ValoracionesAPIView(APIView):
         valoracion.poco_amables += data.get('poco_amables', 0)
         valoracion.save()
 
-        serializer = ValoracionDetailSerializer(valoracion)
+        serializer = ValoracionSerializers(valoracion)
         return Response({'message': 'Valoración actualizada con éxito.', 'data': serializer.data}, status=status.HTTP_200_OK)
 
-    def delete(self, request, id, format=None):
-        valoracion = get_object_or_404(Valoraciones, id=id)
-        valoracion.delete()
-        return Response({'message': 'Datos eliminados con  exito'}, status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, id=None, format=None):
+        valoracion = get_object_or_404(Valoraciones, empresa=id)
+        usuario_id = request.user.id  # Obtén el ID del usuario autenticado
+
+        if usuario_id not in valoracion.usuarios:
+            return Response({'detail': 'No has valorado esta empresa.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        valoracion.usuarios.remove(usuario_id)  # Elimina el ID del usuario de la lista
+        valoracion.save()
+        
+        # Si la lista de usuarios está vacía, elimina la valoración
+        if not valoracion.usuarios:
+            valoracion.delete()
+        
+        return Response({'message': 'Valoración eliminada con éxito.'}, status=status.HTTP_204_NO_CONTENT)
 
 class EstrellasAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)

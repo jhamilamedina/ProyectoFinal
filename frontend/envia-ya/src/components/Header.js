@@ -43,7 +43,7 @@ const Header = ({ userName, userEmail, onLogout }) => {
           <li><Link to="/destinos">Destinos</Link></li>
           <li><Link to="/empresas">Empresas</Link></li>
           <li><Link to="/nosotros">Nosotros</Link></li>
-          <li><Link to="/Registro">Inicio / Registro</Link></li>
+          <li><Link to="/Registro">Registro</Link></li>
         </ul>
       </nav>
       {userName && (

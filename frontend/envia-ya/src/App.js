@@ -14,6 +14,7 @@ import Privacidad from './components/Privacidad';
 import Perfil from './components/Perfil';
 import EmpresaDetail from './components/EmpresaDetail';
 import Registro from './components/Registro';
+import ProtectedRoute from './components/ProtectedRoute';
 // import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -39,14 +40,24 @@ function App() {
           <Route path="/destinos" element={<Destinos />} />
           <Route path="/empresas" element={<Empresas />} />
           <Route path="/empresas/:id" element={<EmpresaDetail />} />
-          <Route path="/evaluacion" element={<Evaluacion />} />
+          <Route path="/evaluacion" element={
+            <ProtectedRoute user={user}>
+              <Evaluacion /> 
+            </ProtectedRoute>
+            }    
+          />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/inicio" element={<Inicio setUserId={setUserId} setUserName={setUserName} setUserEmail={setUserEmail} />} />
           <Route path="/ayuda" element={<Ayuda />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/privacidad" element={<Privacidad />} />
-          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/perfil" element={ 
+            <ProtectedRoute user={user}>
+              <Perfil />
+            </ProtectedRoute>
+            } 
+          />
         </Routes>
       </main>
       <Footer />

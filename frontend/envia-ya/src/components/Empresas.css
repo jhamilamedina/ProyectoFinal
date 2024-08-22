@@ -1,60 +1,81 @@
 .empresas-container {
   padding: 40px;
-  background-color: #f5f5f5; /* Color de fondo suave */
+  background-color: #f0f4f8; /* Fondo fresco y moderno */
 }
 
+/* Estilos para el título */
 .empresas-container h2 {
-  text-align: center; /* Centrar el título */
-  color: #333; /* Color oscuro para mejor contraste */
-  font-size: 2.5em; /* Tamaño grande del título */
-  font-weight: 700; /* Peso fuerte para el título */
-  margin-bottom: 40px; /* Espacio debajo del título */
-
-  padding-bottom: 5px; /* Espacio adicional debajo de la línea */
+  text-align: center;
+  color: #003366; /* Azul oscuro sofisticado */
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
 }
 
+/* Estilos para la lista de empresas */
 .empresas-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Ajuste flexible de columnas */
   gap: 30px; /* Espacio entre las tarjetas */
   padding: 20px;
 }
 
-.empresa-card {
-  background-color: #fff; /* Fondo blanco para las tarjetas */
-  border: 1px solid #191818; /* Borde sutil */
-  border-radius: 8px; /* Bordes redondeados */
+/* Estilos para cada tarjeta de empresa */
+.host-card {
+  background-color: #c6cabf; /* Fondo blanco para una apariencia limpia */
+  border: 2px solid #d3e5d0; /* Borde azul brillante */
+  border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.empresa-card:hover {
-  transform: translateY(-5px); /* Levantar la tarjeta al pasar el mouse */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el mouse */
+/* Ajuste de tamaño y proporción de las imágenes */
+.host-card img {
+  max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  margin-bottom: 20px; /* Espacio debajo de la imagen */
+  object-fit: contain; /* Asegura que la imagen se ajuste bien al cuadro */
+  border-radius: 35px;
 }
 
-.empresa-card h3 {
+/* Estilos para el nombre de la empresa */
+.host-card h2 {
   margin: 0;
-  font-size: 1.5em; /* Tamaño grande del nombre de la empresa */
-  color: #010f1d; /* Color azul para el nombre */
-  margin-bottom: 10px; /* Espacio debajo del nombre */
+  font-size: 1.5em;
+  color: hsl(234, 71%, 19%); /* Azul brillante para el nombre */
+  margin-bottom: 10px;
 }
 
-.empresa-card p {
-  color: #0b0a0a; /* Color gris para el texto */
-  margin: 8px 0; /* Espacio entre párrafos */
-  font-size: 1em; /* Tamaño de fuente estándar */
-  line-height: 1.5; /* Espaciado de línea adecuado */
+/* Estilos para la dirección y descripción */
+.host-card p {
+  color: #333333; /* Gris oscuro para el texto */
+  margin: 8px 0;
+  font-size: 1em;
+  text-align: left;
 }
 
-.empresa-card a {
-  color: #007bff; /* Color azul para los enlaces */
-  text-decoration: none; /* Quitar subrayado */
-  font-weight: 500; /* Peso moderado para los enlaces */
+/* Estilos para los enlaces */
+.host-card a {
+  color: #2a1281; /* Azul brillante para los enlaces */
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 2px solid #2a1281; /* Línea debajo del enlace */
+  padding-bottom: 2px; /* Espacio debajo del enlace */
 }
 
-.empresa-card a:hover {
-  text-decoration: underline; /* Subrayar al pasar el mouse */
-  color: #01080e; /* Azul más oscuro al pasar el mouse */
+.host-card a:hover {
+  text-decoration: underline;
+  color: #0056b3; /* Azul más oscuro para el hover */
+}
+
+/* Estilo para el hover de la tarjeta */
+.host-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
 }

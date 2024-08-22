@@ -1,0 +1,108 @@
+.empresa-detail-container {
+  padding: 40px;
+  background-color: #f9f9f9; /* Fondo suave */
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Estilo para el título principal */
+.empresa-detail-container h1 {
+  text-align: center;
+  color: #2c3e50; /* Color elegante para el título */
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+/* Estilo para la imagen */
+.empresa-detail-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para la información de la empresa */
+.empresa-detail-container p {
+  font-size: 1.2em;
+  color: #34495e;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+/* Estilo para los enlaces */
+.empresa-detail-container a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.empresa-detail-container a:hover {
+  text-decoration: underline;
+  color: #2980b9;
+}
+
+/* Estilo para los subtítulos */
+.empresa-detail-container h2 {
+  color: #2980b9;
+  font-size: 2em;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #2980b9;
+  padding-bottom: 10px;
+}
+
+/* Estilo para las secciones de agencias y valoraciones */
+.empresa-detail-container div {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos específicos para cada agencia */
+.empresa-detail-container .agencia-item {
+  margin-bottom: 20px;
+}
+
+.empresa-detail-container .agencia-item p {
+  margin: 5px 0;
+}
+
+/* Estilos para comentarios */
+.empresa-detail-container .comentarios-item {
+  background-color: #ecf0f1;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.expanded {
+  display: block;
+  transition: max-height 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+/* Estilos para el texto colapsado */
+.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Muestra solo 4 líneas de texto */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* Estilo para el enlace de ver más */
+.show-more-link {
+  color: #3498db;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.show-more-link:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}

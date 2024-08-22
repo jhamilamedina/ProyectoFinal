@@ -6,7 +6,9 @@ import './EmpresaDetail.css';
 const EmpresaDetail = () => {
     const { id } = useParams();
     const [empresa, setEmpresa] = useState(null);
+    const [comentario, setComentario] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/empresas/${id}/`)
@@ -19,6 +21,34 @@ const EmpresaDetail = () => {
     }, [id]);
 
     if (!empresa) return <div>--- Loading ---</div>;
+
+    const handleComentarioChange = (e) => {
+        setComentario(e.target.value);
+    };
+
+    const handleComentarioSubmit = (e) => {
+        e.preventDefault();
+
+        if (!user) return; // Verifica si el usuario está autenticado
+
+        const nuevoComentario = {
+            empresa: id,
+            usuario: user.id, // Usa el ID del usuario autenticado
+            comentario: comentario,
+        };
+
+        axios.post('http://localhost:8000/api/comentarios/', nuevoComentario)
+            .then(response => {
+                setEmpresa((prevEmpresa) => ({
+                    ...prevEmpresa,
+                    Comentarios: [...prevEmpresa.Comentarios, response.data.data.comentario]
+                }));
+                setComentario('');
+            })
+            .catch(error => {
+                console.error('Error al enviar el comentario', error);
+            });
+    };
 
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);
@@ -52,12 +82,6 @@ const EmpresaDetail = () => {
                 </div>
             ))}
 
-            <h2>Valoraciones</h2>
-            <div>
-                <p>Puntualidad: {empresa.Valoraciones[0].puntualidad}</p>
-                <p>Seguridad: {empresa.Valoraciones[0].seguridad}</p>
-            </div>
-
             <h2>Estrellas</h2>
             <div>
                 <p>1 estrella: {empresa.Estrellas[0].estrella_1}</p>
@@ -68,11 +92,26 @@ const EmpresaDetail = () => {
             {empresa.Comentarios.length > 0 ? (
                 empresa.Comentarios.map((comentario, index) => (
                     <div key={index} className="comentarios-item">
-                        <p>{comentario}</p>
+                        <p>{comentario.comentario}</p>
                     </div>
                 ))
             ) : (
                 <p>No hay comentarios.</p>
+            )}
+
+            {user && (
+                <div className="comentario-form">
+                    <h3>Deja tu comentario</h3>
+                    <form onSubmit={handleComentarioSubmit}>
+                        <textarea
+                            value={comentario}
+                            onChange={handleComentarioChange}
+                            placeholder="Escribe tu comentario aquí..."
+                            required
+                        />
+                        <button type="submit">Enviar Comentario</button>
+                    </form>
+                </div>
             )}
         </div>
     );
