@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Inicio = ({ setUserId, setUserName, setUserEmail }) => {
   const [formData, setFormData] = useState({
     email: '',
     contrasenia: '',
   });
-
   const [mensaje, setMensaje] = useState('');
-  const navigate = useNavigate(); // Para redirigir al usuario
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -23,12 +22,16 @@ const Login = () => {
 
     axios.post('http://localhost:8000/api/login/', formData)
       .then(response => {
-        // Guardar los datos del usuario en localStorage
+        const user = response.data;
         localStorage.setItem('user', JSON.stringify({
-          nombre: response.data.nombre,
-          correo: response.data.correo,
+          id: user.id,
+          nombre: user.nombre,
+          email: user.email,
         }));
-        navigate('/');
+        setUserId(user.id);  // Actualiza el estado con el ID del usuario
+        setUserName(user.nombre);
+        setUserEmail(user.email);
+        navigate('/'); // Redirige a la página principal después de iniciar sesión
       })
       .catch(error => {
         if (error.response) {
@@ -73,4 +76,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Inicio;

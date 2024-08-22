@@ -1,147 +1,89 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Perfil.css';
 
-function Perfil({ userName, setUserName, setUserEmail, setFotoPerfil }) {
+const Perfil = () => {
+  const [usuario, setUsuario] = useState(null);
+  const [mensaje, setMensaje] = useState('');
   const [nombre, setNombre] = useState('');
-  const [usuario, setUsuario] = useState('');
-  const [correo, setCorreo] = useState('');
-  const [foto, setFoto] = useState('/ruta/imagen/default.jpg');
-  const [isEditing, setIsEditing] = useState(false);
+  const [email, setEmail] = useState('');
+  const [foto, setFoto] = useState('');
   const navigate = useNavigate();
+  const userId = JSON.parse(localStorage.getItem('user'))?.id; // Obtén el ID del usuario desde localStorage
 
   useEffect(() => {
-    if (userName) {
-      setNombre(userName);
-      const generatedUsername = `@${userName.split(' ').join('').toLowerCase()}`;
-      setUsuario(generatedUsername);
-      const generatedEmail = `${userName.split(' ').join('').toLowerCase()}@correo.com`;
-      setCorreo(generatedEmail);
+    if (userId) {
+      axios.get(`http://localhost:8000/api/usuarios/${userId}/`)
+        .then(response => {
+          setUsuario(response.data.Usuario);
+        })
+        .catch(error => {
+          setMensaje('Error al cargar el perfil');
+          console.error('Error al cargar el perfil:', error);
+        });
+    } else {
+      setMensaje('ID de usuario no proporcionado');
     }
-  }, [userName]);
+  }, [userId]);
 
-  const handlePhotoUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
+  const handleFotoChange = (event) => {
+    setFoto(event.target.files[0]);
+  };
 
-    reader.onloadend = () => {
-      setFoto(reader.result);
-    };
+  const handleUpdate = () => {
+    if (userId) {
+      const formData = new FormData();
+      formData.append('nombre', nombre);
+      formData.append('email', email);
+      if (foto) formData.append('foto_usuario', foto);
 
-    if (file) {
-      reader.readAsDataURL(file);
+      axios.put(`http://localhost:8000/api/usuarios/${userId}/`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(response => {
+        setUsuario(response.data.data);
+        setMensaje('Perfil actualizado con éxito');
+      })
+      .catch(error => {
+        setMensaje('Error al actualizar el perfil');
+        console.error('Error al actualizar el perfil:', error);
+      });
     }
-  };
-
-  const handleButtonClick = () => {
-    navigate('/home');
-  };
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleSaveClick = () => {
-    setIsEditing(false);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'nombre') {
-      setNombre(value);
-    } else if (name === 'usuario') {
-      setUsuario(value);
-    } else if (name === 'correo') {
-      setCorreo(value);
-    }
-  };
-
-  const handleDeleteAccount = () => {
-    navigate('/eliminar-cuenta', {
-      state: { nombre, usuario },
-    });
   };
 
   return (
-    <div className="perfil-container">
-      <h1 className="perfil-header">Bienvenido {nombre.split(' ')[0]}</h1>
-      <div className="perfil-content">
-        <img src={foto} alt="Foto de perfil" className="perfil-foto" />
-        <div className="perfil-info">
-          <p>Usuario: {usuario}</p>
-          <input type="file" accept="image/*" onChange={handlePhotoUpload} />
+    <div>
+      <h2>Perfil de Usuario</h2>
+      {usuario ? (
+        <div>
+          <p><strong>Nombre:</strong> {usuario.nombre}</p>
+          <p><strong>Email:</strong> {usuario.email}</p>
+          <img src={`http://localhost:8000/${usuario.foto_usuario}`} alt="Foto de perfil" style={{ width: '100px', height: '100px' }} />
+          <div>
+            <input 
+              type="text" 
+              value={nombre} 
+              onChange={(e) => setNombre(e.target.value)} 
+              placeholder="Nuevo nombre"
+            />
+            <input 
+              type="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              placeholder="Nuevo email"
+            />
+            <input type="file" onChange={handleFotoChange} />
+            <button onClick={handleUpdate}>Actualizar Perfil</button>
+          </div>
+          {mensaje && <p>{mensaje}</p>}
         </div>
-      </div>
-      <div className="perfil-enlaces">
-        <a href="/datos" className="perfil-enlace">Mis datos</a>
-        <p>
-          Nombre: 
-          {isEditing ? (
-            <input
-              type="text"
-              name="nombre"
-              value={nombre}
-              onChange={handleInputChange}
-            />
-          ) : (
-            <span>{nombre}</span>
-          )}
-          {isEditing ? (
-            <button onClick={handleSaveClick}>Guardar</button>
-          ) : (
-            <button onClick={handleEditClick} className="perfil-enlace-button">Modificar</button>
-          )}
-        </p>
-        <p>
-          Usuario: 
-          {isEditing ? (
-            <input
-              type="text"
-              name="usuario"
-              value={usuario}
-              onChange={handleInputChange}
-            />
-          ) : (
-            <span>{usuario}</span>
-          )}
-          {isEditing ? (
-            <button onClick={handleSaveClick}>Guardar</button>
-          ) : (
-            <button onClick={handleEditClick} className="perfil-enlace-button">Modificar</button>
-          )}
-        </p>
-        <p>
-          Correo: 
-          {isEditing ? (
-            <input
-              type="email"
-              name="correo"
-              value={correo}
-              onChange={handleInputChange}
-            />
-          ) : (
-            <span>{correo}</span>
-          )}
-          {isEditing ? (
-            <button onClick={handleSaveClick}>Guardar</button>
-          ) : (
-            <button onClick={handleEditClick} className="perfil-enlace-button">Modificar</button>
-          )}
-        </p>
-      </div>
-      <div className="eliminar-cuenta-container">
-        <button onClick={handleDeleteAccount} className="eliminar-cuenta-boton">
-          Eliminar mi cuenta
-        </button>
-      </div>
-      <div className="perfil-boton-container">
-        <h2>¡Quiero buscar empresas de envío!</h2>
-        <button onClick={handleButtonClick} className="perfil-boton">
-          INGRESA AQUÍ
-        </button>
-      </div>
+      ) : (
+        <p>{mensaje || 'Cargando...'}</p>
+      )}
     </div>
   );
-}
+};
 
 export default Perfil;

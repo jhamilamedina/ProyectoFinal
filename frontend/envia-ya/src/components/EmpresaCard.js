@@ -15,7 +15,7 @@ const EmpresaCard = ({ id, logo, nombre, direccion, descripcion, sitio_web }) =>
       </div>
       <p className="host-description">
         {descripcion}
-      </p>
+      </p>   
       <p className="external-info">
         <a href={sitio_web}>Ver sitio web</a>
       </p>

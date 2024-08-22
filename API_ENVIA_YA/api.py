@@ -207,6 +207,7 @@ class LoginAPIView(APIView):
         if user.contrasenia == password:
             return Response({
                 'message': 'Inicio de sesión exitoso',
+                'id': user.id,
                 'nombre': user.nombre
             }, status=status.HTTP_200_OK)
         else:

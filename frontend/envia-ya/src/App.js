@@ -17,19 +17,21 @@ import Registro from './components/Registro';
 // import { AuthProvider } from './context/AuthContext';
 
 function App() {
-  const [userName, setUserName] = useState(localStorage.getItem('nombre') || '');
-  const [userEmail, setUserEmail] = useState(localStorage.getItem('correo') || '');
+  const user = JSON.parse(localStorage.getItem('user')) || {};  
+  const [userId, setUserId] = useState(user.id || '');
+  const [userName, setUserName] = useState(user.nombre || '');
+  const [userEmail, setUserEmail] = useState(user.email || '');
+
 
   const handleLogout = () => {
-    localStorage.removeItem('nombre');
-    localStorage.removeItem('correo');
+    localStorage.removeItem('user');
     setUserName('');
     setUserEmail('');
+    setUserId('')
   };
 
   return (
     <Router>
-     
       <Header userName={userName} onLogout={handleLogout} />
       <main>
         <Routes>
@@ -40,12 +42,11 @@ function App() {
           <Route path="/evaluacion" element={<Evaluacion />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/registro" element={<Registro />} />
-          <Route path="/inicio" element={<Inicio setUserName={setUserName} setUserEmail={setUserEmail} />} />
+          <Route path="/inicio" element={<Inicio setUserId={setUserId} setUserName={setUserName} setUserEmail={setUserEmail} />} />
           <Route path="/ayuda" element={<Ayuda />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/privacidad" element={<Privacidad />} />
-          <Route path="/perfil" element={<Perfil userName={userName} userEmail={userEmail} />} />
-        
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </main>
       <Footer />

@@ -3,12 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import logo from '../assets/logo.jpeg';
 
-const Header = () => {
+const Header = ({ userName, userEmail, onLogout }) => {
   const [showDropdown, setShowDropdown] = useState(false);
-
-  // Obtenemos el usuario desde localStorage
-  const user = JSON.parse(localStorage.getItem('user'));
-
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -20,9 +16,19 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // Borrar los datos del usuario de localStorage y recargar la página
-    localStorage.removeItem('user');
-    window.location.reload();
+    // Limpiar datos del perfil en localStorage
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('correo');
+    localStorage.removeItem('foto');
+
+    // Llamar la función de logout pasada como prop
+    if (onLogout) {
+      onLogout();
+    }
+
+    // Redirigir a la página de inicio
+    navigate('/'); // Cambia la ruta según tus necesidades
   };
 
   return (
@@ -37,12 +43,12 @@ const Header = () => {
           <li><Link to="/destinos">Destinos</Link></li>
           <li><Link to="/empresas">Empresas</Link></li>
           <li><Link to="/nosotros">Nosotros</Link></li>
-          <li><Link to="/registro">Inicio / Registro</Link></li>
+          <li><Link to="/Registro">Inicio / Registro</Link></li>
         </ul>
       </nav>
-      {user && (
+      {userName && (
         <div className="user-section" onClick={toggleDropdown}>
-          Hola, {user.nombre}
+          Hola, {userName}
           {showDropdown && (
             <div className="user-dropdown">
               <div className="dropdown-item" onClick={handleViewProfile}>Ver Perfil</div>
