@@ -121,12 +121,27 @@ for nombre_dept in nombres_departamentos:
 datos_empresas = [
     {'logo': 'static/images/olva courier.png', 'nombre': 'Olva Courier', 'sede_principal': 'Avenida Argentina 4458, Callao, Perú', 'descripcion': """En OLVA, nos esforzamos por ofrecer un servicio de calidad que supere las expectativas de nuestros clientes. Trabajamos con actitudes positivas y vivimos nuestros valores en nuestro día a día.
 
-   """, 'sitio_web': 'https://www.olvacourier.com'},
+    Es una empresa peruana de mensajería y logística, reconocida por ofrecer servicios de envío de documentos, paquetes y mercancías a nivel nacional. Fundada en 1987, Olva Courier ha crecido para convertirse en una de las principales empresas de su sector en Perú, con una amplia red de agencias que cubre todo el país.
+
+    Servicios Ofrecidos
+    Envíos Nacionales: Olva Courier ofrece servicios de envío de documentos y paquetes a cualquier destino dentro del Perú, con opciones de entrega en agencia o a domicilio.
+    Envíos Internacionales: También proporciona servicios para envíos al extranjero, facilitando la logística de exportación e importación.
+    Olva Box: Un servicio especializado en compras internacionales que permite a los usuarios adquirir productos de tiendas en el extranjero y recibirlos en Perú.
+    Soluciones para Empresas: Ofrecen servicios personalizados para empresas, incluyendo la gestión de envíos masivos, distribución de productos y logística para comercio electrónico.
+    Seguimiento de Envíos: Los clientes pueden rastrear sus envíos en tiempo real a través de la plataforma en línea de Olva Courier.
+    Cobertura
+    Olva Courier cuenta con una red de más de 300 agencias en todo el país, lo que le permite llegar a las principales ciudades y a zonas rurales de difícil acceso. Además, su infraestructura incluye centros de distribución y una flota de vehículos que aseguran la entrega rápida y segura de los envíos.""", 'sitio_web': 'https://www.olvacourier.com'},
 
 
     {'logo': 'static/images/shalom.png', 'nombre': 'Shalom', 'sede_principal': 'Avenida México 1187,Cercado de Lima, Perú', 'descripcion': """Shalom Transportes y Encomiendas es una empresa peruana especializada en el envío de paquetes y mercancías a nivel nacional.
 
-    """, 'sitio_web': 'https://shalom.com.pe'},
+    Shalom nació en Lima, Perú, con la misión de proporcionar un servicio de transporte seguro, eficiente y accesible. Con el tiempo, la empresa ha crecido exponencialmente, ampliando su cobertura a lo largo y ancho del país, así como estableciendo alianzas estratégicas que le permiten operar en el ámbito internacional.
+
+    Servicios Ofrecidos
+    Envíos Nacionales: Paquetes y Documentos, Encomiendas Especiales.
+    Transporte de Carga Pesada: Transporte de maquinaria industrial, vehículos y equipos especializados.
+    Logística Integral para Empresas: Gestión de Inventarios, Distribución y Almacenamiento.
+    Servicios Internacionales: Envíos internacionales, gestión aduanera, y seguimiento en tiempo real.""", 'sitio_web': 'https://shalom.com.pe'},
 
 
     {'logo': 'static/images/dhl.png','nombre': 'DHL', 'sede_principal': 'Av. Inca Garcilaso de la Vega 1337, Cercado de Lima, Lima', 'descripcion': """DHL es una empresa global de logística y mensajería que opera en más de 220 países y territorios. Fundada en 1969 por Adrian Dalsey, Larry Hillblom y Robert Lynn, sus siglas derivan de los apellidos de los fundadores. DHL comenzó ofreciendo servicios de mensajería aérea, un concepto innovador que revolucionó la logística al permitir la entrega rápida de documentos a nivel internacional.
