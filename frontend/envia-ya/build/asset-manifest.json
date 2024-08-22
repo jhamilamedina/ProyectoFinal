@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.28209884.css",
+    "main.js": "/static/js/main.802f6c12.js",
+    "static/js/453.274ec0a1.chunk.js": "/static/js/453.274ec0a1.chunk.js",
+    "static/media/shalom.png": "/static/media/shalom.fc7dd27a235d83cbd90a.png",
+    "static/media/olva1.png": "/static/media/olva1.77ce2698e7ac64180aae.png",
+    "static/media/Urbano.jpg": "/static/media/Urbano.ff2973187f4ae6f8f988.jpg",
+    "static/media/DHL.jpg": "/static/media/DHL.23c0dd44bdfa3fe604e2.jpg",
+    "static/media/servientrega.png": "/static/media/servientrega.fa8611271095b5b72aa6.png",
+    "static/media/FedEx.jpeg": "/static/media/FedEx.0110f97a7bc859247c09.jpeg",
+    "static/media/Ups.jpg": "/static/media/Ups.f4e971177ef59d3478df.jpg",
+    "static/media/trasmar.jpg": "/static/media/trasmar.775a3fc1bedbab95742c.jpg",
+    "static/media/logo.jpeg": "/static/media/logo.3497e7ffa6889fd5d8a8.jpeg",
+    "index.html": "/index.html",
+    "main.28209884.css.map": "/static/css/main.28209884.css.map",
+    "main.802f6c12.js.map": "/static/js/main.802f6c12.js.map",
+    "453.274ec0a1.chunk.js.map": "/static/js/453.274ec0a1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28209884.css",
+    "static/js/main.802f6c12.js"
+  ]
+}
