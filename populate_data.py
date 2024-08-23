@@ -212,15 +212,15 @@ datos_empresas = [
 
 
     #Transporte Lucerito Vrae
-    {'logo': '', 'nombre': 'Transporte Lucerito Vrae', 'sede_principal': 'Jr. Sebastian Barranca Nro. 587, La Victoria, Lima, Perú', 'descripcion': '''La empresa Transporte Lucerito Vrae S.A.C. es una sociedad anónima cerrada que se dedica al transporte de carga por carretera. 
+    {'logo': 'static/images/lucerito_vrae.png', 'nombre': 'Transporte Lucerito Vrae', 'sede_principal': 'Jr. Sebastian Barranca Nro. 587, La Victoria, Lima, Perú', 'descripcion': '''La empresa Transporte Lucerito Vrae S.A.C. es una sociedad anónima cerrada que se dedica al transporte de carga por carretera. 
     Fue fundada el 3 de diciembre de 2004 y tiene su sede principal en Lima, Perú. La empresa ofrece servicios de transporte de carga, 
     incluyendo troncos, ganado, transporte refrigerado y carga pesada, así como mudanzas de muebles y alquiler de camiones con conductor. 
     También se dedica al comercio exterior como importador/exportador. La empresa está empadronada en el Registro Nacional de 
-    Proveedores (RNP) y tiene varias sucursales en Lima.''', 'sitio_web': ''},
+    Proveedores (RNP) y tiene varias sucursales en Lima.''', 'sitio_web': None},
 
 
     #Expreso Trujillo
-    {'logo': '', 'nombre': 'Expreso Trujillo', 'sede_principal': 'Jr. Renovación 384, La Victoria, Lima ', 'descripcion': '''Expreso Trujillo es una empresa de transporte de carga por carretera que conecta ciudades como Lima, Huancayo, Chimbote, Trujillo, Chiclayo y Piura, 
+    {'logo': 'static/images/expreso_trujillo.png', 'nombre': 'Expreso Trujillo', 'sede_principal': 'Jr. Renovación 384, La Victoria, Lima ', 'descripcion': '''Expreso Trujillo es una empresa de transporte de carga por carretera que conecta ciudades como Lima, Huancayo, Chimbote, Trujillo, Chiclayo y Piura, 
     ofreciendo servicios de transporte personalizado, carga frágil, documentos seguros, carga pesada o a granel y mudanzas. Con más de 20 años de 
     experiencia, la empresa se ha consolidado como una de las principales opciones para el transporte de carga en el Perú.
 
@@ -230,21 +230,21 @@ datos_empresas = [
     La empresa también cuenta con un sistema de seguimiento y monitoreo para garantizar la seguridad y ubicación de la carga en todo momento.
 
     Con más de 20,000 clientes satisfechos y más de 400,000 bultos transportados, Expreso Trujillo es una opción confiable y segura para el transporte 
-    de carga en el Perú.''', 'sitio_web': ''},
+    de carga en el Perú.''', 'sitio_web': 'https://expresotrujillologistico.com'},
 
 
     #Trasporte y turismo, servicios Santa Rita S.A.C
-    {'logo': '', 'nombre': 'Trasporte y turismo, servicios Santa Rita S.A.C', 'sede_principal': 'Jr. Washington 1308, Of. 802, Cercado, Lima', 'descripcion': '''Transporte Turismo y Servicios Santa Rita S.A.C. es una empresa peruana que se especializa en ofrecer servicios de transporte turístico y 
+    {'logo': None, 'nombre': 'Trasporte y turismo, servicios Santa Rita S.A.C', 'sede_principal': 'Jr. Washington 1308, Of. 802, Cercado, Lima', 'descripcion': '''Transporte Turismo y Servicios Santa Rita S.A.C. es una empresa peruana que se especializa en ofrecer servicios de transporte turístico y 
     logístico de alta calidad. Con más de 20 años de experiencia en el mercado, la empresa ha consolidado su posición como una de las principales 
     opciones para el transporte de pasajeros y carga en el Perú.
 
     La empresa cuenta con una flota moderna y diversa de vehículos, incluyendo autobuses turísticos, microbuses, vans y camiones, todos equipados 
     con tecnología de punta y manteniendo altos estándares de seguridad y comodidad. El personal de la empresa está altamente capacitado y 
-    experimentado, garantizando un servicio amable, puntual y seguro.''', 'sitio_web': ''},
+    experimentado, garantizando un servicio amable, puntual y seguro.''', 'sitio_web': None},
 
 
     #Chankas cargo S.A.C
-    {'logo': '', 'nombre': 'Chankas cargo S.A.C', 'sede_principal': 'calle Pasaje Mil Amores 209, Oficina 206 - Andahuaylas - Perú', 'descripcion': '''Expreso Los Chankas es una empresa de transporte terrestre peruana que ofrece servicios de transporte de pasajeros, encomiendas y carga. 
+    {'logo': 'static/images/chankas.png', 'nombre': 'Chankas cargo S.A.C', 'sede_principal': 'calle Pasaje Mil Amores 209, Oficina 206 - Andahuaylas - Perú', 'descripcion': '''Expreso Los Chankas es una empresa de transporte terrestre peruana que ofrece servicios de transporte de pasajeros, encomiendas y carga. 
     Fue fundada en 1969 y tiene su sede principal en la ciudad de Andahuaylas, en la región de Apurímac.
 
     La empresa opera en varias rutas dentro de Perú, conectando ciudades como Lima, Andahuaylas, Abancay, Cusco, entre otras. Ofrece diferentes 
@@ -255,7 +255,7 @@ datos_empresas = [
     - Carga: transporte de mercancías y carga general
 
     La empresa cuenta con un personal capacitado y experimentado. La empresa también cuenta con una flota de vehículos modernos y bien mantenidos, 
-    para garantizar la seguridad y comodidad de sus clientes.''', 'sitio_web': ''},
+    para garantizar la seguridad y comodidad de sus clientes.''', 'sitio_web': 'https://loschankasgroup.pe'},
 ]
 
 datos_agencias = [
