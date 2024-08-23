@@ -7,15 +7,17 @@ const Perfil = () => {
   const [mensaje, setMensaje] = useState('');
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
-  const [foto, setFoto] = useState('');
+  const [foto, setFoto] = useState(null);
   const navigate = useNavigate();
-  const userId = JSON.parse(localStorage.getItem('user'))?.id; // Obtén el ID del usuario desde localStorage
+  const userId = JSON.parse(localStorage.getItem('user'))?.id;
 
   useEffect(() => {
     if (userId) {
       axios.get(`http://localhost:8000/api/usuarios/${userId}/`)
         .then(response => {
           setUsuario(response.data.Usuario);
+          setNombre(response.data.Usuario.nombre);
+          setEmail(response.data.Usuario.email);
         })
         .catch(error => {
           setMensaje('Error al cargar el perfil');
@@ -23,8 +25,9 @@ const Perfil = () => {
         });
     } else {
       setMensaje('ID de usuario no proporcionado');
+      navigate('/login');
     }
-  }, [userId]);
+  }, [userId, navigate]);
 
   const handleFotoChange = (event) => {
     setFoto(event.target.files[0]);
