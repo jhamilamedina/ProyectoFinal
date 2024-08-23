@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Registro.css';
 
@@ -10,6 +11,7 @@ const Registro = () => {
   });
 
   const [mensaje, setMensaje] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -25,6 +27,7 @@ const Registro = () => {
       .then(response => {
         setMensaje('Usuario creado con éxito');
         console.log(response.data);
+        navigate('/inicio');
       })
       .catch(error => {
         if (error.response) {
