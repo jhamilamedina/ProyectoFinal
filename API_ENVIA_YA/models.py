@@ -5,7 +5,7 @@ class Empresas(models.Model):
     nombre = models.CharField(max_length=60, db_index=True)
     sede_principal = models.CharField(max_length=45)
     descripcion = models.TextField()
-    sitio_web = models.URLField(max_length=200)
+    sitio_web = models.URLField(max_length=200, null= True, blank=True)
     creado = models.DateTimeField(auto_now_add=True)
     actualizado = models.DateTimeField(auto_now=True)
 
