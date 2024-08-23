@@ -69,10 +69,16 @@ python manage.py migrate
 python populate_data.py
 ```
 
-5. Ejecuta el servidor:
+5. Ejecuta el servidor backend:
 
 ``` bash
 python manage.py runserver
+```
+
+6. Ejecuta el servidor frontend:
+
+``` bash
+npm start
 ```
 
 ## Uso
