@@ -27,7 +27,7 @@ const Registro = () => {
       .then(response => {
         setMensaje('Usuario creado con éxito');
         console.log(response.data);
-        navigate('/inicio');
+        navigate('/inicio'); // Redirige al inicio de sesión después de registrarse
       })
       .catch(error => {
         if (error.response) {
@@ -39,6 +39,10 @@ const Registro = () => {
           setMensaje('Error al crear el usuario');
         }
       });
+  };
+
+  const handleLoginRedirect = () => {
+    navigate('/inicio'); // Redirige al login cuando se hace clic en el botón
   };
 
   return (
@@ -76,6 +80,11 @@ const Registro = () => {
           />
         </div>
         <button type='submit'>Registrar</button>
+        <div className="login-redirect">
+          <p>¿Ya tienes una cuenta?</p>
+          <button onClick={handleLoginRedirect}>Iniciar Sesión</button>
+        </div>
+        
       </form>
       {mensaje && <p>{mensaje}</p>}
     </div>

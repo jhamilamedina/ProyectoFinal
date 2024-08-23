@@ -83,3 +83,25 @@ body {
   border-color: #27ae60; /* Cambia el color del borde al enfocar */
   box-shadow: 0 0 5px rgba(39, 174, 96, 0.5); /* Sombra suave al enfocar */
 }
+
+.login-redirect {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-redirect button {
+  width: 100%;
+  font-size: 1.1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.login-redirect button:hover {
+  background-color: #0056b3;
+}
+
