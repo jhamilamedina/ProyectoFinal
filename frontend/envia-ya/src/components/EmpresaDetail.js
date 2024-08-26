@@ -84,8 +84,8 @@ const EmpresaDetail = () => {
 
             <h2>Estrellas</h2>
             <div>
-                <p>1 estrella: {empresa.Estrellas[0].estrella_1}</p>
-                <p>2 estrellas: {empresa.Estrellas[0].estrella_2}</p>
+                <p>1 <span style={{ color: 'yellow' }}>★</span>: {empresa.Estrellas[0].estrella_1}</p>
+                <p>2 <span style={{ color: 'yellow' }}>★</span>: {empresa.Estrellas[0].estrella_2}</p>
             </div>
 
             <h2>Comentarios</h2>
