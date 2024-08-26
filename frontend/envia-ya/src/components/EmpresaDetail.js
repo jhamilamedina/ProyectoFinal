@@ -8,32 +8,32 @@ const EmpresaDetail = () => {
     const [empresa, setEmpresa] = useState(null);
     const [comentario, setComentario] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
-    const [ratingAverage, setRatingAverage] = useState(0); // Para almacenar la valoración promedio
     const user = JSON.parse(localStorage.getItem('user'));
 
+    // Fetch empresa data
     useEffect(() => {
         axios.get(`http://localhost:8000/api/empresas/${id}/`)
             .then(response => {
-                const data = response.data;
-                setEmpresa(data);
-
-                // Calcular la valoración promedio
-                const totalStars = data.Estrellas.reduce((acc, estrella) => 
-                    acc + estrella.estrellas_1 * 1 + estrella.estrellas_2 * 2 + estrella.estrellas_3 * 3 + 
-                    estrella.estrellas_4 * 4 + estrella.estrellas_5 * 5, 0);
-
-                const totalReviews = data.Estrellas.reduce((acc, estrella) => 
-                    acc + estrella.estrellas_1 + estrella.estrellas_2 + estrella.estrellas_3 + 
-                    estrella.estrellas_4 + estrella.estrellas_5, 0);
-
-                setRatingAverage(totalStars / totalReviews || 0);
+                setEmpresa(response.data);
             })
             .catch(error => {
                 console.error('Error fetching empresa data', error);
             });
     }, [id]);
 
-    if (!empresa) return <div>--- Loading ---</div>;
+    // Calculate average rating
+    const calculateAverageRating = () => {
+        if (!empresa || !empresa.Estrellas[0]) return 0;
+
+        const ratings = empresa.Estrellas[0];
+        const totalVotes = ratings.estrella_1 + ratings.estrella_2 + ratings.estrella_3 + ratings.estrella_4 + ratings.estrella_5;
+        if (totalVotes === 0) return 0;
+
+        const weightedSum = (ratings.estrella_1 * 1) + (ratings.estrella_2 * 2) + (ratings.estrella_3 * 3) + (ratings.estrella_4 * 4) + (ratings.estrella_5 * 5);
+        return (weightedSum / totalVotes).toFixed(1);
+    };
+
+    const averageRating = calculateAverageRating();
 
     const handleComentarioChange = (e) => {
         setComentario(e.target.value);
@@ -51,13 +51,16 @@ const EmpresaDetail = () => {
         };
 
         axios.post('http://localhost:8000/api/comentarios/', nuevoComentario)
-            .then(response => {
-                const comentarioCreado = response.data.data.comentario;
-                setEmpresa((prevEmpresa) => ({
-                    ...prevEmpresa,
-                    Comentarios: [...prevEmpresa.Comentarios, comentarioCreado]
-                }));
-                setComentario('');
+            .then(() => {
+                // Fetch the updated empresa data to include the new comment
+                axios.get(`http://localhost:8000/api/empresas/${id}/`)
+                    .then(response => {
+                        setEmpresa(response.data);
+                        setComentario('');
+                    })
+                    .catch(error => {
+                        console.error('Error fetching updated empresa data', error);
+                    });
             })
             .catch(error => {
                 console.error('Error al enviar el comentario', error);
@@ -68,23 +71,7 @@ const EmpresaDetail = () => {
         setIsExpanded(!isExpanded);
     };
 
-    const renderStarRatings = () => {
-        const { estrella_1, estrella_2, estrella_3, estrella_4, estrella_5 } = empresa.Estrellas[0];
-
-        const starCounts = [
-            { stars: 1, count: estrella_1 },
-            { stars: 2, count: estrella_2 },
-            { stars: 3, count: estrella_3 },
-            { stars: 4, count: estrella_4 },
-            { stars: 5, count: estrella_5 }
-        ];
-
-        return starCounts.map(({ stars, count }) => (
-            <p key={stars}>
-                {'⭐'.repeat(stars)} {count} {count === 1 ? 'voto' : 'votos'}
-            </p>
-        ));
-    };
+    if (!empresa) return <div>--- Loading ---</div>;
 
     return (
         <div className="empresa-detail-container">
@@ -114,9 +101,13 @@ const EmpresaDetail = () => {
                 </div>
             ))}
 
-            <h2>Estrellas <span>({ratingAverage.toFixed(1)})</span></h2>
+            <h2>Estrellas {averageRating} ⭐</h2>
             <div>
-                {renderStarRatings()}
+                <p>⭐ {empresa.Estrellas[0].estrella_1} votos</p>
+                <p>⭐⭐ {empresa.Estrellas[0].estrella_2} votos</p>
+                <p>⭐⭐⭐ {empresa.Estrellas[0].estrella_3} votos</p>
+                <p>⭐⭐⭐⭐ {empresa.Estrellas[0].estrella_4} votos</p>
+                <p>⭐⭐⭐⭐⭐ {empresa.Estrellas[0].estrella_5} votos</p>
             </div>
 
             <h2>Comentarios</h2>
