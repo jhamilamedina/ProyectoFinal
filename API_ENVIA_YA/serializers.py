@@ -58,9 +58,11 @@ class ComentariosSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 class ComentariosDetailSerializer(serializers.ModelSerializer):
+    nombre_usuario = serializers.CharField(source='usuario.nombre', read_only=True)
+
     class Meta:
         model = Comentarios
-        fields = ['id', 'comentario']
+        fields = ['id', 'comentario', 'nombre_usuario']
 
 
 # Serializa la tabla Agenciaslima

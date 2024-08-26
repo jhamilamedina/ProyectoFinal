@@ -114,7 +114,7 @@ const EmpresaDetail = () => {
             {empresa.Comentarios.length > 0 ? (
                 empresa.Comentarios.map((comentario, index) => (
                     <div key={index} className="comentarios-item">
-                        <p>{comentario.comentario}</p>
+                        <p><strong>{comentario.nombre_usuario}</strong>: {comentario.comentario}</p>
                     </div>
                 ))
             ) : (
