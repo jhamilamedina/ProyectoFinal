@@ -10,7 +10,7 @@ const EmpresaDetail = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const user = JSON.parse(localStorage.getItem('user'));
 
-    useEffect(() => {
+    const fetchEmpresa = () => {
         axios.get(`http://localhost:8000/api/empresas/${id}/`)
             .then(response => {
                 setEmpresa(response.data);
@@ -18,6 +18,10 @@ const EmpresaDetail = () => {
             .catch(error => {
                 console.error('Error fetching empresa data', error);
             });
+    };
+
+    useEffect(() => {
+        fetchEmpresa();
     }, [id]);
 
     if (!empresa) return <div>--- Loading ---</div>;
@@ -39,11 +43,8 @@ const EmpresaDetail = () => {
 
         axios.post('http://localhost:8000/api/comentarios/', nuevoComentario)
             .then(response => {
-                setEmpresa((prevEmpresa) => ({
-                    ...prevEmpresa,
-                    Comentarios: [...prevEmpresa.Comentarios, response.data.data.comentario]
-                }));
-                setComentario('');
+                setComentario(''); // Limpiar el campo de comentario
+                fetchEmpresa(); // Vuelve a cargar la empresa para obtener los comentarios actualizados
             })
             .catch(error => {
                 console.error('Error al enviar el comentario', error);
@@ -86,6 +87,9 @@ const EmpresaDetail = () => {
             <div>
                 <p>1 estrella: {empresa.Estrellas[0].estrella_1}</p>
                 <p>2 estrellas: {empresa.Estrellas[0].estrella_2}</p>
+                <p>3 estrellas: {empresa.Estrellas[0].estrella_3}</p>
+                <p>4 estrellas: {empresa.Estrellas[0].estrella_4}</p>
+                <p>5 estrellas: {empresa.Estrellas[0].estrella_5}</p>
             </div>
 
             <h2>Comentarios</h2>
