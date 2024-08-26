@@ -62,9 +62,12 @@ const Perfil = () => {
       <h2>Perfil de Usuario</h2>
       {usuario ? (
         <div className="perfil-info">
+          <div className="foto-perfil">
+            <img src={`http://localhost:8000/${usuario.foto_usuario}`} alt="Foto de perfil" />
+            <span className="foto-texto">Foto de perfil</span>
+          </div>
           <p><strong>Nombre:</strong> {usuario.nombre}</p>
           <p><strong>Email:</strong> {usuario.email}</p>
-          <img src={`http://localhost:8000/${usuario.foto_usuario}`} alt="Foto de perfil" style={{ width: '100px', height: '100px' }} />
           <div className="input-group">
             <input 
               type="text" 
