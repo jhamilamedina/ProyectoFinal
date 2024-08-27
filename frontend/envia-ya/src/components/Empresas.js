@@ -5,6 +5,7 @@ import './Empresas.css';
 
 const Empresas = () => {
   const [empresas, setEmpresas] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:8000/api/empresas/')
@@ -16,11 +17,27 @@ const Empresas = () => {
       });
   }, []);
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Filtra las empresas según el término de búsqueda
+  const filteredEmpresas = empresas.filter(empresa =>
+    empresa.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="empresas-container">
       <h2>Lista de Empresas</h2>
+      <input
+        type="text"
+        placeholder="Buscar por nombre"
+        value={searchTerm}
+        onChange={handleSearchChange}
+        className="search-input"
+      />
       <div className="empresas-list">
-        {empresas.map((empresa) => (
+        {filteredEmpresas.map((empresa) => (
           <EmpresaCard
             key={empresa.id}
             id={empresa.id}
@@ -32,7 +49,8 @@ const Empresas = () => {
           />
         ))}
       </div>
-    </div>  
+    </div>
   );
 };
+
 export default Empresas;
