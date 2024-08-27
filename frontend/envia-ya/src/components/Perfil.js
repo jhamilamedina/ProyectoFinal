@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Perfil.css'; // Asegúrate de importar los estilos
 
-const Perfil = () => {
+const Perfil = ({ onLogout }) => {
   const [usuario, setUsuario] = useState(null);
   const [mensaje, setMensaje] = useState('');
   const [nombre, setNombre] = useState('');
@@ -57,6 +57,26 @@ const Perfil = () => {
     }
   };
 
+  const handleDeleteAccount = () => {
+    if (userId) {
+      axios.delete(`http://localhost:8000/api/usuarios/${userId}/`)
+        .then(() => {
+          // Limpiar datos del perfil en localStorage
+          localStorage.removeItem('user');
+          // Llamar la función de logout pasada como prop
+          if (onLogout) {
+            onLogout();
+          }
+          // Redirigir a la página de inicio
+          navigate('/Inicio');
+        })
+        .catch(error => {
+          setMensaje('Error al eliminar la cuenta');
+          console.error('Error al eliminar la cuenta:', error);
+        });
+    }
+  };
+
   return (
     <div className="perfil-container">
       <h2>Perfil de Usuario</h2>
@@ -80,6 +100,7 @@ const Perfil = () => {
             />
             <input type="file" onChange={handleFotoChange} />
             <button className="button-update" onClick={handleUpdate}>Actualizar Perfil</button>
+            <button className="button-delete" onClick={handleDeleteAccount}>Eliminar Cuenta</button>
           </div>
           {mensaje && <p className="mensaje">{mensaje}</p>}
         </div>

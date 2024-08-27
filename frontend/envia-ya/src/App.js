@@ -54,7 +54,7 @@ function App() {
           <Route path="/privacidad" element={<Privacidad />} />
           <Route path="/perfil" element={ 
             <ProtectedRoute user={user}>
-              <Perfil />
+              <Perfil onLogout={handleLogout}/>
             </ProtectedRoute>
             } 
           />
