@@ -91,17 +91,18 @@ const EmpresaDetail = () => {
             
             <p><a href={empresa.Empresa.sitio_web} target="_blank" rel="noopener noreferrer">Visitar Sitio Web</a></p>
 
-            <h2>Agencias</h2>
+            <h2>Agencias ({empresa.Agencias.length})</h2>
             {empresa.Agencias.map(agencia => (
                 <div key={agencia.id} className="agencia-item">
                     <h3>{agencia.nombre_referencial}</h3>
                     <p><strong>Dirección:</strong> {agencia.direccion}</p>
                     <p><strong>Horario de Atención:</strong> {agencia.horario_de_atencion}</p>
                     <p><strong>Teléfono:</strong> {agencia.telefono}</p>
+                    <p><strong>Distritos:</strong> {agencia.distritos.map(distrito => distrito.nombre).join(', ')}</p>
                 </div>
             ))}
 
-            <h2>Estrellas {averageRating} ⭐</h2>
+            <h2>Estrellas ({averageRating} ⭐)</h2>
             <div>
                 <p>⭐ {empresa.Estrellas[0].estrella_1} votos</p>
                 <p>⭐⭐ {empresa.Estrellas[0].estrella_2} votos</p>
@@ -110,7 +111,7 @@ const EmpresaDetail = () => {
                 <p>⭐⭐⭐⭐⭐ {empresa.Estrellas[0].estrella_5} votos</p>
             </div>
 
-            <h2>Comentarios</h2>
+            <h2>Comentarios ({empresa.Comentarios.length})</h2>
             {empresa.Comentarios.length > 0 ? (
                 empresa.Comentarios.map((comentario, index) => (
                     <div key={index} className="comentarios-item">

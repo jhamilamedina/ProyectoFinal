@@ -66,16 +66,7 @@ class ComentariosDetailSerializer(serializers.ModelSerializer):
 
 
 # Serializa la tabla Agenciaslima
-class AgenciasLimaSerializers(serializers.ModelSerializer):
-    class Meta: 
-        model = AgenciasLima
-        fields = '__all__'
 
-    # Solo campos específicos
-class AgenciaslimaDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AgenciasLima
-        fields = ['id', 'nombre_referencial', 'foto', 'direccion', 'link_mapa', 'horario_de_atencion', 'telefono', 'cochera']
 
 
 # Serializa la tabla Departamentos
@@ -107,3 +98,15 @@ class DistritosDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Distritos
         fields = ['id', 'nombre']  # Solo campos específicos
+
+class AgenciasLimaSerializers(serializers.ModelSerializer):
+    class Meta: 
+        model = AgenciasLima
+        fields = '__all__'
+
+    # Solo campos específicos
+class AgenciaslimaDetailSerializer(serializers.ModelSerializer):
+    distritos = DistritosSerializers(many=True, read_only=True)
+    class Meta:
+        model = AgenciasLima
+        fields = ['id', 'nombre_referencial', 'foto', 'direccion', 'link_mapa', 'horario_de_atencion', 'telefono', 'cochera', 'distritos']
