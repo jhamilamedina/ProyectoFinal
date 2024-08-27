@@ -17,10 +17,7 @@ const Header = ({ userName, userEmail, onLogout }) => {
 
   const handleLogout = () => {
     // Limpiar datos del perfil en localStorage
-    localStorage.removeItem('nombre');
-    localStorage.removeItem('usuario');
-    localStorage.removeItem('correo');
-    localStorage.removeItem('foto');
+    localStorage.removeItem('user');
 
     // Llamar la función de logout pasada como prop
     if (onLogout) {
@@ -43,7 +40,7 @@ const Header = ({ userName, userEmail, onLogout }) => {
           <li><Link to="/destinos">Destinos</Link></li>
           <li><Link to="/empresas">Empresas</Link></li>
           <li><Link to="/nosotros">Nosotros</Link></li>
-          <li><Link to="/Registro">Registro</Link></li>
+          {!userName && <li><Link to="/registro">Registro</Link></li>}
         </ul>
       </nav>
       {userName && (
