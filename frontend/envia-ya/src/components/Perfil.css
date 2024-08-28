@@ -1,81 +1,118 @@
 .perfil-container {
-  max-width: 600px;
-  margin: 0 auto; /* Centra el contenedor en la página */
-  padding: 20px;
-  border: 1px solid #ddd; /* Borde suave alrededor del contenedor */
-  border-radius: 8px; /* Bordes redondeados */
-  background-color: #f9f9f9; /* Fondo claro */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para un efecto de profundidad */
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
 }
 
-.perfil-container h2 {
-  text-align: center;
-  color: #34495e; /* Azul grisáceo */
+.perfil-header {
+  font-size: 28px;
+  font-weight: bold;
   margin-bottom: 20px;
-  font-size: 1.8em;
+  text-align: center;
+}
+
+.perfil-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.perfil-foto {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4CAF50; /* Borde verde alrededor de la foto */
 }
 
 .perfil-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  margin-left: 20px;
 }
 
 .perfil-info p {
-  font-size: 1.1em;
-  color: #2c3e50; /* Azul oscuro */
+  margin: 5px 0;
+  font-size: 16px;
 }
 
-.perfil-info img {
-  border-radius: 50%; /* Hace la imagen circular */
-  border: 2px solid #7f8c8d; /* Añade un borde alrededor de la imagen */
-  margin-bottom: 20px;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.input-group input[type="text"],
-.input-group input[type="email"] {
-  padding: 10px;
-  border: 1px solid #bdc3c7; /* Gris claro */
-  border-radius: 5px;
-  font-size: 1em;
-  width: 100%;
-}
-
-.input-group input[type="file"] {
-  margin-top: 10px;
-}
-
-.button-update {
-  padding: 12px 20px;
-  font-size: 1em;
-  color: #fff;
-  background-color: #2980b9; /* Azul sereno */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  max-width: 200px;
-  margin: 20px auto;
-}
-
-.button-update:hover {
-  background-color: #2c3e50; /* Azul oscuro */
-}
-
-.mensaje {
-  text-align: center;
-  color: #16a085; /* Verde azulado */
+.perfil-info a {
+  color: #4CAF50;
+  text-decoration: none;
   font-weight: bold;
+}
+
+.perfil-enlaces {
   margin-top: 20px;
+}
+
+.perfil-enlace {
+  color: #4CAF50;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.perfil-enlace-button {
+  background: none;
+  border: none;
+  color: #0db50d; 
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px; 
+}
+
+.perfil-enlace-button:hover {
+  background: none; 
+  color: #0db50d; 
+  text-decoration: underline; 
+  
+}
+
+.perfil-boton-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.perfil-boton-container h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.perfil-boton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.perfil-boton:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+.eliminar-cuenta-boton {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  outline: none;
+  text-align:left;
+}
+
+.eliminar-cuenta-boton:focus,
+.eliminar-cuenta-boton:active {
+  outline: none; 
+  color: rgb(233, 233, 239); 
 }

@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Perfil.css'; // Asegúrate de importar los estilos
 
 const Perfil = () => {
   const [usuario, setUsuario] = useState(null);
   const [mensaje, setMensaje] = useState('');
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
-  const [foto, setFoto] = useState(null);
+  const [foto, setFoto] = useState('');
   const navigate = useNavigate();
-  const userId = JSON.parse(localStorage.getItem('user'))?.id;
+  const userId = JSON.parse(localStorage.getItem('user'))?.id; // Obtén el ID del usuario desde localStorage
 
   useEffect(() => {
     if (userId) {
       axios.get(`http://localhost:8000/api/usuarios/${userId}/`)
         .then(response => {
           setUsuario(response.data.Usuario);
-          setNombre(response.data.Usuario.nombre);
-          setEmail(response.data.Usuario.email);
         })
         .catch(error => {
           setMensaje('Error al cargar el perfil');
@@ -26,9 +23,8 @@ const Perfil = () => {
         });
     } else {
       setMensaje('ID de usuario no proporcionado');
-      navigate('/login');
     }
-  }, [userId, navigate]);
+  }, [userId]);
 
   const handleFotoChange = (event) => {
     setFoto(event.target.files[0]);
@@ -58,14 +54,14 @@ const Perfil = () => {
   };
 
   return (
-    <div className="perfil-container">
+    <div>
       <h2>Perfil de Usuario</h2>
       {usuario ? (
-        <div className="perfil-info">
+        <div>
           <p><strong>Nombre:</strong> {usuario.nombre}</p>
           <p><strong>Email:</strong> {usuario.email}</p>
           <img src={`http://localhost:8000/${usuario.foto_usuario}`} alt="Foto de perfil" style={{ width: '100px', height: '100px' }} />
-          <div className="input-group">
+          <div>
             <input 
               type="text" 
               value={nombre} 
@@ -79,12 +75,12 @@ const Perfil = () => {
               placeholder="Nuevo email"
             />
             <input type="file" onChange={handleFotoChange} />
-            <button className="button-update" onClick={handleUpdate}>Actualizar Perfil</button>
+            <button onClick={handleUpdate}>Actualizar Perfil</button>
           </div>
-          {mensaje && <p className="mensaje">{mensaje}</p>}
+          {mensaje && <p>{mensaje}</p>}
         </div>
       ) : (
-        <p className="mensaje">{mensaje || 'Cargando...'}</p>
+        <p>{mensaje || 'Cargando...'}</p>
       )}
     </div>
   );

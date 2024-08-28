@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Filter from './Filter';
 import './Destinos.css';
 
@@ -10,7 +11,7 @@ const Destinos = () => {
     };
 
     return (
-        <div className="destinos-container">
+        <div>
             <h1>Buscar Agencias de Envíos</h1>
             <Filter onSearch={handleSearch} />
         </div>
