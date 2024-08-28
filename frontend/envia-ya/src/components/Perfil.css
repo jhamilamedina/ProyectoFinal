@@ -28,16 +28,37 @@
 }
 
 .foto-perfil {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%; /* Hace el contenedor circular */
+  border: 2px solid #798181; /* Borde alrededor del contenedor */
+  overflow: hidden; /* Asegura que cualquier contenido desbordante sea recortado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0; /* Fondo claro por defecto */
   position: relative; /* Para posicionar el texto sobre la imagen */
 }
 
 .perfil-info img {
-  width: 300px; /* Ajusta el tamaño de la imagen */
-  height: 300px; /* Asegúrate de que el alto sea igual al ancho para mantener la forma circular */
+  width: 100%; /* Ajusta la imagen al ancho del contenedor */
+  height: 100%; /* Ajusta la imagen al alto del contenedor */
   border-radius: 50%; /* Hace la imagen circular */
-  border: 2px solid #000707; /* Añade un borde alrededor de la imagen */
   object-fit: cover; /* Ajusta la imagen para cubrir el área */
-  margin-bottom: 20px; /* Espacio debajo de la imagen */
+}
+
+.foto-perfil::before {
+  content: 'Foto de Perfil'; /* Texto por defecto */
+  color: #bdc3c7; /* Color del texto por defecto */
+  font-size: 1.2em;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap; /* Asegura que el texto no se divida en varias líneas */
+  overflow: hidden; /* Esconde el texto que se salga del área visible */
+  text-overflow: ellipsis; /* Añade '...' si el texto es muy largo */
 }
 
 .foto-texto {
@@ -45,8 +66,8 @@
   top: 50%; /* Centra verticalmente */
   left: 50%; /* Centra horizontalmente */
   transform: translate(-50%, -50%); /* Ajusta la posición para centrar */
-  color: #5f0e0e; /* Color del texto */
-  font-size:0%; /* Tamaño del texto */
+  color: #f1e4e4; /* Color del texto */
+  font-size: 0%; /* Tamaño del texto */
   font-weight: bold; /* Grosor del texto */
   text-align: center; /* Alinea el texto en el centro */
 }
