@@ -27,10 +27,28 @@
   color: #2c3e50; /* Azul oscuro */
 }
 
+.foto-perfil {
+  position: relative; /* Para posicionar el texto sobre la imagen */
+}
+
 .perfil-info img {
+  width: 300px; /* Ajusta el tamaño de la imagen */
+  height: 300px; /* Asegúrate de que el alto sea igual al ancho para mantener la forma circular */
   border-radius: 50%; /* Hace la imagen circular */
-  border: 2px solid #7f8c8d; /* Añade un borde alrededor de la imagen */
-  margin-bottom: 20px;
+  border: 2px solid #000707; /* Añade un borde alrededor de la imagen */
+  object-fit: cover; /* Ajusta la imagen para cubrir el área */
+  margin-bottom: 20px; /* Espacio debajo de la imagen */
+}
+
+.foto-texto {
+  position: absolute; /* Posiciona el texto sobre la imagen */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta la posición para centrar */
+  color: #5f0e0e; /* Color del texto */
+  font-size:0%; /* Tamaño del texto */
+  font-weight: bold; /* Grosor del texto */
+  text-align: center; /* Alinea el texto en el centro */
 }
 
 .input-group {
