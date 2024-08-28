@@ -41,7 +41,7 @@
   height: auto; /* Mantiene la proporción de la imagen */
   margin-bottom: 20px; /* Espacio debajo de la imagen */
   object-fit: contain; /* Asegura que la imagen se ajuste bien al cuadro */
-  border-radius: 35px;
+  border-radius: 10px;
 }
 
 /* Estilos para el nombre de la empresa */

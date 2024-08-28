@@ -122,7 +122,7 @@ const EmpresaDetail = () => {
                 <p>No hay comentarios.</p>
             )}
 
-            {user && (
+            {user ? (
                 <div className="comentario-form">
                     <h3>Deja tu comentario</h3>
                     <form onSubmit={handleComentarioSubmit}>
@@ -134,6 +134,14 @@ const EmpresaDetail = () => {
                         />
                         <button type="submit">Enviar Comentario</button>
                     </form>
+                </div>
+            ) : (
+                <div className="comentario-form no-user">
+                    <h3>Deja tu comentario</h3>
+                    <textarea
+                        placeholder="Para dejar un comentario necesitas registrarte o iniciar sesión..."
+                        readOnly
+                    />
                 </div>
             )}
         </div>
