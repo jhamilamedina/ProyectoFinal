@@ -17,7 +17,6 @@ const Empresas = () => {
       });
   }, []);
 
-<<<<<<< HEAD
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -27,7 +26,6 @@ const Empresas = () => {
     empresa.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-=======
   // Función para truncar la descripción
   const truncateDescription = (description, maxLength) => {
     if (description.length > maxLength) {
@@ -36,7 +34,6 @@ const Empresas = () => {
     return description;
   };
 
->>>>>>> 13ee243f452153e2f4585bb2e92158bfa49f4607
   return (
     <div className="empresas-container">
       <h2>Lista de Empresas</h2>
