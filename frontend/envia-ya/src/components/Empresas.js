@@ -26,6 +26,13 @@ const Empresas = () => {
     empresa.nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const truncateDescription = (description, maxLength) => {
+    if (description.length > maxLength) {
+      return description.substring(0, maxLength) + '...';
+    }
+    return description;
+  };
+
   return (
     <div className="empresas-container">
       <h2>Lista de Empresas</h2>
@@ -44,7 +51,7 @@ const Empresas = () => {
             logo={empresa.logo}
             nombre={empresa.nombre}
             direccion={empresa.sede_principal}
-            descripcion={empresa.descripcion}
+            descripcion={truncateDescription(empresa.descripcion, 200)}
             sitio_web={empresa.sitio_web}
           />
         ))}
