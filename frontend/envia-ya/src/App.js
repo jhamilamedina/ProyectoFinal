@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Ayuda from './components/Ayuda';
@@ -15,7 +15,6 @@ import Perfil from './components/Perfil';
 import EmpresaDetail from './components/EmpresaDetail';
 import Registro from './components/Registro';
 import ProtectedRoute from './components/ProtectedRoute';
-// import { AuthProvider } from './context/AuthContext';
 
 function App() {
   const user = JSON.parse(localStorage.getItem('user')) || {};  
@@ -23,12 +22,11 @@ function App() {
   const [userName, setUserName] = useState(user.nombre || '');
   const [userEmail, setUserEmail] = useState(user.email || '');
 
-
   const handleLogout = () => {
     localStorage.removeItem('user');
     setUserName('');
     setUserEmail('');
-    setUserId('')
+    setUserId('');
   };
 
   return (
@@ -44,24 +42,28 @@ function App() {
             <ProtectedRoute user={user}>
               <Evaluacion /> 
             </ProtectedRoute>
-            }    
-          />
+          } />
           <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/registro" element={<Registro />} />
-          <Route path="/inicio" element={<Inicio setUserId={setUserId} setUserName={setUserName} setUserEmail={setUserEmail} />} />
+          
+          {/* Redirige a la página principal si el usuario ya está autenticado */}
+          <Route path="/inicio" element={
+            user.id ? <Navigate to="/" /> : <Inicio setUserId={setUserId} setUserName={setUserName} setUserEmail={setUserEmail} />
+          } />
+          <Route path="/registro" element={
+            user.id ? <Navigate to="/" /> : <Registro />
+          } />
+          
           <Route path="/ayuda" element={<Ayuda />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/privacidad" element={<Privacidad />} />
           <Route path="/perfil" element={ 
             <ProtectedRoute user={user}>
-              <Perfil />
+              <Perfil onLogout={handleLogout}/>
             </ProtectedRoute>
-            } 
-          />
+          } />
         </Routes>
       </main>
       <Footer />
-      
     </Router>
   );
 }

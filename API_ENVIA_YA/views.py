@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 from django.shortcuts import get_object_or_404
 from .models import Departamentos, Provincias
-from .serializers import DepartamentosSerializer, ProvinciasDetailSerializer
+from .serializers import DepartamentosSerializer, ProvinciasDetailSerializer, EmpresaDetailSerializer
 
 class DepartamentosAPIView(APIView):
     parser_classes = (JSONParser, MultiPartParser, FormParser)
@@ -21,3 +21,7 @@ class DepartamentosAPIView(APIView):
             departamentos = Departamentos.objects.all()
             serializer = DepartamentosSerializer(departamentos, many=True)
             return Response(serializer.data)
+
+class EmpresaDetailView(generics.RetrieveAPIView):
+    queryset = Empresas.objects.all()
+    serializer_class = EmpresaDetailSerializer

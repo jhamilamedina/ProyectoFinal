@@ -10,6 +10,7 @@ const EmpresaDetail = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const user = JSON.parse(localStorage.getItem('user'));
 
+    // Fetch empresa data
     useEffect(() => {
         axios.get(`http://localhost:8000/api/empresas/${id}/`)
             .then(response => {
@@ -20,7 +21,19 @@ const EmpresaDetail = () => {
             });
     }, [id]);
 
-    if (!empresa) return <div>--- Loading ---</div>;
+    // Calculate average rating
+    const calculateAverageRating = () => {
+        if (!empresa || !empresa.Estrellas[0]) return 0;
+
+        const ratings = empresa.Estrellas[0];
+        const totalVotes = ratings.estrella_1 + ratings.estrella_2 + ratings.estrella_3 + ratings.estrella_4 + ratings.estrella_5;
+        if (totalVotes === 0) return 0;
+
+        const weightedSum = (ratings.estrella_1 * 1) + (ratings.estrella_2 * 2) + (ratings.estrella_3 * 3) + (ratings.estrella_4 * 4) + (ratings.estrella_5 * 5);
+        return (weightedSum / totalVotes).toFixed(1);
+    };
+
+    const averageRating = calculateAverageRating();
 
     const handleComentarioChange = (e) => {
         setComentario(e.target.value);
@@ -38,12 +51,16 @@ const EmpresaDetail = () => {
         };
 
         axios.post('http://localhost:8000/api/comentarios/', nuevoComentario)
-            .then(response => {
-                setEmpresa((prevEmpresa) => ({
-                    ...prevEmpresa,
-                    Comentarios: [...prevEmpresa.Comentarios, response.data.data.comentario]
-                }));
-                setComentario('');
+            .then(() => {
+                // Fetch the updated empresa data to include the new comment
+                axios.get(`http://localhost:8000/api/empresas/${id}/`)
+                    .then(response => {
+                        setEmpresa(response.data);
+                        setComentario('');
+                    })
+                    .catch(error => {
+                        console.error('Error fetching updated empresa data', error);
+                    });
             })
             .catch(error => {
                 console.error('Error al enviar el comentario', error);
@@ -53,6 +70,8 @@ const EmpresaDetail = () => {
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);
     };
+
+    if (!empresa) return <div>--- Loading ---</div>;
 
     return (
         <div className="empresa-detail-container">
@@ -72,27 +91,31 @@ const EmpresaDetail = () => {
             
             <p><a href={empresa.Empresa.sitio_web} target="_blank" rel="noopener noreferrer">Visitar Sitio Web</a></p>
 
-            <h2>Agencias</h2>
+            <h2>Agencias ({empresa.Agencias.length})</h2>
             {empresa.Agencias.map(agencia => (
                 <div key={agencia.id} className="agencia-item">
                     <h3>{agencia.nombre_referencial}</h3>
                     <p><strong>Dirección:</strong> {agencia.direccion}</p>
                     <p><strong>Horario de Atención:</strong> {agencia.horario_de_atencion}</p>
                     <p><strong>Teléfono:</strong> {agencia.telefono}</p>
+                    <p><strong>Distritos:</strong> {agencia.distritos.map(distrito => distrito.nombre).join(', ')}</p>
                 </div>
             ))}
 
-            <h2>Estrellas</h2>
+            <h2>Estrellas ({averageRating} ⭐)</h2>
             <div>
-                <p>1 estrella: {empresa.Estrellas[0].estrella_1}</p>
-                <p>2 estrellas: {empresa.Estrellas[0].estrella_2}</p>
+                <p>⭐ {empresa.Estrellas[0].estrella_1} votos</p>
+                <p>⭐⭐ {empresa.Estrellas[0].estrella_2} votos</p>
+                <p>⭐⭐⭐ {empresa.Estrellas[0].estrella_3} votos</p>
+                <p>⭐⭐⭐⭐ {empresa.Estrellas[0].estrella_4} votos</p>
+                <p>⭐⭐⭐⭐⭐ {empresa.Estrellas[0].estrella_5} votos</p>
             </div>
 
-            <h2>Comentarios</h2>
+            <h2>Comentarios ({empresa.Comentarios.length})</h2>
             {empresa.Comentarios.length > 0 ? (
                 empresa.Comentarios.map((comentario, index) => (
                     <div key={index} className="comentarios-item">
-                        <p>{comentario.comentario}</p>
+                        <p><strong>{comentario.nombre_usuario}</strong>: {comentario.comentario}</p>
                     </div>
                 ))
             ) : (
