@@ -83,7 +83,7 @@ const Perfil = ({ onLogout }) => {
       {usuario ? (
         <div className="perfil-info">
           <div className="foto-perfil">
-            <img src={`http://localhost:8000/${usuario.foto_usuario}`} alt="Foto de perfil" />
+            <img src={`http://localhost:8000/${usuario.foto_usuario}`} alt="" />
             <span className="foto-texto">Foto de perfil</span>
           </div>
           <p><strong>Nombre:</strong> {usuario.nombre}</p>
